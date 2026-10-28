@@ -105,7 +105,11 @@ func play(skit_id: String) -> void:
 		var t2 := 0.0
 		_advance = false
 		while _text.visible_ratio < 1.0:
+			if not is_inside_tree():
+				return
 			await get_tree().process_frame
+			if not is_inside_tree():
+				return
 			if _advance:
 				_text.visible_ratio = 1.0
 				break
@@ -113,6 +117,8 @@ func play(skit_id: String) -> void:
 			_text.visible_ratio = min(1.0, t2 * 60.0 / max(1, total))
 		_advance = false
 		while not _advance:
+			if not is_inside_tree():
+				return
 			await get_tree().process_frame
 	_active = false
 	_root.visible = false

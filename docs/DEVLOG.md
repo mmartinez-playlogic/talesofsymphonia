@@ -84,3 +84,12 @@ Mateo en reunión: NADA se ha ejecutado (ni Godot headless). Todo escrito a cieg
   (Marble, acantilado, Lloyd solo, Forcystus). Nuevo: `Field.on_return(cs)` tras batallas normales, `cs.battle(..., party_override)`,
   `cs.restore_party()`, `cs.affection()`, enemigos golem/ghost (modelo golem generado), ítems clave, 11 skits reales.
 - Pendiente en esta sesión: dirks_house, world_sylvarant (Casa de la Salvación, carta de Dirk, renegados), triet_desert (cartel).
+- (3e, cont.) Reescritos dirks_house (discusión, visitantes, terraza, noche, mañana), world_sylvarant (Casa de la Salvación,
+  carta de Dirk, cordón de renegados) y triet_desert (cartel de se busca). C1 completo según `docs/STORY_C1.md`.
+- Nuevo `tools/SmokeTest.tscn`: carga cada mapa en cada estado de la historia (21 escenarios, incluidos los `on_resume` tras
+  batalla y dos combates), pulsa Confirmar automáticamente y registra errores. Resultado final: 0 SCRIPT ERROR.
+  Cómo ejecutarlo (sin ventana): `godot --headless --path . res://tools/SmokeTest.tscn`.
+  Corregidos: DialogueBox/SkitBox escribiendo tras cambiar de escena; Cutscene._walk_impl sobre actor eliminado.
+- Trazas `[EV] <id>` en consola por cada escena de guion ejecutada (útil para seguir la historia en los logs).
+- Plantilla de guion regenerada: `src/data/script/_template_es.json`.
+- Queda por probar CON VENTANA (cuando Mateo pueda): posiciones de cámara/actores, legibilidad de HUD, sensación de combate.

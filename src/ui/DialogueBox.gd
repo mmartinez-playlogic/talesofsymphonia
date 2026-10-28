@@ -107,7 +107,11 @@ func _show_current() -> void:
 	var total := _text.get_total_character_count()
 	var t := 0.0
 	while _text.visible_ratio < 1.0:
+		if not is_inside_tree():
+			return
 		await get_tree().process_frame
+		if not is_inside_tree():
+			return
 		if _skip_requested:
 			_text.visible_ratio = 1.0
 			break

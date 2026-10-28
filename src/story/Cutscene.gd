@@ -68,6 +68,7 @@ func say(lines: Array) -> void:
 ## otherwise the inline fallback is used. Format: {"<id>": [{"speaker": "...", "text": "..."}, ...]}
 func script(id: String, fallback: Array) -> void:
 	var lines: Array = DB.script_lines(id)
+	print("[EV] ", id)
 	await field.dialogue.show_lines(lines if not lines.is_empty() else fallback)
 
 func line(speaker: String, text: String) -> void:
@@ -78,6 +79,7 @@ func choice(prompt: String, options: Array) -> int:
 	return r
 
 func caption(text: String, seconds := 2.0) -> void:
+	print("[EV] caption: ", text)
 	await field.dialogue.show_caption(text, seconds)
 
 # ---------- motion ----------
@@ -130,6 +132,8 @@ func _walk_impl(a: Node3D, pos: Vector3, speed: float, run: bool) -> void:
 	var guard := 0
 	while guard < 1200:
 		guard += 1
+		if not is_instance_valid(a) or not a.is_inside_tree():
+			return
 		var d := pos - a.global_position
 		d.y = 0
 		var dist := d.length()
@@ -144,7 +148,7 @@ func _walk_impl(a: Node3D, pos: Vector3, speed: float, run: bool) -> void:
 		await tree.process_frame
 	if "scripted" in a:
 		a.set("scripted", false)
-	if m:
+	if m and is_instance_valid(m):
 		m.play("Idle")
 
 func anim(id: String, anim_name: String, force := true) -> void:
@@ -268,6 +272,7 @@ func battle(enemies: Array, resume_event: String, advantage := "normal", guests:
 			Game.add_member(g)
 		if not Game.party.has(g) and Game.party.size() < 4:
 			Game.party.append(g)
+	print("[EV] battle ", enemies, " -> ", resume_event)
 	Game.flags["resume_event"] = resume_event
 	Game.flags["resume_map"] = field.map_id
 	Game.last_field_position = field.player.global_position

@@ -1,5 +1,5 @@
 extends Field
-## Sylvarant world map (south-east region): Iselia, Dirk's house, the road to the Triet desert.
+## Sylvarant world map (south-east): Iselia, Dirk's house, the House of Salvation, the road to the Triet desert.
 
 func build() -> void:
 	map_id = "world_sylvarant"
@@ -9,27 +9,27 @@ func build() -> void:
 	spawns["iselia"] = Vector3(70, 0.1, -84)
 	spawns["dirk"] = Vector3(30, 0.1, -34)
 	spawns["triet"] = Vector3(-80, 0.1, 82)
+	spawns["salvation"] = Vector3(-20, 0.1, 26)
 	spawn_yaw["iselia"] = 0.0
 	spawn_yaw["dirk"] = 0.0
 	spawn_yaw["triet"] = PI * 0.75
 	add_ground(Vector2(260, 260), Color(0.34, 0.56, 0.3))
-	# sea at the edges
 	add_patch(Vector3(0, 0, 135), Vector2(300, 30), Color(0.2, 0.45, 0.8), 0.04)
 	add_patch(Vector3(135, 0, 0), Vector2(30, 300), Color(0.2, 0.45, 0.8), 0.04)
-	# desert region south-west
 	add_patch(Vector3(-85, 0, 85), Vector2(110, 110), Color(0.85, 0.75, 0.5), 0.03)
 	add_patch(Vector3(-50, 0, 45), Vector2(60, 50), Color(0.72, 0.68, 0.45), 0.025)
-	# roads
 	add_path([Vector3(70, 0, -88), Vector3(60, 0, -60), Vector3(30, 0, -40), Vector3(10, 0, -10), Vector3(-20, 0, 20), Vector3(-50, 0, 50), Vector3(-80, 0, 78)], 3.5)
-	# landmarks
 	add_box(Vector3(64, 0, -95), Vector3(1.5, 4, 1.5), Color(0.55, 0.42, 0.3))
 	add_box(Vector3(76, 0, -95), Vector3(1.5, 4, 1.5), Color(0.55, 0.42, 0.3))
 	add_building(Vector3(70, 0, -102), Vector3(16, 5, 10), Color(0.9, 0.85, 0.7), Color(0.6, 0.3, 0.2))
 	add_building(Vector3(30, 0, -48), Vector3(7, 4, 6), Color(0.75, 0.6, 0.4), Color(0.45, 0.3, 0.2))
-	add_box(Vector3(70, 0, -124), Vector3(20, 14, 8), Color(0.85, 0.83, 0.78))   # Martel Temple far north
+	add_building(Vector3(-20, 0, 14), Vector3(8, 5, 7), Color(0.92, 0.9, 0.85), Color(0.3, 0.45, 0.7))   # House of Salvation
+	add_box(Vector3(-20, 5, 14), Vector3(0.4, 2.0, 0.4), Color(0.9, 0.8, 0.4))
+	add_box(Vector3(-20, 6.2, 14), Vector3(1.4, 0.3, 0.4), Color(0.9, 0.8, 0.4))
+	add_box(Vector3(70, 0, -124), Vector3(20, 14, 8), Color(0.85, 0.83, 0.78))
 	for i in 5:
 		add_palm(Vector3(-88 + i * 4, 0, 96 - (i % 2) * 5), 1.2)
-	add_box(Vector3(-96, 0, 100), Vector3(12, 5, 6), Color(0.8, 0.7, 0.5))      # Triet walls
+	add_box(Vector3(-96, 0, 100), Vector3(12, 5, 6), Color(0.8, 0.7, 0.5))
 	var rng := RandomNumberGenerator.new()
 	rng.seed = 2024
 	for i in 160:
@@ -50,24 +50,30 @@ func build() -> void:
 	add_wall(Vector3(-125, 0, -125), Vector3(125, 0, -125))
 	add_wall(Vector3(-125, 0, 125), Vector3(125, 0, 125))
 	add_sign(Vector3(33, 0, -38), "Casa de Dirk, el herrero enano.")
-	add_sign(Vector3(-16, 0, 16), "Suroeste: desierto y ciudad de Triet.\nNoreste: Iselia.")
+	add_sign(Vector3(-16, 0, 22), "Casa de la Salvación.\nSuroeste: desierto y ciudad de Triet.\nNoreste: Iselia.")
 	add_chest("w1", Vector3(-5, 0, -30), "apple_gel", 2)
 	add_chest("w2", Vector3(-60, 0, 20), "life_bottle")
-	# monsters along the road
 	add_monster(Vector3(48, 0, -58), ["wolf", "wolf"])
 	add_monster(Vector3(14, 0, -22), ["hare", "hare", "bee"])
 	add_monster(Vector3(-8, 0, 2), ["wolf", "hare"])
 	add_monster(Vector3(-30, 0, 30), ["wolf", "wolf", "bee"])
 	add_monster(Vector3(-62, 0, 58), ["sand_wolf", "hare"])
 	add_monster(Vector3(20, 0, 20), ["wolf"])
-	# exits
 	add_exit(Vector3(70, 1, -93), Vector3(10, 3, 3), "iselia_village", "from_world",
 		func(): return not Game.get_flag("exiled", false),
 		[{"speaker": "Lloyd", "text": "Iselia... Ya no es nuestro hogar. Sigamos adelante."}])
-	add_exit(Vector3(30, 1, -43.5), Vector3(4, 3, 2), "dirks_house", "default")
+	add_exit(Vector3(30, 1, -43.5), Vector3(4, 3, 2), "dirks_house", "default",
+		func(): return not Game.get_flag("exiled", false),
+		[{"speaker": "Lloyd", "text": "Papá... Ya me he despedido. Ahora toca seguir a Colette."}])
 	add_exit(Vector3(-92, 1, 92), Vector3(14, 3, 8), "triet_desert", "default",
-		func(): return Game.get_flag("left_for_journey", false),
+		func(): return Game.get_flag("exiled", false),
 		[{"speaker": "Lloyd", "text": "El desierto de Triet... Ahora no. Tengo que estar en la aldea cuando Colette se vaya."}])
+	if Game.get_flag("exiled", false):
+		add_npc("salvation_woman", Vector3(-17, 0, 18.5), "Mujer", "phaidra", [], 0.0)
+		npc("salvation_woman").on_interact = func(_f): await _house_of_salvation(cs)
+		add_trigger(Vector3(-62, 1, 60), Vector3(30, 3, 30), _renegades, "renegades_cordon")
+		if not Game.get_flag("house_of_salvation", false):
+			add_trigger(Vector3(-20, 1, 22), Vector3(14, 3, 8), _house_arrive, "salvation_arrive")
 
 func _near_road(p: Vector3) -> bool:
 	var pts := [Vector3(70, 0, -88), Vector3(60, 0, -60), Vector3(30, 0, -40), Vector3(10, 0, -10), Vector3(-20, 0, 20), Vector3(-50, 0, 50), Vector3(-80, 0, 78)]
@@ -78,14 +84,76 @@ func _near_road(p: Vector3) -> bool:
 		var t: float = clamp((p - a).dot(ab) / ab.length_squared(), 0.0, 1.0)
 		if (a + ab * t).distance_to(p) < 8.0:
 			return true
-	if p.distance_to(Vector3(70, 0, -100)) < 20 or p.distance_to(Vector3(30, 0, -46)) < 10 or p.distance_to(Vector3(-92, 0, 95)) < 16:
+	if p.distance_to(Vector3(70, 0, -100)) < 20 or p.distance_to(Vector3(30, 0, -46)) < 10 or p.distance_to(Vector3(-92, 0, 95)) < 16 or p.distance_to(Vector3(-20, 0, 16)) < 12:
 		return true
 	return false
 
 func on_enter(c: Cutscene) -> void:
 	if c.has("ranch_visited") and not c.has("world_first_time"):
 		c.flag("world_first_time")
-		await c.script("world_sylvarant.on_enter.01", [
-			{"speaker": "Genis", "text": "Desde aquí se ve todo el sur de Sylvarant. La casa de Dirk está siguiendo el camino, al suroeste de la aldea."},
-			{"speaker": "Lloyd", "text": "Y más allá, el desierto. Nunca he ido tan lejos..."},
+		await c.script("world_sylvarant.first.01", [
+			{"speaker": "Lloyd", "text": "Desde aquí se ve todo el sur de Sylvarant. Mi casa está siguiendo el camino, al suroeste de la aldea."},
 		])
+
+func _house_arrive(c: Cutscene) -> void:
+	await c.script("world_sylvarant.salvation.01", [
+		{"speaker": "Genis", "text": "Una Casa de la Salvación. Es un refugio de la Iglesia de Martel para peregrinos. Podríamos descansar."},
+		{"speaker": "Lloyd", "text": "Hablemos con la mujer de la entrada."},
+	])
+
+func _house_of_salvation(c: Cutscene) -> void:
+	if c.has("house_of_salvation"):
+		await c.line("Mujer", "Que Martel os acompañe en vuestra peregrinación.")
+		Game.heal_all()
+		return
+	c.flag("house_of_salvation")
+	c.spawn("genis", "genis", player.global_position + Vector3(-1.5, 0, 1), 0.0, "Genis")
+	c.spawn("noishe", "wolf", player.global_position + Vector3(2.5, 0, 2), 0.0, "Noishe")
+	await c.script("world_sylvarant.salvation.02", [
+		{"speaker": "Mujer", "text": "¿Peregrinos? Pasad, pasad. Aquí podéis descansar gratis. Es lo menos que puede hacer la Iglesia."},
+		{"speaker": "Lloyd", "text": "Eh... sí, peregrinos. Gracias, señora."},
+	])
+	Game.heal_all()
+	await c.fade_out(0.6)
+	await c.caption("Lloyd y Genis descansan en la Casa de la Salvación.", 2.0)
+	await c.fade_in(0.6)
+	await c.script("world_sylvarant.salvation.03", [
+		{"speaker": "Noishe", "text": "¡Guau! ¡Guau!"},
+		{"speaker": "Genis", "text": "Noishe trae algo. Se te ha caído de la bolsa, Lloyd."},
+		{"speaker": "Lloyd", "text": "Es... una carta de papá."},
+	])
+	await c.give_item("dirk_letter")
+	await c.script("world_sylvarant.salvation.04", [
+		{"speaker": "Dirk", "text": "«Lloyd: ¿has leído la Guía del viajero? Tiene los siete Juramentos Enanos más conocidos y consejos de viaje. Protege a Colette.»"},
+		{"speaker": "Dirk", "text": "«Han pasado catorce años desde que te encontré, apenas sabías andar, muerto de miedo y llorando. Ahora eres un espadachín fuerte. Te agradezco que llames padre a alguien que no es humano.»"},
+		{"speaker": "Dirk", "text": "«Cuando seas mayor, tendré un regalo para ti. P. D.: en la guía explico cómo usar las EX Gems.»"},
+		{"speaker": "Lloyd", "text": "Papá..."},
+		{"speaker": "Genis", "text": "Dirk te quiere mucho, Lloyd."},
+	])
+	await c.caption("EX Gems: desbloqueadas (menú de pausa, próximamente).", 2.0)
+	c.despawn("genis")
+	c.despawn("noishe")
+
+func _renegades(c: Cutscene) -> void:
+	await c.fade_out(0.5)
+	c.hide_actor("player")
+	c.spawn("ren1", "desian", Vector3(-62, 0, 60), 180.0, "Soldado")
+	c.spawn("ren2", "desian", Vector3(-59, 0, 61), 180.0, "Soldado")
+	await c.look_at_pos(Vector3(-60, 0, 60), 0.1)
+	await c.fade_in(0.5)
+	await c.script("world_sylvarant.renegades.01", [
+		{"speaker": "Soldado", "text": "Órdenes de arriba: el humano Lloyd Irving. Código de identificación desconocido. Formad un cordón por toda la región."},
+		{"speaker": "Soldado", "text": "Su retrato ya está en los carteles de «se busca». Que nadie lo deje pasar."},
+	])
+	await c.fade_out(0.5)
+	c.despawn("ren1")
+	c.despawn("ren2")
+	c.show_actor("player")
+	await c.camera_reset(0.1)
+	await c.fade_in(0.5)
+	c.spawn("genis", "genis", player.global_position + Vector3(-1.5, 0, 1), 0.0, "Genis")
+	await c.script("world_sylvarant.renegades.02", [
+		{"speaker": "Genis", "text": "Lloyd... los desianos nos buscan. Hay que encontrar a Colette, tanto para pedirle ayuda como para protegerla."},
+		{"speaker": "Lloyd", "text": "Pues vamos a Triet. Noishe, ¡venga, al desierto!"},
+	])
+	c.despawn("genis")
