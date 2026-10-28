@@ -84,8 +84,9 @@ func _populate(raid: bool) -> void:
 		[{"speaker": "Aldeano", "text": "Dicen que la Torre de la Salvación ha aparecido en el cielo. ¡La Elegida va a salvarnos!"}])
 	add_npc("villager_b", Vector3(6, 0, 12), "Aldeana", "marble",
 		[{"speaker": "Aldeana", "text": "Gracias al tratado con el rancho, los desianos no nos atacan. Pero no me gusta tenerlos tan cerca..."}], 180.0)
-	add_npc("merchant", Vector3(-8, 0, 15), "Mercader", "botta",
-		[{"speaker": "Mercader", "text": "Geles de manzana, geles de naranja... Hoy no abro, chico. Todo el mundo está celebrando el oráculo."}])
+	add_shop_npc("merchant", Vector3(-8, 0, 15), "Mercader", "botta", "iselia", "¡Lloyd! Geles, ingredientes y algo de equipo. Para la Elegida, lo que sea.")
+	add_npc("wonder_chef", Vector3(9, 0, 15.2), "Cocinero misterioso", "dirk", [], 180.0)
+	npc("wonder_chef").on_interact = func(_f): await _wonder_chef(cs)
 	add_npc("gate_villager", Vector3(-4, 0, -28), "Aldeano", "frank", [], 0.0)
 	npc("gate_villager").on_interact = func(_f): await _gate_talk(cs)
 	if Game.get_flag("colette_house_done", false) and not Game.get_flag("ranch_visited", false):
@@ -200,7 +201,24 @@ func _genis_door(c: Cutscene) -> void:
 		{"speaker": "Lloyd", "text": "¿Cocinar? Yo con un Gel de Manzana voy servido."},
 		{"speaker": "Genis", "text": "Los Geles de Manzana no son baratos, Lloyd. Listo, vámonos."},
 	])
-	await c.caption("Receta aprendida: Sándwich. (Cocina: menú de pausa, próximamente.)", 2.0)
+	Game.learn_recipe("sandwich")
+	Game.add_item("bread", 2)
+	Game.add_item("lettuce", 2)
+	Game.add_item("tomato", 2)
+	await c.caption("Receta aprendida: Sándwich. Genis guarda pan, lechuga y tomate. (Menú → Cocina)", 2.4)
+
+func _wonder_chef(c: Cutscene) -> void:
+	if c.has("wonder_chef_iselia"):
+		await c.line("Cocinero misterioso", "¡Practica, practica! Un buen cocinero se hace con la sartén, no con los libros.")
+		return
+	c.flag("wonder_chef_iselia")
+	await c.script("iselia_village.wonder_chef.01", [
+		{"speaker": "Cocinero misterioso", "text": "¡Ajá! ¡Me has descubierto! No soy un simple aldeano: ¡soy el Maestro Cocinero!"},
+		{"speaker": "Lloyd", "text": "¿El qué?"},
+		{"speaker": "Cocinero misterioso", "text": "Viajo por el mundo enseñando recetas a quien sepa encontrarme. Hoy te toca a ti: la tortilla. Huevos y leche, nada más. ¡Hasta la próxima!"},
+	])
+	Game.learn_recipe("omelet")
+	await c.caption("Receta aprendida: Tortilla.", 1.8)
 
 func _gate_talk(c: Cutscene) -> void:
 	if not c.has("genis_house_done") or c.has("gate_done"):

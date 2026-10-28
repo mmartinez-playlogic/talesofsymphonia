@@ -125,3 +125,18 @@ Mateo en reunión: NADA se ha ejecutado (ni Godot headless). Todo escrito a cieg
   (fuente editable) → `src/data/script/es.json` vía `tools/import_script.py`. Cargado por `DB.story_script`.
 - Si algún día se importa el texto oficial (subtítulos ES de Chronicles/Remastered), basta sustituir `es.json`.
 - Fuentes en inglés localizadas: FAQs de guion (GameFAQs / espejo video-games-museum), "Z-Skit Scripts" (tamashii).
+
+## 2026-10-28 — Sesión 3h (harness: Claude Code 2.1.287, modelo Opus 5.5 desde aquí) — "todos los sistemas"
+- Mateo cambió el modelo a Opus 5.5 (`/model`); atribución de commits actualizada.
+- Datos nuevos: 20 ingredientes, armas/armaduras/accesorios, EX Gems Nv1-4 (`items.json`, 77 objetos), `recipes.json` (10),
+  `titles.json` (15), `ex_skills.json` (8 comunes + propias), `shops.json` (Iselia, Triet, Casa de la Salvación).
+- `Game.gd` reescrito: equipo por huecos, títulos por flags (señal `title_earned`), EX Skills con gemas, cocina con
+  habilidad por personaje, compra/venta, guardado de todo lo anterior.
+- UI: `PauseMenu` con 10 secciones (Objetos, Equipo, Artes, Cocina, Títulos, EX Skills, Estado, Manual, Guardar, Cerrar),
+  `ShopMenu` nuevo, posada (`Field.inn`), menú de objetos en combate (tecla I).
+- Campo: Anillo del Hechicero real (`RingShot`, aturde monstruos → ventaja). Maestros Cocineros en Iselia y casa de Dirk.
+- Combate: Over Limit (barra naranja), Unison Attack (barra azul, tecla N), efectos de EX Skills (combo 4, TP, lanzamiento,
+  súper armadura, crítico, EXP/Gald), título por combo de 10.
+- Bug real encontrado por el test: niveles de EX del JSON llegan como float y no casaban con el hueco.
+- Nuevo `tools/SystemsTest.tscn`: 146 aserciones, incluidas pulsaciones reales en tienda, menú (cocinar) y anillo. 146/146.
+- Referencia: `docs/SYSTEMS.md`.

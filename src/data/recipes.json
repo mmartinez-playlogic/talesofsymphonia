@@ -1,0 +1,176 @@
+{
+ "sandwich": {
+  "name": "Sándwich",
+  "ingredients": {
+   "bread": 1,
+   "lettuce": 1,
+   "tomato": 1
+  },
+  "effect": {
+   "hp_pct": 0.2
+  },
+  "difficulty": 1,
+  "best": [
+   "genis",
+   "colette"
+  ],
+  "desc": "Recupera 20% de HP a todos."
+ },
+ "omelet": {
+  "name": "Tortilla",
+  "ingredients": {
+   "egg": 2,
+   "milk": 1
+  },
+  "effect": {
+   "hp_pct": 0.25,
+   "tp_pct": 0.05
+  },
+  "difficulty": 1,
+  "best": [
+   "genis",
+   "raine"
+  ],
+  "desc": "Recupera 25% de HP y 5% de TP."
+ },
+ "rice_ball": {
+  "name": "Bola de arroz",
+  "ingredients": {
+   "rice": 1
+  },
+  "effect": {
+   "hp_pct": 0.15
+  },
+  "difficulty": 1,
+  "best": [
+   "sheena",
+   "genis"
+  ],
+  "desc": "Recupera 15% de HP."
+ },
+ "cabbage_roll": {
+  "name": "Rollito de col",
+  "ingredients": {
+   "lettuce": 1,
+   "beef": 1,
+   "onion": 1
+  },
+  "effect": {
+   "hp_pct": 0.3
+  },
+  "difficulty": 2,
+  "best": [
+   "genis",
+   "regal"
+  ],
+  "desc": "Recupera 30% de HP."
+ },
+ "curry": {
+  "name": "Curry",
+  "ingredients": {
+   "rice": 1,
+   "potato": 1,
+   "carrot": 1,
+   "spice": 1,
+   "beef": 1
+  },
+  "effect": {
+   "hp_pct": 0.4,
+   "cure": true
+  },
+  "difficulty": 3,
+  "best": [
+   "genis",
+   "regal"
+  ],
+  "desc": "Recupera 40% de HP y cura estados."
+ },
+ "ramen": {
+  "name": "Ramen",
+  "ingredients": {
+   "noodles": 1,
+   "egg": 1,
+   "chicken": 1
+  },
+  "effect": {
+   "hp_pct": 0.3,
+   "tp_pct": 0.1
+  },
+  "difficulty": 2,
+  "best": [
+   "sheena",
+   "presea"
+  ],
+  "desc": "Recupera 30% de HP y 10% de TP."
+ },
+ "spaghetti": {
+  "name": "Espaguetis",
+  "ingredients": {
+   "pasta": 1,
+   "tomato": 1,
+   "cheese": 1
+  },
+  "effect": {
+   "hp_pct": 0.35
+  },
+  "difficulty": 2,
+  "best": [
+   "zelos",
+   "genis"
+  ],
+  "desc": "Recupera 35% de HP."
+ },
+ "fried_fish": {
+  "name": "Pescado frito",
+  "ingredients": {
+   "fish": 1,
+   "butter": 1
+  },
+  "effect": {
+   "hp_pct": 0.3,
+   "tp_pct": 0.1
+  },
+  "difficulty": 2,
+  "best": [
+   "regal",
+   "kratos"
+  ],
+  "desc": "Recupera 30% de HP y 10% de TP."
+ },
+ "beef_stew": {
+  "name": "Estofado",
+  "ingredients": {
+   "beef": 1,
+   "potato": 1,
+   "carrot": 1,
+   "onion": 1
+  },
+  "effect": {
+   "hp_pct": 0.5
+  },
+  "difficulty": 3,
+  "best": [
+   "regal",
+   "genis"
+  ],
+  "desc": "Recupera 50% de HP."
+ },
+ "pie": {
+  "name": "Tarta de manzana",
+  "ingredients": {
+   "apple": 2,
+   "butter": 1,
+   "egg": 1
+  },
+  "effect": {
+   "hp_pct": 0.2,
+   "tp_pct": 0.2
+  },
+  "difficulty": 3,
+  "best": [
+   "colette",
+   "raine"
+  ],
+  "desc": "Recupera 20% de HP y 20% de TP."
+ }
+}

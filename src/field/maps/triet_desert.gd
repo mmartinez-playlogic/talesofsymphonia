@@ -44,6 +44,8 @@ func build() -> void:
 	add_monster(Vector3(30, 0, -10), ["sand_wolf"])
 	add_monster(Vector3(0, 0, 12), ["sand_wolf", "desert_hornet"])
 	add_monster(Vector3(-24, 0, -12), ["desert_hornet", "desert_hornet", "hare"])
+	add_shop_npc("caravan", Vector3(-52, 0, 6), "Mercader de la caravana", "botta", "triet", "¡Agua, geles, especias y acero! Lo mejor del bazar de Triet, aquí mismo.", 270.0)
+	add_inn_npc("tent_inn", Vector3(-52, 0, -6), "Posadera nómada", "marble", 100, 270.0)
 	add_interactable("poster", Vector3(-57.8, 0, -6.2), Vector3(0.6, 2.0, 1.0), Color(0.95, 0.9, 0.75), _poster)
 	add_interactable("triet_gate", Vector3(-62, 0, 0), Vector3(2, 6, 12), Color(0.5, 0.4, 0.3), _gate)
 	if Game.get_flag("triet_arrived", false):

@@ -35,6 +35,11 @@ var flying := false
 var model_scale := 1.0
 var _anim_prefix_sword := true
 var _death_done := false
+var ol_gauge := 0.0            # 0..100, fills when taking damage (player side)
+var over_limit_t := 0.0        # seconds remaining of Over Limit
+var ex: Dictionary = {}        # EX skill effects (player side)
+var status := ""               # "" | "poison" | "stun"
+var status_t := 0.0
 
 func _ready() -> void:
 	collision_layer = 8
@@ -91,7 +96,22 @@ func stat(name: String) -> float:
 	var v := float(stats.get(name, 10))
 	if buffs.has(name):
 		v *= float(buffs[name]["mult"])
+	if over_limit_t > 0 and (name == "atk" or name == "int"):
+		v *= 1.3
 	return v
+
+func in_over_limit() -> bool:
+	return over_limit_t > 0
+
+func add_ol(amount: float) -> void:
+	if over_limit_t > 0 or not player_side:
+		return
+	ol_gauge = min(100.0, ol_gauge + amount * float(ex.get("ol_rate", 1.0)))
+	if ol_gauge >= 100.0:
+		ol_gauge = 0.0
+		over_limit_t = 8.0
+		manager.spawn_popup(global_position + Vector3(0, 2.1, 0), "OVER LIMIT", Color(1, 0.6, 0.2), 0.8)
+		Effects.ring(manager._fx_root, global_position, Color(1, 0.5, 0.1), 2.5, 0.6)
 
 func hp_ratio() -> float:
 	return float(stats["hp"]) / float(max(1, stats["max_hp"]))
@@ -121,7 +141,7 @@ func face_target() -> void:
 
 ## Physical hit. Returns damage dealt.
 func deal_physical(victim: Battler, power: float, knock := 1.5, elem := "none", launch := false) -> int:
-	var crit := randf() < 0.04 + stat("luck") * 0.002
+	var crit := randf() < 0.04 + stat("luck") * 0.002 + float(ex.get("crit", 0.0))
 	var base := stat("atk") * power * 1.15 - victim.stat("def") * 0.45
 	base = max(base, stat("atk") * power * 0.12)
 	base *= randf_range(0.92, 1.08)
@@ -167,8 +187,12 @@ func take_hit(attacker: Battler, dmg: int, knock: float, crit: bool, magical: bo
 	if stats["hp"] <= 0:
 		_die()
 		return
+	if player_side:
+		add_ol(float(dmg) / max(1.0, float(stats["max_hp"])) * 100.0 * 0.9)
 	if blocked:
 		return
+	if over_limit_t > 0 or (bool(ex.get("super_armor", false)) and dmg < stats["max_hp"] * 0.08):
+		return  # no stagger
 	if is_boss and randf() < 0.6 and not magical:
 		return  # bosses resist stagger
 	# stagger
@@ -208,6 +232,14 @@ func apply_buff(stat_name: String, mult: float, duration: float) -> void:
 
 # ---------- per-frame ----------
 func _physics_process(delta: float) -> void:
+	if over_limit_t > 0:
+		over_limit_t -= delta
+	if status != "":
+		status_t -= delta
+		if status == "poison" and int(Time.get_ticks_msec() / 1000) != int((Time.get_ticks_msec() - delta * 1000) / 1000) and is_alive():
+			stats["hp"] = max(1, int(stats["hp"]) - max(1, int(stats["max_hp"] * 0.02)))
+		if status_t <= 0:
+			status = ""
 	# buffs
 	for k in buffs.keys():
 		buffs[k]["time"] -= delta

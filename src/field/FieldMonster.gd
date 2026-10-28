@@ -16,6 +16,8 @@ var _field: Node
 var _triggered := false
 var _stuck_t := 0.0
 var _last_pos := Vector3.ZERO
+var stun_t := 0.0
+var _stun_mat: StandardMaterial3D
 
 func setup(field: Node, enemies: Array, index: int) -> void:
 	_field = field
@@ -56,7 +58,31 @@ func _pick_target() -> void:
 	_target = wander_center + Vector3(cos(a), 0, sin(a)) * randf_range(1.0, wander_radius)
 	_wait = randf_range(0.8, 2.5)
 
+## Sorcerer's Ring hit: freeze in place and glow blue; touching a stunned monster gives player advantage.
+func stun(seconds: float) -> void:
+	stun_t = seconds
+	if _stun_mat == null:
+		_stun_mat = StandardMaterial3D.new()
+		_stun_mat.albedo_color = Color(0.4, 0.6, 1.0)
+		_stun_mat.emission_enabled = true
+		_stun_mat.emission = Color(0.3, 0.5, 1.0)
+		_stun_mat.emission_energy_multiplier = 1.5
+	for mi in model.find_children("*", "MeshInstance3D", true, false):
+		(mi as MeshInstance3D).material_override = _stun_mat
+
+func _unstun() -> void:
+	stun_t = 0.0
+	for mi in model.find_children("*", "MeshInstance3D", true, false):
+		(mi as MeshInstance3D).material_override = null
+
 func _physics_process(delta: float) -> void:
+	if stun_t > 0:
+		stun_t -= delta
+		velocity = Vector3.ZERO
+		_anim_idle()
+		if stun_t <= 0:
+			_unstun()
+		return
 	if _triggered or _field == null or _field.player == null or not _field.player.can_move:
 		velocity = Vector3.ZERO
 		_anim_idle()
@@ -119,7 +145,7 @@ func _on_body_entered(body: Node) -> void:
 	var m_fwd := Vector3(sin(rotation.y), 0, cos(rotation.y))
 	var to_m := (global_position - player.global_position).normalized()
 	var advantage := "normal"
-	if p_fwd.dot(to_m) > 0.5 and m_fwd.dot(to_m) > 0.5:
+	if stun_t > 0 or (p_fwd.dot(to_m) > 0.5 and m_fwd.dot(to_m) > 0.5):
 		advantage = "player"
 	elif p_fwd.dot(-to_m) < -0.5 and m_fwd.dot(-to_m) > 0.5:
 		advantage = "enemy"

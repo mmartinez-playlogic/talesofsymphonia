@@ -22,6 +22,7 @@ var _skit_check := 0.0
 var _available_skit := ""
 var _skit_box: SkitBox
 var _pause: PauseMenu
+var _shop: ShopMenu
 var _hud: CanvasLayer
 
 func _ready() -> void:
@@ -167,6 +168,45 @@ func _build_hud() -> void:
 	_pause = PauseMenu.new()
 	_pause.field = self
 	add_child(_pause)
+	_shop = ShopMenu.new()
+	add_child(_shop)
+	Game.title_earned.connect(_on_title_earned)
+
+func _on_title_earned(char_id: String, title_id: String) -> void:
+	if dialogue:
+		dialogue.show_caption("%s ha obtenido el título «%s»" % [str(DB.characters.get(char_id, {}).get("name", char_id)).split(" ")[0], DB.titles[title_id]["name"]], 2.2)
+
+## Open a shop (id from src/data/shops.json). Awaitable; used from NPC handlers.
+func open_shop(shop_id: String) -> void:
+	await _shop.open(shop_id)
+
+## Inn: ask, charge, fade, heal. Awaitable.
+func inn(price: int, keeper := "Posadero") -> void:
+	var i: int = await dialogue.show_choice("%s: Una noche son %d Gald. ¿Os quedáis?" % [keeper, price], ["Sí", "No"])
+	if i != 0:
+		return
+	if Game.gald < price:
+		await dialogue.show_lines([{"speaker": keeper, "text": "Lo siento, no os llega el dinero."}])
+		return
+	Game.gald -= price
+	await Router.fade_out(0.6)
+	Game.heal_all()
+	await get_tree().create_timer(0.8).timeout
+	await Router.fade_in(0.6)
+	await dialogue.show_lines([{"speaker": keeper, "text": "Buenos días. Habéis dormido como troncos."}])
+
+## Merchant NPC helper.
+func add_shop_npc(id: String, pos: Vector3, npc_name: String, model_id: String, shop_id: String, greeting := "¡Bienvenidos! Mirad lo que tengo.", yaw_deg := 0.0) -> Npc:
+	var n := add_npc(id, pos, npc_name, model_id, [], yaw_deg)
+	n.on_interact = func(_f):
+		await dialogue.show_lines([{"speaker": npc_name, "text": greeting}])
+		await open_shop(shop_id)
+	return n
+
+func add_inn_npc(id: String, pos: Vector3, npc_name: String, model_id: String, price: int, yaw_deg := 0.0) -> Npc:
+	var n := add_npc(id, pos, npc_name, model_id, [], yaw_deg)
+	n.on_interact = func(_f): await inn(price, npc_name)
+	return n
 
 func _process(delta: float) -> void:
 	_skit_check -= delta

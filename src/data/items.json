@@ -291,5 +291,338 @@
    "spr": 3
   },
   "desc": "Amplifica las capacidades latentes de quien la lleva. Necesita una Cresta Clave."
+ },
+ "bread": {
+  "name": "Pan",
+  "type": "ingredient",
+  "price": 20,
+  "desc": "Ingrediente para cocinar."
+ },
+ "tomato": {
+  "name": "Tomate",
+  "type": "ingredient",
+  "price": 15,
+  "desc": "Ingrediente para cocinar."
+ },
+ "lettuce": {
+  "name": "Lechuga",
+  "type": "ingredient",
+  "price": 10,
+  "desc": "Ingrediente para cocinar."
+ },
+ "cheese": {
+  "name": "Queso",
+  "type": "ingredient",
+  "price": 30,
+  "desc": "Ingrediente para cocinar."
+ },
+ "egg": {
+  "name": "Huevo",
+  "type": "ingredient",
+  "price": 12,
+  "desc": "Ingrediente para cocinar."
+ },
+ "milk": {
+  "name": "Leche",
+  "type": "ingredient",
+  "price": 15,
+  "desc": "Ingrediente para cocinar."
+ },
+ "rice": {
+  "name": "Arroz",
+  "type": "ingredient",
+  "price": 20,
+  "desc": "Ingrediente para cocinar."
+ },
+ "potato": {
+  "name": "Patata",
+  "type": "ingredient",
+  "price": 12,
+  "desc": "Ingrediente para cocinar."
+ },
+ "carrot": {
+  "name": "Zanahoria",
+  "type": "ingredient",
+  "price": 10,
+  "desc": "Ingrediente para cocinar."
+ },
+ "onion": {
+  "name": "Cebolla",
+  "type": "ingredient",
+  "price": 10,
+  "desc": "Ingrediente para cocinar."
+ },
+ "beef": {
+  "name": "Carne",
+  "type": "ingredient",
+  "price": 60,
+  "desc": "Ingrediente para cocinar."
+ },
+ "chicken": {
+  "name": "Pollo",
+  "type": "ingredient",
+  "price": 45,
+  "desc": "Ingrediente para cocinar."
+ },
+ "fish": {
+  "name": "Pescado",
+  "type": "ingredient",
+  "price": 40,
+  "desc": "Ingrediente para cocinar."
+ },
+ "noodles": {
+  "name": "Fideos",
+  "type": "ingredient",
+  "price": 25,
+  "desc": "Ingrediente para cocinar."
+ },
+ "apple": {
+  "name": "Manzana",
+  "type": "ingredient",
+  "price": 10,
+  "desc": "Ingrediente para cocinar."
+ },
+ "pasta": {
+  "name": "Pasta",
+  "type": "ingredient",
+  "price": 25,
+  "desc": "Ingrediente para cocinar."
+ },
+ "beans": {
+  "name": "Alubias",
+  "type": "ingredient",
+  "price": 15,
+  "desc": "Ingrediente para cocinar."
+ },
+ "spice": {
+  "name": "Especias",
+  "type": "ingredient",
+  "price": 25,
+  "desc": "Ingrediente para cocinar."
+ },
+ "butter": {
+  "name": "Mantequilla",
+  "type": "ingredient",
+  "price": 20,
+  "desc": "Ingrediente para cocinar."
+ },
+ "mushroom": {
+  "name": "Seta",
+  "type": "ingredient",
+  "price": 18,
+  "desc": "Ingrediente para cocinar."
+ },
+ "leather_glove": {
+  "name": "Guante de cuero",
+  "type": "arm",
+  "price": 120,
+  "stats": {
+   "def": 3
+  }
+ },
+ "iron_gauntlet": {
+  "name": "Guantelete de hierro",
+  "type": "arm",
+  "price": 420,
+  "stats": {
+   "def": 8
+  }
+ },
+ "leather_cap": {
+  "name": "Gorro de cuero",
+  "type": "head",
+  "price": 90,
+  "stats": {
+   "def": 2
+  }
+ },
+ "iron_helm": {
+  "name": "Yelmo de hierro",
+  "type": "head",
+  "price": 380,
+  "stats": {
+   "def": 7
+  }
+ },
+ "ribbon": {
+  "name": "Lazo",
+  "type": "head",
+  "price": 150,
+  "stats": {
+   "def": 1,
+   "spr": 4
+  }
+ },
+ "leather_armor": {
+  "name": "Armadura de cuero",
+  "type": "body",
+  "price": 260,
+  "stats": {
+   "def": 10
+  }
+ },
+ "chain_mail": {
+  "name": "Cota de malla",
+  "type": "body",
+  "price": 700,
+  "stats": {
+   "def": 18
+  }
+ },
+ "soft_leather": {
+  "name": "Cuero blando",
+  "type": "body",
+  "price": 220,
+  "stats": {
+   "def": 8,
+   "eva": 2
+  }
+ },
+ "white_robe": {
+  "name": "Túnica blanca",
+  "type": "body",
+  "price": 300,
+  "stats": {
+   "def": 7,
+   "spr": 6
+  }
+ },
+ "steel_sword": {
+  "name": "Steel Sword",
+  "type": "weapon",
+  "price": 900,
+  "stats": {
+   "atk": 38
+  },
+  "users": [
+   "lloyd"
+  ]
+ },
+ "short_sword": {
+  "name": "Short Sword",
+  "type": "weapon",
+  "price": 400,
+  "stats": {
+   "atk": 34
+  },
+  "users": [
+   "kratos",
+   "zelos"
+  ]
+ },
+ "duel_chakram": {
+  "name": "Duel Chakram",
+  "type": "weapon",
+  "price": 320,
+  "stats": {
+   "atk": 20
+  },
+  "users": [
+   "colette"
+  ]
+ },
+ "spiked_kendama": {
+  "name": "Spiked Kendama",
+  "type": "weapon",
+  "price": 300,
+  "stats": {
+   "atk": 9,
+   "int": 14
+  },
+  "users": [
+   "genis"
+  ]
+ },
+ "wand": {
+  "name": "Wand",
+  "type": "weapon",
+  "price": 340,
+  "stats": {
+   "atk": 10,
+   "int": 16
+  },
+  "users": [
+   "raine"
+  ]
+ },
+ "talisman": {
+  "name": "Talismán",
+  "type": "accessory",
+  "price": 300,
+  "stats": {
+   "spr": 5,
+   "luck": 3
+  },
+  "desc": "Protege de la mala suerte."
+ },
+ "poison_charm": {
+  "name": "Amuleto antiveneno",
+  "type": "accessory",
+  "price": 250,
+  "stats": {},
+  "desc": "Inmuniza contra el veneno."
+ },
+ "stun_bracelet": {
+  "name": "Brazalete de aturdimiento",
+  "type": "accessory",
+  "price": 500,
+  "stats": {},
+  "desc": "Inmuniza contra el aturdimiento."
+ },
+ "magic_mist": {
+  "name": "Niebla mágica",
+  "type": "consumable",
+  "price": 250,
+  "effect": {
+   "hp_pct": 0.15,
+   "tp_pct": 0.15
+  },
+  "desc": "Restaura un poco de HP y TP."
+ },
+ "holy_bottle": {
+  "name": "Botella sagrada",
+  "type": "consumable",
+  "price": 200,
+  "effect": {
+   "repel": true
+  },
+  "desc": "Ahuyenta a los monstruos un tiempo."
+ },
+ "dark_bottle": {
+  "name": "Botella oscura",
+  "type": "consumable",
+  "price": 200,
+  "effect": {
+   "attract": true
+  },
+  "desc": "Atrae a los monstruos un tiempo."
+ },
+ "ex_gem_1": {
+  "name": "EX Gem Nv. 1",
+  "type": "ex_gem",
+  "price": 1000,
+  "level": 1,
+  "desc": "Gema que desbloquea una EX Skill de nivel 1."
+ },
+ "ex_gem_2": {
+  "name": "EX Gem Nv. 2",
+  "type": "ex_gem",
+  "price": 2000,
+  "level": 2,
+  "desc": "Gema que desbloquea una EX Skill de nivel 2."
+ },
+ "ex_gem_3": {
+  "name": "EX Gem Nv. 3",
+  "type": "ex_gem",
+  "price": 4000,
+  "level": 3,
+  "desc": "Gema que desbloquea una EX Skill de nivel 3."
+ },
+ "ex_gem_4": {
+  "name": "EX Gem Nv. 4",
+  "type": "ex_gem",
+  "price": 8000,
+  "level": 4,
+  "desc": "Gema que desbloquea una EX Skill de nivel 4."
  }
 }

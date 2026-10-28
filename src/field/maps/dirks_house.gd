@@ -42,6 +42,7 @@ func build() -> void:
 		func(): return not _evening or Game.get_flag("night_dirk", false),
 		[{"speaker": "Lloyd", "text": "Ya es tarde. Mañana iré a la aldea a despedirme de Colette."}])
 	add_chest("home", Vector3(-6, 0, 2), "melange_gel")
+	add_interactable("forge_pot", Vector3(9.5, 0, 0.5), Vector3(0.7, 0.7, 0.7), Color(0.35, 0.3, 0.3), _wonder_chef)
 	if not _evening:
 		add_npc("dirk", Vector3(5, 0, 0), "Dirk", "dirk",
 			[{"speaker": "Dirk", "text": "¡A la aldea, Lloyd! ¡Ya! Colette y los demás se fueron hace mucho."}] if Game.get_flag("night_dirk", false) and not Game.get_flag("exiled", false) else
@@ -53,6 +54,19 @@ func on_enter(c: Cutscene) -> void:
 		await _argument(c)
 	elif c.has("night_dirk") and not c.has("dirk_morning") and not c.has("exiled"):
 		await _morning(c)
+
+func _wonder_chef(c: Cutscene) -> void:
+	if c.has("wonder_chef_dirk"):
+		await c.line("", "Una olla vieja junto a la forja. Huele a arroz.")
+		return
+	c.flag("wonder_chef_dirk")
+	await c.script("dirks_house.wonder_chef.01", [
+		{"speaker": "", "text": "(¡La olla se mueve! De dentro sale un hombrecillo con gorro de cocinero.)"},
+		{"speaker": "Maestro Cocinero", "text": "¡Ja! ¡Disfrazado de olla, el escondite perfecto! Ya que me has encontrado: la bola de arroz. Arroz y nada más. ¡Adiós!"},
+	])
+	Game.learn_recipe("rice_ball")
+	Game.add_item("rice", 2)
+	await c.caption("Receta aprendida: Bola de arroz.", 1.8)
 
 func _grave(c: Cutscene) -> void:
 	await c.script("dirks_house.grave.01", [

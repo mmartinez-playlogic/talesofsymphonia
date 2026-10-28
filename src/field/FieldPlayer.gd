@@ -14,6 +14,7 @@ var scripted := false      # true while a cutscene moves this body directly
 var _interact_area: Area3D
 var _camera_yaw := 0.0
 var _enc_timer := 0.0
+var _ring_cd := 0.0
 
 func _ready() -> void:
 	collision_layer = 1
@@ -45,6 +46,7 @@ func set_camera_yaw(yaw: float) -> void:
 	_camera_yaw = yaw
 
 func _physics_process(delta: float) -> void:
+	_ring_cd -= delta
 	if not can_move:
 		if scripted:
 			return
@@ -78,6 +80,15 @@ func _physics_process(delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not can_move:
+		return
+	if event.is_action_pressed("arte") and Game.has_item("sorcerers_ring") and _ring_cd <= 0:
+		get_viewport().set_input_as_handled()
+		_ring_cd = 0.6
+		var shot := RingShot.new()
+		get_parent().add_child(shot)
+		var fwd := Vector3(sin(rotation.y), 0, cos(rotation.y))
+		shot.global_position = global_position + fwd * 0.9 + Vector3(0, 0.9, 0)
+		shot.velocity = fwd * 11.0
 		return
 	if event.is_action_pressed("confirm"):
 		var best: Node = null

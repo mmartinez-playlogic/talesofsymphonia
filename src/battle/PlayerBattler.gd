@@ -34,6 +34,7 @@ func setup_from_member(char_id: String) -> void:
 		if arte_shortcuts.is_empty():
 			arte_shortcuts = known_artes.slice(0, 3)
 	strategy = member.get("strategy", "normal")
+	ex = Game.ex_effects(char_id)
 	_anim_prefix_sword = char_data["weapon"] in ["twin_swords", "sword", "axe"]
 	move_speed = 6.0
 	var sc: float = {"genis": 0.82, "presea": 0.85, "colette": 0.95, "raine": 0.98, "sheena": 0.97, "regal": 1.06, "kratos": 1.04, "zelos": 1.02}.get(char_id, 1.0)
@@ -94,6 +95,9 @@ func _think_player(delta: float) -> void:
 	if Input.is_action_just_pressed("arte"):
 		_use_shortcut()
 		return
+	if Input.is_action_just_pressed("unison"):
+		manager.try_unison()
+		return
 	var input := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if free_run:
 		if input.length() > 0.1:
@@ -137,14 +141,16 @@ func _think_player(delta: float) -> void:
 
 func _do_combo() -> void:
 	combo_step += 1
-	if combo_step > 3:
+	var max_combo: int = int(ex.get("combo", 3))
+	if combo_step > max_combo:
 		combo_step = 1
 	combo_window = 0.9
-	var speed := 1.0 if combo_step < 3 else 1.6
-	var power: float = [1.0, 1.05, 1.35][combo_step - 1]
-	var knock: float = [0.8, 1.0, 2.4][combo_step - 1]
-	start_attack(combo_step, power, 1.9, knock, "none", speed, combo_step == 3)
-	if combo_step == 3:
+	var last: bool = combo_step == max_combo
+	var speed := 1.0 if not last else 1.6
+	var power: float = [1.0, 1.05, 1.2, 1.35][min(combo_step, 4) - 1]
+	var knock: float = [0.8, 1.0, 1.2, 2.4][min(combo_step, 4) - 1]
+	start_attack(min(combo_step, 3), power, 1.9, knock, "none", speed, last)
+	if last:
 		action_timer = min(action_timer, 0.9)
 
 func _use_shortcut() -> void:
@@ -163,10 +169,11 @@ func use_arte(arte_id: String) -> bool:
 	var a: Dictionary = DB.artes.get(arte_id, {})
 	if a.is_empty():
 		return false
-	if int(stats["tp"]) < int(a["tp"]):
-		manager.spawn_popup(global_position + Vector3(0, 1.9, 0), "Not enough TP", Color(0.8, 0.8, 0.8))
+	var cost: int = max(1, int(round(int(a["tp"]) * (1.0 + float(ex.get("tp_cost", 0.0))))))
+	if int(stats["tp"]) < cost:
+		manager.spawn_popup(global_position + Vector3(0, 1.9, 0), "TP insuficientes", Color(0.8, 0.8, 0.8))
 		return false
-	stats["tp"] = int(stats["tp"]) - int(a["tp"])
+	stats["tp"] = int(stats["tp"]) - cost
 	face_target()
 	combo_step = 0
 	manager.announce_arte(self, a["name"])
@@ -200,7 +207,7 @@ func _melee_arte(_arte_id: String, a: Dictionary) -> void:
 func _cast(_arte_id: String, a: Dictionary) -> void:
 	state = State.CAST
 	velocity = Vector3.ZERO
-	var cast_time := float(a.get("cast", 1.2))
+	var cast_time := float(a.get("cast", 1.2)) * (1.0 + float(ex.get("cast", 0.0)))
 	model.play(anim_name("cast_enter"), 0.08, 1.0, true)
 	action_timer = cast_time + 0.6
 	manager.show_cast_circle(self, cast_time)

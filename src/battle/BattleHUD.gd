@@ -16,6 +16,17 @@ var _arte_timer := 0.0
 var _results: PanelContainer
 var _results_text: RichTextLabel
 var _center: Label
+var _unison_bar: ProgressBar
+var _unison_label: Label
+var _menu_panel: PanelContainer
+var _menu_list: VBoxContainer
+var _menu_title: Label
+var _menu_labels: Array[Label] = []
+var _menu_entries: Array = []
+var _menu_cursor := 0
+var _menu_mode := ""
+var _menu_item := ""
+var _menu_done := false
 
 func _ready() -> void:
 	layer = 20
@@ -58,6 +69,37 @@ func _ready() -> void:
 	_center.add_theme_constant_override("outline_size", 12)
 	_center.visible = false
 	add_child(_center)
+	_unison_bar = _bar(Color(0.3, 0.6, 1.0))
+	_unison_bar.position = Vector2(1920 - 420, 1080 - 190)
+	_unison_bar.size = Vector2(360, 14)
+	_unison_bar.value = 0.0
+	add_child(_unison_bar)
+	_unison_label = Label.new()
+	_unison_label.text = "UNISON [N]"
+	_unison_label.position = Vector2(1920 - 420, 1080 - 222)
+	_unison_label.add_theme_font_size_override("font_size", 20)
+	_unison_label.add_theme_color_override("font_color", Color(0.7, 0.85, 1.0))
+	add_child(_unison_label)
+	_menu_panel = PanelContainer.new()
+	var mstyle := StyleBoxFlat.new()
+	mstyle.bg_color = Color(0.03, 0.05, 0.14, 0.94)
+	mstyle.border_color = Color(0.85, 0.75, 0.45)
+	mstyle.set_border_width_all(3)
+	mstyle.set_corner_radius_all(12)
+	mstyle.set_content_margin_all(24)
+	_menu_panel.add_theme_stylebox_override("panel", mstyle)
+	_menu_panel.position = Vector2(560, 220)
+	_menu_panel.size = Vector2(800, 520)
+	_menu_panel.visible = false
+	add_child(_menu_panel)
+	var mvb := VBoxContainer.new()
+	_menu_panel.add_child(mvb)
+	_menu_title = Label.new()
+	_menu_title.add_theme_font_size_override("font_size", 32)
+	_menu_title.add_theme_color_override("font_color", Color(0.95, 0.85, 0.5))
+	mvb.add_child(_menu_title)
+	_menu_list = VBoxContainer.new()
+	mvb.add_child(_menu_list)
 	_results = PanelContainer.new()
 	var style := StyleBoxFlat.new()
 	style.bg_color = Color(0.03, 0.05, 0.14, 0.92)
@@ -127,8 +169,111 @@ func add_party_member(b: PlayerBattler) -> void:
 	tp_row.add_child(tp_l)
 	tp_row.add_child(tp_bar)
 	vb.add_child(tp_row)
+	var ol_bar := _bar(Color(0.95, 0.55, 0.15))
+	ol_bar.custom_minimum_size = Vector2(376, 6)
+	ol_bar.value = 0.0
+	vb.add_child(ol_bar)
 	_party_box.add_child(panel)
-	_panels[b] = {"hp": hp_bar, "tp": tp_bar, "hp_l": hp_l, "tp_l": tp_l, "name": name_l, "panel": panel}
+	_panels[b] = {"hp": hp_bar, "tp": tp_bar, "hp_l": hp_l, "tp_l": tp_l, "name": name_l, "panel": panel, "ol": ol_bar}
+
+func combo_hits() -> int:
+	return _combo_hits
+
+# ---------- battle item menu ----------
+func item_menu(bm: BattleManager) -> void:
+	_menu_mode = "items"
+	_menu_cursor = 0
+	_menu_done = false
+	_menu_panel.visible = true
+	_render_menu(bm)
+	while not _menu_done:
+		await get_tree().process_frame
+	_menu_panel.visible = false
+	_menu_mode = ""
+
+func _render_menu(bm: BattleManager) -> void:
+	for ch in _menu_list.get_children():
+		ch.queue_free()
+	_menu_labels.clear()
+	_menu_entries.clear()
+	if _menu_mode == "items":
+		_menu_title.text = "Objetos  (Cancelar: volver al combate)"
+		var ids: Array = Game.inventory.keys()
+		ids.sort()
+		for id in ids:
+			var it: Dictionary = DB.items.get(id, {})
+			if it.get("type", "") != "consumable":
+				continue
+			_menu_entries.append(id)
+			_add_menu_row("%s  x%d   %s" % [it["name"], Game.inventory[id], it.get("desc", "")])
+		if _menu_entries.is_empty():
+			_add_menu_row("(sin objetos)")
+	else:
+		_menu_title.text = "Usar %s en..." % DB.items[_menu_item]["name"]
+		for b in bm.party:
+			_menu_entries.append(b)
+			_add_menu_row("%s   HP %d/%d   TP %d/%d%s" % [b.display_name, b.stats["hp"], b.stats["max_hp"], b.stats["tp"], b.stats["max_tp"], "   (KO)" if not b.is_alive() else ""])
+	for i in _menu_labels.size():
+		var sel := i == _menu_cursor and not _menu_entries.is_empty()
+		_menu_labels[i].modulate = Color(1, 0.9, 0.5) if sel else Color(0.85, 0.85, 0.9)
+		_menu_labels[i].text = ("▶ " if sel else "   ") + _menu_labels[i].text.trim_prefix("▶ ").strip_edges()
+
+func _add_menu_row(text: String) -> void:
+	var l := Label.new()
+	l.text = text
+	l.add_theme_font_size_override("font_size", 26)
+	_menu_list.add_child(l)
+	_menu_labels.append(l)
+
+func _unhandled_input(event: InputEvent) -> void:
+	if _menu_mode == "":
+		return
+	var bm := manager as BattleManager
+	var n := _menu_entries.size()
+	if event.is_action_pressed("move_down") and n > 0:
+		_menu_cursor = (_menu_cursor + 1) % n
+	elif event.is_action_pressed("move_up") and n > 0:
+		_menu_cursor = (_menu_cursor - 1 + n) % n
+	elif event.is_action_pressed("confirm") and n > 0:
+		if _menu_mode == "items":
+			_menu_item = _menu_entries[_menu_cursor]
+			_menu_mode = "target"
+			_menu_cursor = 0
+		else:
+			var b: PlayerBattler = _menu_entries[_menu_cursor]
+			if _apply_item(_menu_item, b):
+				_menu_done = true
+	elif event.is_action_pressed("cancel") or event.is_action_pressed("menu"):
+		if _menu_mode == "target":
+			_menu_mode = "items"
+			_menu_cursor = 0
+		else:
+			_menu_done = true
+	else:
+		return
+	get_viewport().set_input_as_handled()
+	if not _menu_done:
+		_render_menu(bm)
+
+func _apply_item(item_id: String, b: PlayerBattler) -> bool:
+	var fx: Dictionary = DB.items.get(item_id, {}).get("effect", {})
+	var boost := 1.0 + float(b.ex.get("item", 0.0))
+	if fx.has("revive"):
+		if b.is_alive():
+			return false
+		b.revive(float(fx["revive"]))
+	else:
+		if not b.is_alive():
+			return false
+		if fx.has("hp_pct"):
+			b.heal(int(b.stats["max_hp"] * float(fx["hp_pct"]) * boost))
+		if fx.has("tp_pct"):
+			b.stats["tp"] = min(int(b.stats["max_tp"]), int(b.stats["tp"]) + int(b.stats["max_tp"] * float(fx["tp_pct"]) * boost))
+		if fx.has("cure"):
+			b.status = ""
+	Game.add_item(item_id, -1)
+	announce_arte(DB.items[item_id]["name"])
+	return true
 
 func _process(delta: float) -> void:
 	for b in _panels:
@@ -141,6 +286,10 @@ func _process(delta: float) -> void:
 		p["tp_l"].text = "TP %d/%d" % [b.stats["tp"], b.stats["max_tp"]]
 		p["name"].modulate = Color(1, 0.9, 0.5) if b == manager.controlled else Color(1, 1, 1)
 		p["panel"].modulate.a = 0.5 if not b.is_alive() else 1.0
+		p["ol"].value = 1.0 if b.over_limit_t > 0 else b.ol_gauge / 100.0
+		p["ol"].modulate = Color(1, 0.5, 0.2) if b.over_limit_t > 0 else Color(1, 1, 1)
+	_unison_bar.value = manager.unison_gauge / 100.0
+	_unison_label.modulate = Color(1, 0.9, 0.4) if manager.unison_gauge >= 100.0 else Color(0.7, 0.85, 1.0)
 	var c = manager.controlled
 	if c and c.target and is_instance_valid(c.target):
 		_target_name.text = c.target.display_name

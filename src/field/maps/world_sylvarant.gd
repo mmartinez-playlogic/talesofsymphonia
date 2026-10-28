@@ -71,6 +71,7 @@ func build() -> void:
 	if Game.get_flag("exiled", false):
 		add_npc("salvation_woman", Vector3(-17, 0, 18.5), "Mujer", "phaidra", [], 0.0)
 		npc("salvation_woman").on_interact = func(_f): await _house_of_salvation(cs)
+		add_shop_npc("salvation_shop", Vector3(-23, 0, 18.5), "Hermano de la Iglesia", "mayor", "salvation", "Que Martel os bendiga. Vendemos lo justo para el camino.")
 		add_trigger(Vector3(-62, 1, 60), Vector3(30, 3, 30), _renegades, "renegades_cordon")
 		if not Game.get_flag("house_of_salvation", false):
 			add_trigger(Vector3(-20, 1, 22), Vector3(14, 3, 8), _house_arrive, "salvation_arrive")
@@ -103,8 +104,10 @@ func _house_arrive(c: Cutscene) -> void:
 
 func _house_of_salvation(c: Cutscene) -> void:
 	if c.has("house_of_salvation"):
-		await c.line("Mujer", "Que Martel os acompañe en vuestra peregrinación.")
+		await c.line("Mujer", "Que Martel os acompañe en vuestra peregrinación. Descansad cuanto necesitéis.")
+		await Router.fade_out(0.5)
 		Game.heal_all()
+		await Router.fade_in(0.5)
 		return
 	c.flag("house_of_salvation")
 	c.spawn("genis", "genis", player.global_position + Vector3(-1.5, 0, 1), 0.0, "Genis")
@@ -130,7 +133,8 @@ func _house_of_salvation(c: Cutscene) -> void:
 		{"speaker": "Lloyd", "text": "Papá..."},
 		{"speaker": "Genis", "text": "Dirk te quiere mucho, Lloyd."},
 	])
-	await c.caption("EX Gems: desbloqueadas (menú de pausa, próximamente).", 2.0)
+	Game.add_item("ex_gem_1", 2)
+	await c.caption("En la bolsa de Dirk hay dos EX Gems Nv. 1. (Menú → EX Skills)", 2.4)
 	c.despawn("genis")
 	c.despawn("noishe")
 

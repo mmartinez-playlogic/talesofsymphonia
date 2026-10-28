@@ -1,0 +1,722 @@
+{
+ "lloyd": [
+  {
+   "id": "tough",
+   "level": 1,
+   "name": "Tough",
+   "desc": "+10% HP máximo.",
+   "effect": {
+    "max_hp": 0.1
+   }
+  },
+  {
+   "id": "concentrate",
+   "level": 1,
+   "name": "Concentrate",
+   "desc": "+10% ataque.",
+   "effect": {
+    "atk": 0.1
+   }
+  },
+  {
+   "id": "sharpness",
+   "level": 2,
+   "name": "Sharpness",
+   "desc": "+8% precisión y +5% crítico.",
+   "effect": {
+    "acc": 0.08,
+    "crit": 0.05
+   }
+  },
+  {
+   "id": "guardian",
+   "level": 2,
+   "name": "Guardian",
+   "desc": "+12% defensa.",
+   "effect": {
+    "def": 0.12
+   }
+  },
+  {
+   "id": "spell_charge",
+   "level": 3,
+   "name": "Spell Charge",
+   "desc": "-25% coste de TP.",
+   "effect": {
+    "tp_cost": -0.25
+   }
+  },
+  {
+   "id": "glory",
+   "level": 3,
+   "name": "Glory",
+   "desc": "No te aturden los golpes débiles.",
+   "effect": {
+    "super_armor": true
+   }
+  },
+  {
+   "id": "ex_gauge",
+   "level": 4,
+   "name": "EX Gauge",
+   "desc": "Over Limit se carga el doble de rápido.",
+   "effect": {
+    "ol_rate": 2.0
+   }
+  },
+  {
+   "id": "lucky",
+   "level": 4,
+   "name": "Lucky",
+   "desc": "+30% EXP y +20% Gald.",
+   "effect": {
+    "exp": 0.3,
+    "gald": 0.2
+   }
+  },
+  {
+   "id": "combo_plus",
+   "level": 2,
+   "name": "Combo Plus",
+   "desc": "El combo básico tiene 4 golpes.",
+   "effect": {
+    "combo": 4
+   }
+  }
+ ],
+ "colette": [
+  {
+   "id": "tough",
+   "level": 1,
+   "name": "Tough",
+   "desc": "+10% HP máximo.",
+   "effect": {
+    "max_hp": 0.1
+   }
+  },
+  {
+   "id": "concentrate",
+   "level": 1,
+   "name": "Concentrate",
+   "desc": "+10% ataque.",
+   "effect": {
+    "atk": 0.1
+   }
+  },
+  {
+   "id": "sharpness",
+   "level": 2,
+   "name": "Sharpness",
+   "desc": "+8% precisión y +5% crítico.",
+   "effect": {
+    "acc": 0.08,
+    "crit": 0.05
+   }
+  },
+  {
+   "id": "guardian",
+   "level": 2,
+   "name": "Guardian",
+   "desc": "+12% defensa.",
+   "effect": {
+    "def": 0.12
+   }
+  },
+  {
+   "id": "spell_charge",
+   "level": 3,
+   "name": "Spell Charge",
+   "desc": "-25% coste de TP.",
+   "effect": {
+    "tp_cost": -0.25
+   }
+  },
+  {
+   "id": "glory",
+   "level": 3,
+   "name": "Glory",
+   "desc": "No te aturden los golpes débiles.",
+   "effect": {
+    "super_armor": true
+   }
+  },
+  {
+   "id": "ex_gauge",
+   "level": 4,
+   "name": "EX Gauge",
+   "desc": "Over Limit se carga el doble de rápido.",
+   "effect": {
+    "ol_rate": 2.0
+   }
+  },
+  {
+   "id": "lucky",
+   "level": 4,
+   "name": "Lucky",
+   "desc": "+30% EXP y +20% Gald.",
+   "effect": {
+    "exp": 0.3,
+    "gald": 0.2
+   }
+  },
+  {
+   "id": "item_thrower",
+   "level": 3,
+   "name": "Item Thrower",
+   "desc": "Los objetos curan un 50% más.",
+   "effect": {
+    "item": 0.5
+   }
+  }
+ ],
+ "genis": [
+  {
+   "id": "tough",
+   "level": 1,
+   "name": "Tough",
+   "desc": "+10% HP máximo.",
+   "effect": {
+    "max_hp": 0.1
+   }
+  },
+  {
+   "id": "concentrate",
+   "level": 1,
+   "name": "Concentrate",
+   "desc": "+10% ataque.",
+   "effect": {
+    "atk": 0.1
+   }
+  },
+  {
+   "id": "sharpness",
+   "level": 2,
+   "name": "Sharpness",
+   "desc": "+8% precisión y +5% crítico.",
+   "effect": {
+    "acc": 0.08,
+    "crit": 0.05
+   }
+  },
+  {
+   "id": "guardian",
+   "level": 2,
+   "name": "Guardian",
+   "desc": "+12% defensa.",
+   "effect": {
+    "def": 0.12
+   }
+  },
+  {
+   "id": "spell_charge",
+   "level": 3,
+   "name": "Spell Charge",
+   "desc": "-25% coste de TP.",
+   "effect": {
+    "tp_cost": -0.25
+   }
+  },
+  {
+   "id": "glory",
+   "level": 3,
+   "name": "Glory",
+   "desc": "No te aturden los golpes débiles.",
+   "effect": {
+    "super_armor": true
+   }
+  },
+  {
+   "id": "ex_gauge",
+   "level": 4,
+   "name": "EX Gauge",
+   "desc": "Over Limit se carga el doble de rápido.",
+   "effect": {
+    "ol_rate": 2.0
+   }
+  },
+  {
+   "id": "lucky",
+   "level": 4,
+   "name": "Lucky",
+   "desc": "+30% EXP y +20% Gald.",
+   "effect": {
+    "exp": 0.3,
+    "gald": 0.2
+   }
+  },
+  {
+   "id": "spell_save",
+   "level": 1,
+   "name": "Spell Save",
+   "desc": "Lanzamiento de hechizos un 20% más rápido.",
+   "effect": {
+    "cast": -0.2
+   }
+  }
+ ],
+ "raine": [
+  {
+   "id": "tough",
+   "level": 1,
+   "name": "Tough",
+   "desc": "+10% HP máximo.",
+   "effect": {
+    "max_hp": 0.1
+   }
+  },
+  {
+   "id": "concentrate",
+   "level": 1,
+   "name": "Concentrate",
+   "desc": "+10% ataque.",
+   "effect": {
+    "atk": 0.1
+   }
+  },
+  {
+   "id": "sharpness",
+   "level": 2,
+   "name": "Sharpness",
+   "desc": "+8% precisión y +5% crítico.",
+   "effect": {
+    "acc": 0.08,
+    "crit": 0.05
+   }
+  },
+  {
+   "id": "guardian",
+   "level": 2,
+   "name": "Guardian",
+   "desc": "+12% defensa.",
+   "effect": {
+    "def": 0.12
+   }
+  },
+  {
+   "id": "spell_charge",
+   "level": 3,
+   "name": "Spell Charge",
+   "desc": "-25% coste de TP.",
+   "effect": {
+    "tp_cost": -0.25
+   }
+  },
+  {
+   "id": "glory",
+   "level": 3,
+   "name": "Glory",
+   "desc": "No te aturden los golpes débiles.",
+   "effect": {
+    "super_armor": true
+   }
+  },
+  {
+   "id": "ex_gauge",
+   "level": 4,
+   "name": "EX Gauge",
+   "desc": "Over Limit se carga el doble de rápido.",
+   "effect": {
+    "ol_rate": 2.0
+   }
+  },
+  {
+   "id": "lucky",
+   "level": 4,
+   "name": "Lucky",
+   "desc": "+30% EXP y +20% Gald.",
+   "effect": {
+    "exp": 0.3,
+    "gald": 0.2
+   }
+  },
+  {
+   "id": "spell_save",
+   "level": 1,
+   "name": "Spell Save",
+   "desc": "Lanzamiento de hechizos un 20% más rápido.",
+   "effect": {
+    "cast": -0.2
+   }
+  }
+ ],
+ "kratos": [
+  {
+   "id": "tough",
+   "level": 1,
+   "name": "Tough",
+   "desc": "+10% HP máximo.",
+   "effect": {
+    "max_hp": 0.1
+   }
+  },
+  {
+   "id": "concentrate",
+   "level": 1,
+   "name": "Concentrate",
+   "desc": "+10% ataque.",
+   "effect": {
+    "atk": 0.1
+   }
+  },
+  {
+   "id": "sharpness",
+   "level": 2,
+   "name": "Sharpness",
+   "desc": "+8% precisión y +5% crítico.",
+   "effect": {
+    "acc": 0.08,
+    "crit": 0.05
+   }
+  },
+  {
+   "id": "guardian",
+   "level": 2,
+   "name": "Guardian",
+   "desc": "+12% defensa.",
+   "effect": {
+    "def": 0.12
+   }
+  },
+  {
+   "id": "spell_charge",
+   "level": 3,
+   "name": "Spell Charge",
+   "desc": "-25% coste de TP.",
+   "effect": {
+    "tp_cost": -0.25
+   }
+  },
+  {
+   "id": "glory",
+   "level": 3,
+   "name": "Glory",
+   "desc": "No te aturden los golpes débiles.",
+   "effect": {
+    "super_armor": true
+   }
+  },
+  {
+   "id": "ex_gauge",
+   "level": 4,
+   "name": "EX Gauge",
+   "desc": "Over Limit se carga el doble de rápido.",
+   "effect": {
+    "ol_rate": 2.0
+   }
+  },
+  {
+   "id": "lucky",
+   "level": 4,
+   "name": "Lucky",
+   "desc": "+30% EXP y +20% Gald.",
+   "effect": {
+    "exp": 0.3,
+    "gald": 0.2
+   }
+  }
+ ],
+ "sheena": [
+  {
+   "id": "tough",
+   "level": 1,
+   "name": "Tough",
+   "desc": "+10% HP máximo.",
+   "effect": {
+    "max_hp": 0.1
+   }
+  },
+  {
+   "id": "concentrate",
+   "level": 1,
+   "name": "Concentrate",
+   "desc": "+10% ataque.",
+   "effect": {
+    "atk": 0.1
+   }
+  },
+  {
+   "id": "sharpness",
+   "level": 2,
+   "name": "Sharpness",
+   "desc": "+8% precisión y +5% crítico.",
+   "effect": {
+    "acc": 0.08,
+    "crit": 0.05
+   }
+  },
+  {
+   "id": "guardian",
+   "level": 2,
+   "name": "Guardian",
+   "desc": "+12% defensa.",
+   "effect": {
+    "def": 0.12
+   }
+  },
+  {
+   "id": "spell_charge",
+   "level": 3,
+   "name": "Spell Charge",
+   "desc": "-25% coste de TP.",
+   "effect": {
+    "tp_cost": -0.25
+   }
+  },
+  {
+   "id": "glory",
+   "level": 3,
+   "name": "Glory",
+   "desc": "No te aturden los golpes débiles.",
+   "effect": {
+    "super_armor": true
+   }
+  },
+  {
+   "id": "ex_gauge",
+   "level": 4,
+   "name": "EX Gauge",
+   "desc": "Over Limit se carga el doble de rápido.",
+   "effect": {
+    "ol_rate": 2.0
+   }
+  },
+  {
+   "id": "lucky",
+   "level": 4,
+   "name": "Lucky",
+   "desc": "+30% EXP y +20% Gald.",
+   "effect": {
+    "exp": 0.3,
+    "gald": 0.2
+   }
+  }
+ ],
+ "zelos": [
+  {
+   "id": "tough",
+   "level": 1,
+   "name": "Tough",
+   "desc": "+10% HP máximo.",
+   "effect": {
+    "max_hp": 0.1
+   }
+  },
+  {
+   "id": "concentrate",
+   "level": 1,
+   "name": "Concentrate",
+   "desc": "+10% ataque.",
+   "effect": {
+    "atk": 0.1
+   }
+  },
+  {
+   "id": "sharpness",
+   "level": 2,
+   "name": "Sharpness",
+   "desc": "+8% precisión y +5% crítico.",
+   "effect": {
+    "acc": 0.08,
+    "crit": 0.05
+   }
+  },
+  {
+   "id": "guardian",
+   "level": 2,
+   "name": "Guardian",
+   "desc": "+12% defensa.",
+   "effect": {
+    "def": 0.12
+   }
+  },
+  {
+   "id": "spell_charge",
+   "level": 3,
+   "name": "Spell Charge",
+   "desc": "-25% coste de TP.",
+   "effect": {
+    "tp_cost": -0.25
+   }
+  },
+  {
+   "id": "glory",
+   "level": 3,
+   "name": "Glory",
+   "desc": "No te aturden los golpes débiles.",
+   "effect": {
+    "super_armor": true
+   }
+  },
+  {
+   "id": "ex_gauge",
+   "level": 4,
+   "name": "EX Gauge",
+   "desc": "Over Limit se carga el doble de rápido.",
+   "effect": {
+    "ol_rate": 2.0
+   }
+  },
+  {
+   "id": "lucky",
+   "level": 4,
+   "name": "Lucky",
+   "desc": "+30% EXP y +20% Gald.",
+   "effect": {
+    "exp": 0.3,
+    "gald": 0.2
+   }
+  }
+ ],
+ "presea": [
+  {
+   "id": "tough",
+   "level": 1,
+   "name": "Tough",
+   "desc": "+10% HP máximo.",
+   "effect": {
+    "max_hp": 0.1
+   }
+  },
+  {
+   "id": "concentrate",
+   "level": 1,
+   "name": "Concentrate",
+   "desc": "+10% ataque.",
+   "effect": {
+    "atk": 0.1
+   }
+  },
+  {
+   "id": "sharpness",
+   "level": 2,
+   "name": "Sharpness",
+   "desc": "+8% precisión y +5% crítico.",
+   "effect": {
+    "acc": 0.08,
+    "crit": 0.05
+   }
+  },
+  {
+   "id": "guardian",
+   "level": 2,
+   "name": "Guardian",
+   "desc": "+12% defensa.",
+   "effect": {
+    "def": 0.12
+   }
+  },
+  {
+   "id": "spell_charge",
+   "level": 3,
+   "name": "Spell Charge",
+   "desc": "-25% coste de TP.",
+   "effect": {
+    "tp_cost": -0.25
+   }
+  },
+  {
+   "id": "glory",
+   "level": 3,
+   "name": "Glory",
+   "desc": "No te aturden los golpes débiles.",
+   "effect": {
+    "super_armor": true
+   }
+  },
+  {
+   "id": "ex_gauge",
+   "level": 4,
+   "name": "EX Gauge",
+   "desc": "Over Limit se carga el doble de rápido.",
+   "effect": {
+    "ol_rate": 2.0
+   }
+  },
+  {
+   "id": "lucky",
+   "level": 4,
+   "name": "Lucky",
+   "desc": "+30% EXP y +20% Gald.",
+   "effect": {
+    "exp": 0.3,
+    "gald": 0.2
+   }
+  }
+ ],
+ "regal": [
+  {
+   "id": "tough",
+   "level": 1,
+   "name": "Tough",
+   "desc": "+10% HP máximo.",
+   "effect": {
+    "max_hp": 0.1
+   }
+  },
+  {
+   "id": "concentrate",
+   "level": 1,
+   "name": "Concentrate",
+   "desc": "+10% ataque.",
+   "effect": {
+    "atk": 0.1
+   }
+  },
+  {
+   "id": "sharpness",
+   "level": 2,
+   "name": "Sharpness",
+   "desc": "+8% precisión y +5% crítico.",
+   "effect": {
+    "acc": 0.08,
+    "crit": 0.05
+   }
+  },
+  {
+   "id": "guardian",
+   "level": 2,
+   "name": "Guardian",
+   "desc": "+12% defensa.",
+   "effect": {
+    "def": 0.12
+   }
+  },
+  {
+   "id": "spell_charge",
+   "level": 3,
+   "name": "Spell Charge",
+   "desc": "-25% coste de TP.",
+   "effect": {
+    "tp_cost": -0.25
+   }
+  },
+  {
+   "id": "glory",
+   "level": 3,
+   "name": "Glory",
+   "desc": "No te aturden los golpes débiles.",
+   "effect": {
+    "super_armor": true
+   }
+  },
+  {
+   "id": "ex_gauge",
+   "level": 4,
+   "name": "EX Gauge",
+   "desc": "Over Limit se carga el doble de rápido.",
+   "effect": {
+    "ol_rate": 2.0
+   }
+  },
+  {
+   "id": "lucky",
+   "level": 4,
+   "name": "Lucky",
+   "desc": "+30% EXP y +20% Gald.",
+   "effect": {
+    "exp": 0.3,
+    "gald": 0.2
+   }
+  }
+ ]
+}

@@ -8,6 +8,10 @@ var enemies: Dictionary = {}
 var items: Dictionary = {}
 var encounters: Dictionary = {}
 var skits: Dictionary = {}
+var recipes: Dictionary = {}
+var titles: Dictionary = {}
+var ex_skills: Dictionary = {}
+var shops: Dictionary = {}
 var story_script: Dictionary = {}   # scene id -> Array of {speaker, text}; merged from src/data/script/*.json
 
 func _ready() -> void:
@@ -17,6 +21,10 @@ func _ready() -> void:
 	items = _load("items")
 	encounters = _load("encounters")
 	skits = _load("skits")
+	recipes = _load("recipes")
+	titles = _load("titles")
+	ex_skills = _load("ex_skills")
+	shops = _load("shops")
 	_load_script()
 	print("[DB] loaded %d characters, %d artes, %d enemies, %d items" % [characters.size(), artes.size(), enemies.size(), items.size()])
 

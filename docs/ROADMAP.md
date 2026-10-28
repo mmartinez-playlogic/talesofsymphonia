@@ -7,10 +7,10 @@ Estado: ⬜ pendiente · 🟨 en curso · ✅ hecho
 - ✅ H1 Pipeline de arte: shader toon + outline, unificación de rigs, personajes estilizados generados en Blender (9 jugables + enemigos)
 - 🟨 H2 Campo (hecho; validado headless con bot; falta ver cámara/colisiones con ventana): controlador, cámara, NPCs, cuadro de diálogo Tales, encuentros visibles, transición a combate
 - 🟨 H3 Combate LMBS (escrito; carga y corre headless; falta jugarlo con ventana y equilibrar): combos, artes, guardia, HP/TP, IA, HUD, resultados
-- 🟨 H4 Datos (datos + menú de pausa básico; falta equipo/tienda): 9 personajes, tablas de nivel, artes, enemigos, ítems, equipo; menú de pausa
+- ✅ H4 Datos y menú (equipo, objetos, estado, guardado; ver docs/SYSTEMS.md): 9 personajes, tablas de nivel, artes, enemigos, ítems, equipo; menú de pausa
 - 🟨 H5 Sistema de eventos (Cutscene, skits, flags, guardado; validado headless con bot): cutscenes por script, skits, flags, guardado/carga
-- ⬜ H6 Combate avanzado: Unison Attack, Ex Skills/Gems, Over Limit, elementos y debilidades, Grado, títulos
-- ⬜ H7 Sistemas secundarios: cocina, afinidad, tienda, posadas, Figurine, Grade Shop
+- 🟨 H6 Combate avanzado: Unison, EX Skills/Gems, Over Limit, elementos, Grado, títulos (hecho); falta Compound EX y combinaciones Unison
+- 🟨 H7 Sistemas secundarios: cocina, tienda, posadas, Maestro Cocinero (hecho); falta afinidad visible, Figurinas, Grade Shop
 - ⬜ H8 Mapa del mundo: Sylvarant y Tethe'alla, Noishe, Rheairds, barco
 - ⬜ H9 Audio: música original estilo Sakuraba (generada/CC0), SFX, voces no
 - ⬜ H10 Pulido: 60 fps estables, menús, opciones, exportación Mac/Win/Linux

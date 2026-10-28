@@ -125,7 +125,7 @@ func _on_pedestal(c: Cutscene) -> void:
 	])
 	await c.give_item("sorcerers_ring")
 	c.flag("got_ring")
-	await c.caption("Anillo del Hechicero: dispara fuego. Pulsa Arte en el campo para aturdir enemigos (próximamente).", 2.6)
+	await c.caption("Anillo del Hechicero: pulsa Arte (K) en el campo para lanzar fuego. Aturde a los monstruos y da ventaja.", 2.8)
 
 func _on_seal(c: Cutscene) -> void:
 	if not c.has("got_ring"):

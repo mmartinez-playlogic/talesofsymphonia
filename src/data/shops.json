@@ -1,0 +1,72 @@
+{
+ "iselia": {
+  "name": "Tienda de Iselia",
+  "items": [
+   "apple_gel",
+   "orange_gel",
+   "life_bottle",
+   "panacea_bottle",
+   "bread",
+   "tomato",
+   "lettuce",
+   "cheese",
+   "egg",
+   "milk",
+   "rice",
+   "apple",
+   "wooden_blade",
+   "iron_sword",
+   "duel_chakram",
+   "spiked_kendama",
+   "leather_glove",
+   "leather_cap",
+   "leather_armor",
+   "soft_leather",
+   "white_robe"
+  ]
+ },
+ "triet": {
+  "name": "Bazar de Triet",
+  "items": [
+   "apple_gel",
+   "orange_gel",
+   "lemon_gel",
+   "life_bottle",
+   "melange_gel",
+   "holy_bottle",
+   "dark_bottle",
+   "beef",
+   "chicken",
+   "fish",
+   "potato",
+   "carrot",
+   "onion",
+   "spice",
+   "noodles",
+   "pasta",
+   "butter",
+   "steel_sword",
+   "short_sword",
+   "wand",
+   "iron_gauntlet",
+   "iron_helm",
+   "ribbon",
+   "chain_mail",
+   "talisman",
+   "poison_charm",
+   "ex_gem_1"
+  ]
+ },
+ "salvation": {
+  "name": "Casa de la Salvación",
+  "items": [
+   "apple_gel",
+   "orange_gel",
+   "panacea_bottle",
+   "holy_bottle",
+   "bread",
+   "cheese",
+   "apple"
+  ]
+ }
+}

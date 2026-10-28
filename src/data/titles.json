@@ -1,0 +1,122 @@
+{
+ "lloyd_drifting": {
+  "name": "Drifting Swordsman",
+  "user": "lloyd",
+  "desc": "Un espadachín sin rumbo. Título inicial.",
+  "mods": {},
+  "start": true
+ },
+ "lloyd_exiled": {
+  "name": "Exiled",
+  "user": "lloyd",
+  "desc": "Desterrado de Iselia. Lleva el peso de la aldea.",
+  "mods": {
+   "atk": 0.03,
+   "def": 0.03
+  },
+  "flag": "exiled"
+ },
+ "lloyd_eternal": {
+  "name": "Eternal Apprentice",
+  "user": "lloyd",
+  "desc": "Aprendiz eterno. Leíste el Manual de entrenamiento.",
+  "mods": {
+   "acc": 0.05
+  },
+  "flag": "temple_entered"
+ },
+ "lloyd_combo": {
+  "name": "Combo Newbie",
+  "user": "lloyd",
+  "desc": "Más de 10 golpes en un combo.",
+  "mods": {
+   "atk": 0.04
+  },
+  "flag": "combo_10"
+ },
+ "colette_chosen": {
+  "name": "Chosen",
+  "user": "colette",
+  "desc": "La Elegida de la Regeneración.",
+  "mods": {},
+  "start": true
+ },
+ "colette_klutz": {
+  "name": "Klutz",
+  "user": "colette",
+  "desc": "Tropieza con todo. Pero nunca se rinde.",
+  "mods": {
+   "luck": 0.1
+  },
+  "flag": "oracle_seen"
+ },
+ "genis_genius": {
+  "name": "Genius Mage",
+  "user": "genis",
+  "desc": "El mago prodigio de Iselia.",
+  "mods": {},
+  "start": true
+ },
+ "genis_cook": {
+  "name": "Little Chef",
+  "user": "genis",
+  "desc": "Cocinó diez platos con éxito.",
+  "mods": {
+   "int": 0.04,
+   "spr": 0.04
+  },
+  "flag": "cook_10"
+ },
+ "genis_exiled": {
+  "name": "Fugitive",
+  "user": "genis",
+  "desc": "Desterrado junto a Lloyd.",
+  "mods": {
+   "int": 0.03,
+   "eva": 0.03
+  },
+  "flag": "exiled"
+ },
+ "raine_scholar": {
+  "name": "Scholar",
+  "user": "raine",
+  "desc": "Maestra de Iselia y arqueóloga.",
+  "mods": {},
+  "start": true
+ },
+ "kratos_mercenary": {
+  "name": "Mercenary",
+  "user": "kratos",
+  "desc": "Protege a la Elegida por dinero.",
+  "mods": {},
+  "start": true
+ },
+ "sheena_assassin": {
+  "name": "Assassin",
+  "user": "sheena",
+  "desc": "Enviada de Mizuho.",
+  "mods": {},
+  "start": true
+ },
+ "zelos_chosen": {
+  "name": "Chosen of Tethe'alla",
+  "user": "zelos",
+  "desc": "El Elegido del otro mundo.",
+  "mods": {},
+  "start": true
+ },
+ "presea_lumberjack": {
+  "name": "Lumberjack",
+  "user": "presea",
+  "desc": "Leñadora de Ozette.",
+  "mods": {},
+  "start": true
+ },
+ "regal_convict": {
+  "name": "Convict",
+  "user": "regal",
+  "desc": "Prisionero por voluntad propia.",
+  "mods": {},
+  "start": true
+ }
+}
