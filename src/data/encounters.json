@@ -1,17 +1,134 @@
 {
-  "iselia_forest": {
-    "groups": [
-      {"enemies": ["wolf"], "weight": 3},
-      {"enemies": ["wolf", "wolf"], "weight": 3},
-      {"enemies": ["rabbit", "rabbit", "bee"], "weight": 2},
-      {"enemies": ["wolf", "rabbit", "bee"], "weight": 2}
-    ]
-  },
-  "martel_temple": {
-    "groups": [
-      {"enemies": ["zombie"], "weight": 3},
-      {"enemies": ["zombie", "bee"], "weight": 2},
-      {"enemies": ["zombie", "zombie"], "weight": 1}
-    ]
-  }
+ "iselia_forest": {
+  "groups": [
+   {
+    "enemies": [
+     "wolf"
+    ],
+    "weight": 3
+   },
+   {
+    "enemies": [
+     "wolf",
+     "wolf"
+    ],
+    "weight": 3
+   },
+   {
+    "enemies": [
+     "rabbit",
+     "rabbit",
+     "bee"
+    ],
+    "weight": 2
+   },
+   {
+    "enemies": [
+     "wolf",
+     "rabbit",
+     "bee"
+    ],
+    "weight": 2
+   }
+  ]
+ },
+ "martel_temple": {
+  "groups": [
+   {
+    "enemies": [
+     "zombie"
+    ],
+    "weight": 3
+   },
+   {
+    "enemies": [
+     "zombie",
+     "bee"
+    ],
+    "weight": 2
+   },
+   {
+    "enemies": [
+     "zombie",
+     "zombie"
+    ],
+    "weight": 1
+   }
+  ]
+ },
+ "iselia_ranch": {
+  "groups": [
+   {
+    "enemies": [
+     "desian_soldier"
+    ],
+    "weight": 2
+   },
+   {
+    "enemies": [
+     "desian_soldier",
+     "desian_soldier"
+    ],
+    "weight": 2
+   },
+   {
+    "enemies": [
+     "desian_whip",
+     "desian_soldier"
+    ],
+    "weight": 1
+   }
+  ]
+ },
+ "world_sylvarant_south": {
+  "groups": [
+   {
+    "enemies": [
+     "wolf",
+     "wolf"
+    ],
+    "weight": 3
+   },
+   {
+    "enemies": [
+     "hare",
+     "hare",
+     "bee"
+    ],
+    "weight": 2
+   },
+   {
+    "enemies": [
+     "wolf",
+     "hare"
+    ],
+    "weight": 2
+   }
+  ]
+ },
+ "triet_desert": {
+  "groups": [
+   {
+    "enemies": [
+     "sand_wolf"
+    ],
+    "weight": 3
+   },
+   {
+    "enemies": [
+     "sand_wolf",
+     "desert_hornet"
+    ],
+    "weight": 2
+   },
+   {
+    "enemies": [
+     "desert_hornet",
+     "desert_hornet",
+     "hare"
+    ],
+    "weight": 2
+   }
+  ]
+ }
 }

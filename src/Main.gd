@@ -53,7 +53,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		match _cursor:
 			0:
 				Game.new_game()
-				Router.goto_map("iselia_forest", "default")
+				Router.goto_map("iselia_school", "default")
 			1:
 				if Game.load_save(0):
 					Router.goto_map(Game.current_map, Game.spawn_point)

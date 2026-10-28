@@ -25,6 +25,13 @@ func fade_in(duration := 0.35) -> void:
 	t.tween_property(_fade, "color:a", 0.0, duration)
 	await t.finished
 
+func flash(color := Color(1, 1, 1), duration := 0.5) -> void:
+	_fade.color = Color(color.r, color.g, color.b, 1.0)
+	var t := create_tween()
+	t.tween_property(_fade, "color:a", 0.0, duration)
+	await t.finished
+	_fade.color = Color(0, 0, 0, 0)
+
 func goto_scene(path: String) -> void:
 	if _busy:
 		return
@@ -63,6 +70,12 @@ func consume_pending_battle() -> Dictionary:
 func return_from_battle() -> void:
 	Game.return_to_field = true
 	await goto_scene("res://src/field/maps/%s.tscn" % Game.current_map)
+
+## Fade to black and then back in on the same scene (used for time skips inside an event).
+func blink(hold := 0.6) -> void:
+	await fade_out(0.4)
+	await get_tree().create_timer(hold).timeout
+	await fade_in(0.4)
 
 func _battle_swirl() -> void:
 	# Quick flash + fade, Tales style.

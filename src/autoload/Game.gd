@@ -20,6 +20,7 @@ var current_map: String = "iselia_forest"
 var spawn_point: String = "default"
 var last_field_position: Vector3 = Vector3.ZERO
 var return_to_field: bool = false
+var seen_skits: Array = []
 
 func _process(delta: float) -> void:
 	play_time += delta
@@ -30,10 +31,11 @@ func new_game() -> void:
 	inventory.clear()
 	flags.clear()
 	affection.clear()
+	seen_skits.clear()
 	gald = 0
 	grade = 0.0
 	play_time = 0.0
-	current_map = "iselia_forest"
+	current_map = "iselia_school"
 	spawn_point = "default"
 	# Prologue party of Symphonia.
 	add_member("lloyd")
@@ -70,6 +72,43 @@ func add_member(id: String, level: int = 1) -> void:
 func remove_from_party(id: String) -> void:
 	party.erase(id)
 	party_changed.emit()
+
+## Replace the active party (ids must already be members; unknown ids are added).
+func set_party(ids: Array) -> void:
+	party.clear()
+	for id in ids:
+		if not members.has(id):
+			add_member(id)
+			party.erase(id)
+		if party.size() < 4:
+			party.append(id)
+	party_changed.emit()
+
+func has_member(id: String) -> bool:
+	return members.has(id)
+
+func leader() -> String:
+	return party[0] if party.size() > 0 else "lloyd"
+
+func use_item(item_id: String, char_id: String) -> bool:
+	var item: Dictionary = DB.items.get(item_id, {})
+	if item.is_empty() or not has_item(item_id) or not members.has(char_id):
+		return false
+	var fx: Dictionary = item.get("effect", {})
+	var m: Dictionary = members[char_id]
+	if fx.has("revive"):
+		if int(m["hp"]) > 0:
+			return false
+		m["hp"] = max(1, int(max_hp(char_id) * float(fx["revive"])))
+	else:
+		if int(m["hp"]) <= 0:
+			return false
+		if fx.has("hp_pct"):
+			m["hp"] = min(max_hp(char_id), int(m["hp"]) + int(max_hp(char_id) * float(fx["hp_pct"])))
+		if fx.has("tp_pct"):
+			m["tp"] = min(max_tp(char_id), int(m["tp"]) + int(max_tp(char_id) * float(fx["tp_pct"])))
+	add_item(item_id, -1)
+	return true
 
 func _artes_known(id: String, level: int) -> Array:
 	var known: Array = []
@@ -131,7 +170,7 @@ func save(slot: int = 0) -> void:
 	var data := {
 		"party": party, "members": members, "inventory": inventory, "gald": gald, "grade": grade,
 		"flags": flags, "affection": affection, "play_time": play_time, "current_map": current_map,
-		"spawn_point": spawn_point,
+		"spawn_point": spawn_point, "seen_skits": seen_skits,
 	}
 	var f := FileAccess.open(SAVE_PATH % slot, FileAccess.WRITE)
 	f.store_string(JSON.stringify(data, "\t"))
@@ -153,5 +192,9 @@ func load_save(slot: int = 0) -> bool:
 	play_time = float(data["play_time"])
 	current_map = data["current_map"]
 	spawn_point = data["spawn_point"]
+	seen_skits.assign(data.get("seen_skits", []))
 	party_changed.emit()
 	return true
+
+func save_exists(slot: int = 0) -> bool:
+	return FileAccess.file_exists(SAVE_PATH % slot)

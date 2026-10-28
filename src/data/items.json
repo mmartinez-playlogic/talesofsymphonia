@@ -1,24 +1,259 @@
 {
-  "apple_gel":   {"name": "Apple Gel",   "type": "consumable", "price": 100, "effect": {"hp_pct": 0.3}, "desc": "Restores 30% of HP."},
-  "orange_gel":  {"name": "Orange Gel",  "type": "consumable", "price": 200, "effect": {"tp_pct": 0.3}, "desc": "Restores 30% of TP."},
-  "lemon_gel":   {"name": "Lemon Gel",   "type": "consumable", "price": 800, "effect": {"hp_pct": 0.6}, "desc": "Restores 60% of HP."},
-  "life_bottle": {"name": "Life Bottle", "type": "consumable", "price": 300, "effect": {"revive": 0.3}, "desc": "Revives a fallen ally."},
-  "panacea_bottle": {"name": "Panacea Bottle", "type": "consumable", "price": 150, "effect": {"cure": true}, "desc": "Cures status ailments."},
-  "wooden_blade": {"name": "Wooden Blade", "type": "weapon", "price": 100, "stats": {"atk": 10}, "users": ["lloyd"]},
-  "long_sword":   {"name": "Long Sword",   "type": "weapon", "price": 280, "stats": {"atk": 30}, "users": ["kratos", "zelos"]},
-  "chakram":      {"name": "Chakram",      "type": "weapon", "price": 80,  "stats": {"atk": 8},  "users": ["colette"]},
-  "kendama":      {"name": "Kendama",      "type": "weapon", "price": 60,  "stats": {"atk": 4, "int": 6}, "users": ["genis"]},
-  "rod":          {"name": "Rod",          "type": "weapon", "price": 120, "stats": {"atk": 6, "int": 8}, "users": ["raine"]},
-  "cards":        {"name": "Cards",        "type": "weapon", "price": 300, "stats": {"atk": 22}, "users": ["sheena"]},
-  "axe":          {"name": "Axe",          "type": "weapon", "price": 600, "stats": {"atk": 48}, "users": ["presea"]},
-  "greaves":      {"name": "Greaves",      "type": "weapon", "price": 500, "stats": {"atk": 40}, "users": ["regal"]},
-  "cloak":        {"name": "Cloak",        "type": "body", "price": 100, "stats": {"def": 6}},
-  "white_cloak":  {"name": "White Cloak",  "type": "body", "price": 100, "stats": {"def": 5, "spr": 2}},
-  "blue_tunic":   {"name": "Tunic",        "type": "body", "price": 60,  "stats": {"def": 3, "spr": 3}},
-  "orange_robe":  {"name": "Robe",         "type": "body", "price": 150, "stats": {"def": 5, "spr": 5}},
-  "purple_coat":  {"name": "Leather Coat", "type": "body", "price": 320, "stats": {"def": 14}},
-  "ninja_garb":   {"name": "Ninja Garb",   "type": "body", "price": 400, "stats": {"def": 12, "eva": 4}},
-  "pink_vest":    {"name": "Vest",         "type": "body", "price": 400, "stats": {"def": 14}},
-  "pink_dress":   {"name": "Dress",        "type": "body", "price": 400, "stats": {"def": 16}},
-  "prisoner_garb": {"name": "Prisoner Garb", "type": "body", "price": 1, "stats": {"def": 10}}
+ "apple_gel": {
+  "name": "Apple Gel",
+  "type": "consumable",
+  "price": 100,
+  "effect": {
+   "hp_pct": 0.3
+  },
+  "desc": "Restores 30% of HP."
+ },
+ "orange_gel": {
+  "name": "Orange Gel",
+  "type": "consumable",
+  "price": 200,
+  "effect": {
+   "tp_pct": 0.3
+  },
+  "desc": "Restores 30% of TP."
+ },
+ "lemon_gel": {
+  "name": "Lemon Gel",
+  "type": "consumable",
+  "price": 800,
+  "effect": {
+   "hp_pct": 0.6
+  },
+  "desc": "Restores 60% of HP."
+ },
+ "life_bottle": {
+  "name": "Life Bottle",
+  "type": "consumable",
+  "price": 300,
+  "effect": {
+   "revive": 0.3
+  },
+  "desc": "Revives a fallen ally."
+ },
+ "panacea_bottle": {
+  "name": "Panacea Bottle",
+  "type": "consumable",
+  "price": 150,
+  "effect": {
+   "cure": true
+  },
+  "desc": "Cures status ailments."
+ },
+ "wooden_blade": {
+  "name": "Wooden Blade",
+  "type": "weapon",
+  "price": 100,
+  "stats": {
+   "atk": 10
+  },
+  "users": [
+   "lloyd"
+  ]
+ },
+ "long_sword": {
+  "name": "Long Sword",
+  "type": "weapon",
+  "price": 280,
+  "stats": {
+   "atk": 30
+  },
+  "users": [
+   "kratos",
+   "zelos"
+  ]
+ },
+ "chakram": {
+  "name": "Chakram",
+  "type": "weapon",
+  "price": 80,
+  "stats": {
+   "atk": 8
+  },
+  "users": [
+   "colette"
+  ]
+ },
+ "kendama": {
+  "name": "Kendama",
+  "type": "weapon",
+  "price": 60,
+  "stats": {
+   "atk": 4,
+   "int": 6
+  },
+  "users": [
+   "genis"
+  ]
+ },
+ "rod": {
+  "name": "Rod",
+  "type": "weapon",
+  "price": 120,
+  "stats": {
+   "atk": 6,
+   "int": 8
+  },
+  "users": [
+   "raine"
+  ]
+ },
+ "cards": {
+  "name": "Cards",
+  "type": "weapon",
+  "price": 300,
+  "stats": {
+   "atk": 22
+  },
+  "users": [
+   "sheena"
+  ]
+ },
+ "axe": {
+  "name": "Axe",
+  "type": "weapon",
+  "price": 600,
+  "stats": {
+   "atk": 48
+  },
+  "users": [
+   "presea"
+  ]
+ },
+ "greaves": {
+  "name": "Greaves",
+  "type": "weapon",
+  "price": 500,
+  "stats": {
+   "atk": 40
+  },
+  "users": [
+   "regal"
+  ]
+ },
+ "cloak": {
+  "name": "Cloak",
+  "type": "body",
+  "price": 100,
+  "stats": {
+   "def": 6
+  }
+ },
+ "white_cloak": {
+  "name": "White Cloak",
+  "type": "body",
+  "price": 100,
+  "stats": {
+   "def": 5,
+   "spr": 2
+  }
+ },
+ "blue_tunic": {
+  "name": "Tunic",
+  "type": "body",
+  "price": 60,
+  "stats": {
+   "def": 3,
+   "spr": 3
+  }
+ },
+ "orange_robe": {
+  "name": "Robe",
+  "type": "body",
+  "price": 150,
+  "stats": {
+   "def": 5,
+   "spr": 5
+  }
+ },
+ "purple_coat": {
+  "name": "Leather Coat",
+  "type": "body",
+  "price": 320,
+  "stats": {
+   "def": 14
+  }
+ },
+ "ninja_garb": {
+  "name": "Ninja Garb",
+  "type": "body",
+  "price": 400,
+  "stats": {
+   "def": 12,
+   "eva": 4
+  }
+ },
+ "pink_vest": {
+  "name": "Vest",
+  "type": "body",
+  "price": 400,
+  "stats": {
+   "def": 14
+  }
+ },
+ "pink_dress": {
+  "name": "Dress",
+  "type": "body",
+  "price": 400,
+  "stats": {
+   "def": 16
+  }
+ },
+ "prisoner_garb": {
+  "name": "Prisoner Garb",
+  "type": "body",
+  "price": 1,
+  "stats": {
+   "def": 10
+  }
+ },
+ "sorcerers_ring": {
+  "name": "Sorcerer's Ring",
+  "type": "key",
+  "price": 0,
+  "desc": "Anillo de la era de Kharlan. Dispara una pequeña bola de fuego."
+ },
+ "marble_exsphere": {
+  "name": "Exsphere de Marble",
+  "type": "key",
+  "price": 0,
+  "desc": "La Exsfera que Marble entregó a Lloyd. Necesita una Cresta Clave."
+ },
+ "colette_necklace": {
+  "name": "Collar de Colette",
+  "type": "key",
+  "price": 0,
+  "desc": "Collar hecho a mano por Lloyd para Colette."
+ },
+ "key_crest": {
+  "name": "Cresta Clave",
+  "type": "key",
+  "price": 0,
+  "desc": "Amuleto de mineral inhibidor tallado por Dirk. Controla una Exsfera."
+ },
+ "melange_gel": {
+  "name": "Melange Gel",
+  "type": "consumable",
+  "price": 380,
+  "effect": {
+   "hp_pct": 0.3,
+   "tp_pct": 0.3
+  },
+  "desc": "Restaura 30% de HP y TP."
+ },
+ "iron_sword": {
+  "name": "Iron Sword",
+  "type": "weapon",
+  "price": 350,
+  "stats": {
+   "atk": 22
+  },
+  "users": [
+   "lloyd"
+  ]
+ }
 }

@@ -28,6 +28,11 @@ func setup_from_member(char_id: String) -> void:
 	}
 	known_artes = member["artes"].duplicate()
 	arte_shortcuts = known_artes.slice(0, 3)
+	var sc: Array = member.get("shortcuts", [])
+	if sc.size() > 0:
+		arte_shortcuts = sc.filter(func(x): return x != "" and known_artes.has(x))
+		if arte_shortcuts.is_empty():
+			arte_shortcuts = known_artes.slice(0, 3)
 	strategy = member.get("strategy", "normal")
 	_anim_prefix_sword = char_data["weapon"] in ["twin_swords", "sword", "axe"]
 	move_speed = 6.0

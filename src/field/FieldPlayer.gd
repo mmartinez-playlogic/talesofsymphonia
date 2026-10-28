@@ -10,6 +10,7 @@ const TURN_SPEED := 14.0
 
 var model: CharacterModel
 var can_move := true
+var scripted := false      # true while a cutscene moves this body directly
 var _interact_area: Area3D
 var _camera_yaw := 0.0
 var _enc_timer := 0.0
@@ -45,12 +46,15 @@ func set_camera_yaw(yaw: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	if not can_move:
+		if scripted:
+			return
 		velocity.x = 0
 		velocity.z = 0
 		if not is_on_floor():
 			velocity.y -= 19.6 * delta
 		move_and_slide()
-		model.play("Idle")
+		if model.current() in ["Jog_Fwd", "Walk"]:
+			model.play("Idle")
 		return
 	var input := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var dir := Vector3(input.x, 0, input.y).rotated(Vector3.UP, _camera_yaw)

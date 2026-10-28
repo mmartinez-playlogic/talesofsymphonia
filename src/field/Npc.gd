@@ -23,6 +23,7 @@ func _ready() -> void:
 	model = CharacterModel.new()
 	add_child(model)
 	model.load_model(model_id)
+	model.rotation.y = PI  # glb faces -Z; node forward is +Z (same convention as FieldPlayer)
 	model.play(idle_anim)
 
 func interact(field) -> void:
@@ -37,3 +38,9 @@ func interact(field) -> void:
 		if d.length() > 0.01:
 			rotation.y = atan2(d.x, d.z)
 	await field.dialogue.show_lines(lines)
+
+func face_pos(pos: Vector3) -> void:
+	var d: Vector3 = pos - global_position
+	d.y = 0
+	if d.length() > 0.01:
+		rotation.y = atan2(d.x, d.z)

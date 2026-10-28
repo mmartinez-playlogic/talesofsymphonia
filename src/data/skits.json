@@ -1,0 +1,56 @@
+{
+  "s01_oracle": {"title": "La luz del templo", "requires": ["oracle_seen"], "forbids": ["temple_arrived"], "lines": [
+    {"speaker": "Genis", "text": "¿De verdad crees que era el oráculo, Lloyd? Nunca había visto una luz así."},
+    {"speaker": "Lloyd", "text": "¡Claro que sí! Colette es la Elegida. Hoy empieza su viaje de regeneración."},
+    {"speaker": "Colette", "text": "Jeje... Me pongo nerviosa solo de pensarlo. Pero me alegro de que estéis conmigo.", "mood": "happy"},
+    {"speaker": "Genis", "text": "La profesora Raine nos va a matar por escaparnos de clase.", "mood": "angry"},
+    {"speaker": "Lloyd", "text": "Bah, ya estaba dormido de todas formas."}]},
+  "s02_desians": {"title": "Los desianos", "requires": ["vidarr_defeated"], "forbids": ["temple_done"], "lines": [
+    {"speaker": "Lloyd", "text": "Desianos atacando el templo... ¿Y el tratado de no agresión? Se supone que Iselia está protegida."},
+    {"speaker": "Genis", "text": "Eso es lo que dice el alcalde. Pero el rancho sigue ahí, y la gente sigue desapareciendo."},
+    {"speaker": "Colette", "text": "Por eso tengo que regenerar el mundo. Para que los desianos desaparezcan y nadie más sufra."},
+    {"speaker": "Lloyd", "text": "Y yo voy a ayudarte. Te lo prometo."}]},
+  "s03_kratos": {"title": "Ese mercenario", "requires": ["vidarr_defeated"], "forbids": ["temple_done"], "lines": [
+    {"speaker": "Genis", "text": "Ese tal Kratos... Es increíblemente fuerte. Derribó a Vidarr casi sin inmutarse."},
+    {"speaker": "Lloyd", "text": "Bueno, yo también le di unos cuantos golpes.", "mood": "angry"},
+    {"speaker": "Genis", "text": "Ya, ya. Pero ¿no te parece raro? Aparece justo cuando atacan los desianos."},
+    {"speaker": "Lloyd", "text": "Dice que es un mercenario. Mientras proteja a Colette, por mí bien."},
+    {"speaker": "Genis", "text": "Hmm... Tú siempre tan confiado."}]},
+  "s04_ring": {"title": "El Anillo del Hechicero", "requires": ["got_ring"], "forbids": ["temple_done"], "lines": [
+    {"speaker": "Lloyd", "text": "¡Mira esto! El anillo lanza bolas de fuego. ¡Es genial!"},
+    {"speaker": "Genis", "text": "Es el Anillo del Hechicero. Raine dice que es una reliquia de la época de la Guerra de Kharlan."},
+    {"speaker": "Colette", "text": "Ten cuidado, Lloyd. No vayas a quemar el templo..."},
+    {"speaker": "Lloyd", "text": "Oye, que tengo buena puntería."}]},
+  "s05_remiel": {"title": "El ángel", "requires": ["temple_done"], "forbids": ["ranch_visited"], "party": ["lloyd"], "lines": [
+    {"speaker": "Genis", "text": "Remiel dijo que es el padre de Colette. Un ángel de Cruxis... Es increíble."},
+    {"speaker": "Lloyd", "text": "Y no nos deja ir con ella. «La Elegida y su guardián». Qué morro tiene Kratos."},
+    {"speaker": "Genis", "text": "Ya conoces a Colette. Se irá sin decir nada para no preocuparnos."},
+    {"speaker": "Lloyd", "text": "Ni hablar. Pienso despedirme de ella como es debido. Y luego ya veremos."}]},
+  "s06_marble": {"title": "Marble", "requires": ["ranch_visited"], "forbids": ["night_dirk"], "lines": [
+    {"speaker": "Lloyd", "text": "Genis... ¿cuánto tiempo llevas visitando a Marble?"},
+    {"speaker": "Genis", "text": "Unos meses. Ella es muy amable conmigo. Me cuenta historias de Luin, de antes de que la capturaran."},
+    {"speaker": "Lloyd", "text": "Esa Exsfera que lleva... sin Cresta Clave la va a devorar por dentro. Dirk sabrá qué hacer."},
+    {"speaker": "Genis", "text": "¿De verdad crees que podemos ayudarla?"},
+    {"speaker": "Lloyd", "text": "Vamos a intentarlo."}]},
+  "s07_necklace": {"title": "Un regalo", "requires": ["night_dirk"], "forbids": ["exiled"], "lines": [
+    {"speaker": "Genis", "text": "¿Terminaste el collar para Colette?"},
+    {"speaker": "Lloyd", "text": "Sí. Me ha costado tres noches, pero ha quedado perfecto."},
+    {"speaker": "Genis", "text": "Seguro que le encanta. Aunque viniendo de ti, no sé si será muy elegante...", "mood": "happy"},
+    {"speaker": "Lloyd", "text": "¡Oye!", "mood": "angry"}]},
+  "s08_exile": {"title": "Desterrados", "requires": ["exiled"], "forbids": ["triet_arrived"], "lines": [
+    {"speaker": "Genis", "text": "Nos han echado de Iselia... Todo por mi culpa. Si no hubiera ido al rancho..."},
+    {"speaker": "Lloyd", "text": "No. Fue culpa de los dos. Y de los desianos. Marble murió por mí, Genis."},
+    {"speaker": "Genis", "text": "Lloyd..."},
+    {"speaker": "Lloyd", "text": "Vamos a alcanzar a Colette. Si vamos a ser desterrados, al menos que sirva para algo."},
+    {"speaker": "Genis", "text": "Al desierto de Triet, entonces. Primero el sello del fuego."}]},
+  "s09_noishe": {"title": "Noishe", "requires": ["left_for_journey"], "forbids": ["triet_arrived"], "lines": [
+    {"speaker": "Genis", "text": "Noishe no ha parado de gemir desde que salimos. ¿Tiene miedo?"},
+    {"speaker": "Lloyd", "text": "Siempre ha sido un cobarde con los monstruos. Dirk dice que es un protozoo, no un perro."},
+    {"speaker": "Genis", "text": "¡Eso es imposible! Los protozoos son criaturas legendarias."},
+    {"speaker": "Lloyd", "text": "Pues díselo a él."}]},
+  "s10_desert": {"title": "Calor", "requires": ["triet_arrived"], "lines": [
+    {"speaker": "Lloyd", "text": "Uf... Qué calor. ¿Cómo puede vivir alguien aquí?"},
+    {"speaker": "Genis", "text": "Triet está construida sobre un oasis. Según los libros de Raine, aquí cerca están las ruinas del sello del fuego."},
+    {"speaker": "Lloyd", "text": "Entonces Colette tiene que andar por aquí. Vamos a la ciudad."},
+    {"speaker": "Genis", "text": "Y busquemos agua antes de que te derritas."}]}
+}

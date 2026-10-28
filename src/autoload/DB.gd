@@ -7,6 +7,7 @@ var artes: Dictionary = {}
 var enemies: Dictionary = {}
 var items: Dictionary = {}
 var encounters: Dictionary = {}
+var skits: Dictionary = {}
 
 func _ready() -> void:
 	characters = _load("characters")
@@ -14,6 +15,7 @@ func _ready() -> void:
 	enemies = _load("enemies")
 	items = _load("items")
 	encounters = _load("encounters")
+	skits = _load("skits")
 	print("[DB] loaded %d characters, %d artes, %d enemies, %d items" % [characters.size(), artes.size(), enemies.size(), items.size()])
 
 func _load(name: String) -> Dictionary:

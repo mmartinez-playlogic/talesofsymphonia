@@ -33,7 +33,8 @@ Se construye sesión a sesión, "día a día, poco a poco". Cada sesión debe de
 - `assets/` anim, characters (glb generados), shaders, audio
 - `src/autoload/` Game (estado global, party, flags), Router (cambio de escenas), DB (carga de datos)
 - `src/data/` JSON: characters, artes, enemies, items, titles, recipes
-- `src/field/` exploración; `src/battle/` combate; `src/ui/` HUD y menús; `src/story/` eventos y skits
+- `src/field/` exploración (`Field.gd` base, `maps/<id>.gd+.tscn`); `src/battle/` combate; `src/ui/` HUD, diálogo, skits, menú; `src/story/` `Cutscene.gd` (eventos) y `Skits.gd`
+- Historia: cada mapa implementa `on_enter(cs)` y `on_resume(cs, event)`; las batallas de historia usan `cs.battle(enemigos, "evento_siguiente")`. Progreso por flags en `Game.flags` (lista en DEVLOG sesión 3).
 - `tools/` scripts de Blender y utilidades
 
 ## Cómo retomar una sesión
