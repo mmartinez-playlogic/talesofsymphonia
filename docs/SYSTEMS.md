@@ -15,7 +15,10 @@
 | Over Limit | `Battler.add_ol` | La barra naranja bajo cada personaje se llena al recibir daño. Llena: 8 s sin tambalearse y +30% ATK/INT. | SystemsTest: battle |
 | Unison Attack | `BattleManager.try_unison` | La barra azul se llena con los golpes del grupo. N: todos lanzan su arte principal a la vez. | SystemsTest: battle |
 | Grado | `BattleManager._win` | Rapidez y daño recibido suman Grado tras cada combate. | — |
-| Guardado | menú → Guardar; título → Continuar | Guarda party, equipo, títulos, EX, recetas, cocina, flags, skits. | SystemsTest: save/load |
+| Guardado (3 ranuras) | `src/ui/SaveMenu.gd`, `Game.save/load_save/slot_info` | Como en el original: sobre un Círculo de Memoria (Iselia, templo fuera y dentro, casa de Dirk, puerta de Triet) o en el mapa del mundo. Menú → Guardar o Confirmar sobre el círculo. Cada ranura muestra lugar, grupo y niveles, tiempo, Gald, fecha y ★ si la demo está completada. Sobrescribir pide confirmar dos veces. Se guarda la posición exacta. | FlowTest |
+| Título | `src/Main.gd` | Nueva partida · Continuar (abre las ranuras; gris si no hay partidas; el cursor empieza ahí si las hay) · Salir. | FlowTest |
+| Game Over | `BattleManager._lose` | Derrota → pantalla Game Over → Confirmar → título. | FlowTest |
+| Fin de la demo | `src/ui/DemoEnd.tscn` | En la puerta de Triet: "¿Entrar en Triet?" → fundido → resumen (tiempo, Grado, Gald, niveles, títulos, skits, recetas) → Guardar (al continuar, apareces junto a la puerta) o Volver al título. | FlowTest, Playthrough |
 | Skits | U cuando aparece el aviso | 11 skits del capítulo 1. | Smoke |
 | Manual | menú → Manual | Todos los controles de campo y combate. | — |
 

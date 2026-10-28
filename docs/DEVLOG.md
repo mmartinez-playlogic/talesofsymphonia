@@ -170,3 +170,13 @@ Mateo en reunión: NADA se ha ejecutado (ni Godot headless). Todo escrito a cieg
   `docs/images/cast_vesperia.png` y `docs/images/npcs_vesperia.png`.
 - Regresión completa en verde tras el cambio (Check 46/0, Smoke 0, Systems 146/146, Combat 0 derrotas, QA 128/0, Play 0).
 - Pendiente visual: ver el shader real en Godot con ventana (la preview es aproximada); texturas pintadas para caras y ropa.
+
+## 2026-10-28 — Sesión 3k (harness: Claude Code 2.1.287, Opus 5.5) — demo rematada + guardado
+- Fin de la demo real: en la puerta de Triet se elige "Entrar en Triet" → fundido → `src/ui/DemoEnd.tscn` con resumen,
+  Guardar (marca ★ Demo completada; al continuar apareces junto a la puerta) y Volver al título.
+- Guardado fiel al original: 3 ranuras (`SaveMenu`), Círculos de Memoria (`Field.add_memory_circle`, sin colisión) en Iselia,
+  templo exterior e interior, casa de Dirk y puerta de Triet, y en el mapa del mundo. Fuera de ellos el menú lo rechaza.
+  Ranuras con lugar, grupo/niveles, tiempo, Gald, fecha. Sobrescribir pide doble confirmación. Se guarda la posición exacta.
+- Título nuevo: degradado, Torre de la Salvación, Continuar abre las ranuras y sale gris sin partidas.
+- Menú de pausa y menú de guardado bloquean al jugador mientras están abiertos (lo destapó el test).
+- Nuevo `tools/FlowTest.tscn` (36 pruebas con pulsaciones reales) añadido a `tools/run_all_tests.sh`.

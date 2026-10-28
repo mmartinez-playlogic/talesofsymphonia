@@ -45,6 +45,7 @@ func build() -> void:
 	add_wall(Vector3(5, 0, 35), Vector3(40, 0, 35), 3.0, true, Color(0.55, 0.42, 0.3))
 	add_sign(Vector3(3, 0, 26), "Iselia, aldea del Oráculo.\nNorte: bosque y Templo de Martel.\nSur: camino a la casa de Dirk.")
 	add_chest("plaza", Vector3(20, 0, -2), "apple_gel", 2)
+	add_memory_circle(Vector3(-4, 0, -12))
 	add_exit(Vector3(0, 1, -36), Vector3(10, 3, 1.5), "iselia_forest", "from_village",
 		func(): return Game.get_flag("frank_talked", false) and not raid,
 		[{"speaker": "Lloyd", "text": "Antes de salir deberíamos ver qué pasa en la aldea. Está todo demasiado silencioso."}])

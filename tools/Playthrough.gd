@@ -14,7 +14,7 @@ const STEPS := [
 	{"flag": "vidarr_defeated"}, {"party_has": "kratos"},
 	{"goto": [0, -26.6]}, {"map": "martel_temple"},
 	{"flag": "temple_entered"},
-	{"goto": [-13, 10]}, {"goto": [-9, 6]}, {"goto": [-14, 3]}, {"wait_defeated": 3},
+	{"hunt": [0, 1, 2]},
 	{"interact": "pedestal"}, {"flag": "got_ring"},
 	{"interact": "seal"}, {"flag": "seal_open"},
 	{"interact": "altar_trigger"}, {"flag": "temple_done"}, {"party_size": 2},
@@ -41,7 +41,7 @@ const STEPS := [
 	{"goto": [-50, 50]}, {"goto": [-62, 60]}, {"flag": "renegades_cordon"},
 	{"goto": [-80, 78]}, {"goto": [-92, 92]}, {"map": "triet_desert"}, {"flag": "triet_arrived"},
 	{"goto": [-20, 4]}, {"goto": [-54, 0]}, {"interact": "poster"}, {"flag": "poster_seen"},
-	{"goto": [-59.5, 0]}, {"interact": "triet_gate"},
+	{"goto": [-59.5, 0]}, {"interact": "triet_gate"}, {"scene": "DemoEnd"},
 ]
 
 var _tap_timer := 0.0
@@ -94,6 +94,10 @@ func _run(start: int = 0) -> void:
 			ok = await _until(func(): return _field() != null and _field().defeated_count() >= int(st["wait_defeated"]), 120.0)
 		elif st.has("goto"):
 			ok = await _walk_to(Vector3(st["goto"][0], 0, st["goto"][1]), 60.0)
+		elif st.has("hunt"):
+			ok = await _hunt(st["hunt"], 180.0)
+		elif st.has("scene"):
+			ok = await _until(func(): return get_tree().current_scene != null and get_tree().current_scene.name == st["scene"], 60.0)
 		elif st.has("interact"):
 			ok = await _interact(st["interact"])
 		if ok:
@@ -210,6 +214,29 @@ func _walk_to(target: Vector3, timeout: float) -> bool:
 		if dir.z < -0.05: Input.action_press("move_up", min(1.0, -dir.z))
 		await get_tree().process_frame
 	_release_moves()
+	return false
+
+## Walk into the field monsters with these indices until all are defeated (battles auto-won by _tick).
+func _hunt(indices: Array, timeout: float) -> bool:
+	var t0 := Time.get_ticks_msec()
+	while (Time.get_ticks_msec() - t0) / 1000.0 < timeout:
+		var f := _field()
+		if f == null:
+			await _until(func(): return _field() != null and _field().player != null and _field().player.can_move, 30.0)
+			continue
+		var defeated: Array = Game.flags.get("defeated_" + f.map_id, [])
+		var left := indices.filter(func(i): return not defeated.has(i) and not defeated.has(float(i)))
+		if left.is_empty():
+			return true
+		var target: FieldMonster = null
+		for m in f._monsters:
+			if is_instance_valid(m) and m.is_inside_tree() and left.has(m.monster_index):
+				if target == null or m.global_position.distance_to(f.player.global_position) < target.global_position.distance_to(f.player.global_position):
+					target = m
+		if target == null:
+			await get_tree().process_frame
+			continue
+		await _walk_to(target.global_position, 2.0)
 	return false
 
 func _interact(node_name: String) -> bool:

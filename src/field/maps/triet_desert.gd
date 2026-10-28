@@ -39,6 +39,7 @@ func build() -> void:
 	add_wall(Vector3(-65, 0, -45), Vector3(65, 0, -45))
 	add_wall(Vector3(-65, 0, 45), Vector3(65, 0, 45))
 	add_exit(Vector3(66, 1, 0), Vector3(1.5, 3, 10), "world_sylvarant", "triet")
+	add_memory_circle(Vector3(-46, 0, 0))
 	add_sign(Vector3(-56, 0, 4), "Ciudad de Triet, puerta este.")
 	add_chest("desert1", Vector3(10, 0, 20), "orange_gel")
 	add_monster(Vector3(30, 0, -10), ["sand_wolf"])
@@ -69,8 +70,12 @@ func _gate(c: Cutscene) -> void:
 	await c.script("triet_desert.gate.01", [
 		{"speaker": "Genis", "text": "La ciudad de Triet. Colette tiene que estar ahí dentro."},
 		{"speaker": "Lloyd", "text": "Pues vamos. ¡Colette, espéranos!"},
-		{"speaker": "", "text": "[color=#a0c0ff](Fin del contenido actual. Triet, la adivina, la captura de Lloyd y la base de los Renegados llegan en la siguiente sesión: C2.)[/color]"},
 	])
+	var i: int = await c.choice("¿Entrar en Triet? (Termina la demo)", ["Entrar en Triet", "Todavía no"])
+	if i != 0:
+		return
+	await c.fade_out(1.2)
+	Router.goto_scene("res://src/ui/DemoEnd.tscn")
 
 func on_enter(c: Cutscene) -> void:
 	if c.has("triet_arrived"):

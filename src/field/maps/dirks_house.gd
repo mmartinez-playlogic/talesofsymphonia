@@ -42,6 +42,7 @@ func build() -> void:
 		func(): return not _evening or Game.get_flag("night_dirk", false),
 		[{"speaker": "Lloyd", "text": "Ya es tarde. Mañana iré a la aldea a despedirme de Colette."}])
 	add_chest("home", Vector3(-6, 0, 2), "melange_gel")
+	add_memory_circle(Vector3(-5, 0, 14))
 	add_interactable("forge_pot", Vector3(9.5, 0, 0.5), Vector3(0.7, 0.7, 0.7), Color(0.35, 0.3, 0.3), _wonder_chef)
 	if not _evening:
 		add_npc("dirk", Vector3(5, 0, 0), "Dirk", "dirk",

@@ -91,6 +91,8 @@ func _drive_until_free(timeout_frames := 3600) -> bool:
 			# a scene change (battle or map) happened: wait for it and keep driving
 			await get_tree().process_frame
 			var s := get_tree().current_scene
+			if s and s.name == "DemoEnd":
+				return true   # the Triet gate ends the demo
 			if s is BattleManager:
 				var bm := s as BattleManager
 				if bm.phase == BattleManager.Phase.FIGHT:
@@ -230,8 +232,8 @@ func _continue_from_title() -> void:
 	get_tree().change_scene_to_file("res://src/Main.tscn")
 	for i in 30:
 		await get_tree().process_frame
-	await _tap("move_down")
-	await _tap("confirm")
+	await _tap("confirm")   # Continuar (cursor starts there when a save exists)
+	await _tap("confirm")   # slot 1
 	var reached := false
 	for i in 1200:
 		await get_tree().process_frame
@@ -245,3 +247,5 @@ func _continue_from_title() -> void:
 	if backup != "":
 		var w := FileAccess.open("user://save_0.json", FileAccess.WRITE)
 		w.store_string(backup)
+	else:
+		Game.delete_save(0)

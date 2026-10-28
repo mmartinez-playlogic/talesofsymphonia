@@ -9,6 +9,8 @@ Añade `--max-fps 0 --fixed-fps 60` para que corra más rápido que el tiempo re
 | Recorrido | `... res://tools/Playthrough.tscn` | Juega la historia de la escuela a Triet con físicas reales (110 pasos) e imprime los niveles por tramo | 0 fallos |
 | Sistemas | `... res://tools/SystemsTest.tscn` | 146 aserciones: tienda, equipo, objetos, cocina, títulos, EX, guardado, Over Limit, Unison, objetos en combate, y pulsaciones reales en tienda/menú/anillo | 146/146 |
 | Combate real | `... res://tools/CombatTest.tscn -- --runs 5 [--only NOMBRE] [--debug]` | Bot que pelea con las teclas (ataca, artes, gel al 35%, Unison) en los 13 combates del capítulo al nivel real del recorrido | 65/65 victorias |
+| Flujo | `... res://tools/FlowTest.tscn` | Título sin partidas, Nueva partida, guardar en Círculo de Memoria (menú y círculo), negarse fuera del círculo, sobrescribir con doble confirmación, Continuar con posición exacta, Game Over → título, fin de demo → guardar → título → continuar en Triet. Hace copia de seguridad de tus partidas. | 36/36 |
+| Todo | `bash tools/run_all_tests.sh` | Las 7 baterías en orden con resumen | — |
 | QA | `... res://tools/QATest.tscn` | Interactúa con TODO lo interactuable de 15 estados, fuzz de 6×400 teclas en menú y tienda, 3000 teclas en combate, guardar y Continuar desde el título | 128 ok, 0 fallos |
 
 ## Curva de combate (bot, 5 rondas, niveles del recorrido real)

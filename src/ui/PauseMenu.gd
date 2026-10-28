@@ -72,6 +72,10 @@ func _panel(pos: Vector2, size: Vector2) -> PanelContainer:
 	return p
 
 func open() -> void:
+	var locked_player = null
+	if field and field.get("player") and field.player.can_move:
+		locked_player = field.player
+		locked_player.can_move = false
 	_open = true
 	_closed = false
 	_mode = "main"
@@ -85,6 +89,8 @@ func open() -> void:
 		await get_tree().process_frame
 	_root.visible = false
 	_open = false
+	if locked_player and is_instance_valid(locked_player):
+		locked_player.can_move = true
 
 func _name(id: String) -> String:
 	return str(DB.characters.get(id, {}).get("name", id)).split(" ")[0]
@@ -343,8 +349,20 @@ func _confirm() -> void:
 				6: _mode = "status"
 				7: _mode = "manual"
 				8:
-					Game.save(0)
-					_mode = "saved"
+					if field and field.has_method("can_save_here") and field.can_save_here():
+						_root.visible = false
+						var slot: int = await field.save_game()
+						_root.visible = true
+						_msg = ("Partida guardada en la ranura %d." % (slot + 1)) if slot >= 0 else ""
+						_mode = "main"
+						_cursor = 8
+						_render()
+						return
+					_msg = "Solo puedes guardar sobre un Círculo de Memoria o en el mapa del mundo."
+					_mode = "main"
+					_cursor = 8
+					_render()
+					return
 				9:
 					_closed = true
 					return

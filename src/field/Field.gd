@@ -23,7 +23,9 @@ var _available_skit := ""
 var _skit_box: SkitBox
 var _pause: PauseMenu
 var _shop: ShopMenu
+var _save_menu: SaveMenu
 var _hud: CanvasLayer
+var _circles: Array[Node3D] = []
 
 func _ready() -> void:
 	_world_root = Node3D.new()
@@ -154,6 +156,9 @@ func _spawn_player() -> void:
 	var pos: Vector3 = spawns.get(Game.spawn_point, spawns.get("default", Vector3.ZERO))
 	if Game.return_to_field and Game.last_field_position != Vector3.ZERO:
 		pos = Game.last_field_position
+	if Game.pending_load_pos is Vector3:
+		pos = Game.pending_load_pos
+		Game.pending_load_pos = null
 	player.global_position = pos
 	player.rotation.y = float(spawn_yaw.get(Game.spawn_point, PI))
 	player.interact_requested.connect(_on_interact)
@@ -187,6 +192,8 @@ func _build_hud() -> void:
 	add_child(_pause)
 	_shop = ShopMenu.new()
 	add_child(_shop)
+	_save_menu = SaveMenu.new()
+	add_child(_save_menu)
 	Game.title_earned.connect(_on_title_earned)
 
 func _on_title_earned(char_id: String, title_id: String) -> void:
@@ -211,6 +218,89 @@ func inn(price: int, keeper := "Posadero") -> void:
 	await get_tree().create_timer(0.8).timeout
 	await Router.fade_in(0.6)
 	await dialogue.show_lines([{"speaker": keeper, "text": "Buenos días. Habéis dormido como troncos."}])
+
+## Saving is allowed on the world map or standing on a Memory Circle (as in the original).
+func can_save_here() -> bool:
+	if map_id == "world_sylvarant":
+		return true
+	for c in _circles:
+		if is_instance_valid(c) and player and c.global_position.distance_to(player.global_position) < 2.5:
+			return true
+	return false
+
+## Open the save-slot menu in save mode. Returns the slot saved to, or -1.
+func save_game() -> int:
+	Game.current_map = map_id
+	var was := player.can_move
+	player.can_move = false
+	var pos := player.global_position
+	var slot: int = await _save_menu.open_save(pos)
+	if is_instance_valid(player):
+		player.can_move = was
+	return slot
+
+## Memory Circle: glowing save point. The player walks over it (no collision) and presses Confirm.
+func add_memory_circle(pos: Vector3) -> void:
+	var root := Node3D.new()
+	root.position = pos
+	add_child(root)
+	var ring := MeshInstance3D.new()
+	var tm := TorusMesh.new()
+	tm.inner_radius = 0.75
+	tm.outer_radius = 0.95
+	tm.rings = 32
+	tm.ring_segments = 6
+	ring.mesh = tm
+	var m := StandardMaterial3D.new()
+	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	m.albedo_color = Color(0.55, 0.85, 1.0)
+	m.emission_enabled = true
+	m.emission = Color(0.4, 0.75, 1.0)
+	m.emission_energy_multiplier = 2.0
+	ring.material_override = m
+	ring.position.y = 0.05
+	ring.scale = Vector3(1, 0.2, 1)
+	root.add_child(ring)
+	var disc := MeshInstance3D.new()
+	var cm := CylinderMesh.new()
+	cm.top_radius = 0.75
+	cm.bottom_radius = 0.75
+	cm.height = 0.02
+	disc.mesh = cm
+	var m2 := StandardMaterial3D.new()
+	m2.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	m2.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	m2.albedo_color = Color(0.5, 0.8, 1.0, 0.35)
+	disc.material_override = m2
+	disc.position.y = 0.03
+	root.add_child(disc)
+	var l := OmniLight3D.new()
+	l.light_color = Color(0.5, 0.8, 1.0)
+	l.light_energy = 1.5
+	l.omni_range = 4.0
+	l.position.y = 0.8
+	root.add_child(l)
+	var tw := create_tween().set_loops()
+	tw.tween_property(ring, "rotation:y", TAU, 6.0).from(0.0)
+	_circles.append(root)
+	var body := StaticBody3D.new()
+	body.name = "memory_circle_%d" % _circles.size()
+	body.collision_layer = 4   # interactable only: the player walks through it
+	body.collision_mask = 0
+	body.set_script(preload("res://src/field/Interactable.gd"))
+	body.set("handler", func(_f):
+		var i: int = await dialogue.show_choice("Un Círculo de Memoria brilla bajo tus pies. ¿Guardar la partida?", ["Guardar", "No"])
+		if i == 0:
+			await save_game()
+	)
+	var cs_ := CollisionShape3D.new()
+	var box := BoxShape3D.new()
+	box.size = Vector3(1.8, 1.0, 1.8)
+	cs_.shape = box
+	cs_.position.y = 0.5
+	body.add_child(cs_)
+	body.position = pos
+	add_child(body)
 
 ## Merchant NPC helper.
 func add_shop_npc(id: String, pos: Vector3, npc_name: String, model_id: String, shop_id: String, greeting := "¡Bienvenidos! Mirad lo que tengo.", yaw_deg := 0.0) -> Npc:

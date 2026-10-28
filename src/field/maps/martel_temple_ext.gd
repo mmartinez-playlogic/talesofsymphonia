@@ -36,6 +36,7 @@ func build() -> void:
 	add_wall(Vector3(-30, 0, 35), Vector3(-5, 0, 35))
 	add_wall(Vector3(5, 0, 35), Vector3(30, 0, 35))
 	add_exit(Vector3(0, 1, 34), Vector3(10, 3, 1.5), "iselia_forest", "from_temple")
+	add_memory_circle(Vector3(6, 0, 16))
 	add_exit(Vector3(0, 1.5, -26.5), Vector3(3.5, 4, 1.4), "martel_temple", "default",
 		func(): return Game.get_flag("vidarr_defeated", false), [{"speaker": "Lloyd", "text": "La puerta está cerrada."}])
 	if Game.get_flag("vidarr_defeated", false) and not Game.get_flag("temple_done", false):

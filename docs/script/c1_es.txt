@@ -519,4 +519,3 @@ Lloyd: ¡Oye! ¿Tan mal está? ¿Tan feo soy?
 ## triet_desert.gate.01
 Genis: La ciudad de Triet. Colette tiene que estar ahí dentro. Preguntemos en la posada.
 Lloyd: Pues vamos. ¡Colette, espéranos!
-(Fin del contenido actual. Triet, la adivina, la captura de Lloyd y la base de los Renegados llegan en la siguiente sesión: C2.)

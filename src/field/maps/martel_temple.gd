@@ -54,6 +54,7 @@ func build() -> void:
 	add_monster(Vector3(5, 0, 18), ["zombie"])
 	add_monster(Vector3(6, 0, -18), ["ghost", "zombie"])
 	add_exit(Vector3(0, 1, 36), Vector3(8, 3, 1.5), "martel_temple_ext", "from_inside")
+	add_memory_circle(Vector3(6, 0, 30))
 	if Game.get_flag("seal_open", false) and not Game.get_flag("temple_done", false):
 		add_interactable("altar_trigger", Vector3(0, 0, -33), Vector3(6, 0.2, 1.0), Color(0.9, 0.9, 0.8), _oracle)
 	if Game.get_flag("temple_done", false):

@@ -6,6 +6,11 @@ signal flag_changed(flag: String, value)
 signal title_earned(char_id: String, title_id: String)
 
 const SAVE_PATH := "user://save_%d.json"
+const SLOT_COUNT := 3
+const MAP_TITLES := {"iselia_school": "Iselia · Escuela", "iselia_village": "Iselia", "iselia_forest": "Bosque de Iselia",
+	"martel_temple_ext": "Templo de Martel", "martel_temple": "Templo de Martel · Interior", "iselia_ranch": "Rancho de Iselia",
+	"dirks_house": "Casa de Dirk", "world_sylvarant": "Sylvarant", "triet_desert": "Desierto de Triet"}
+var pending_load_pos = null      # Vector3 to spawn at after loading a save
 const SLOTS := ["weapon", "body", "head", "arm", "acc1", "acc2"]
 const SLOT_NAMES := {"weapon": "Arma", "body": "Cuerpo", "head": "Cabeza", "arm": "Brazos", "acc1": "Accesorio 1", "acc2": "Accesorio 2"}
 
@@ -390,8 +395,15 @@ func heal_all() -> void:
 		members[id]["tp"] = max_tp(id)
 
 # ---------- save / load ----------
-func save(slot: int = 0) -> void:
+func save(slot: int = 0, pos = null) -> void:
+	var lv: Array = []
+	for id in party:
+		lv.append([id, int(members[id]["level"])])
+	var meta := {"map": current_map, "map_title": MAP_TITLES.get(current_map, current_map), "time": play_time,
+		"date": Time.get_datetime_string_from_system(false, true), "party": lv, "gald": gald,
+		"demo_complete": bool(get_flag("demo_complete", false))}
 	var data := {
+		"meta": meta, "pos": [pos.x, pos.y, pos.z] if pos is Vector3 else null,
 		"party": party, "members": members, "inventory": inventory, "gald": gald, "grade": grade,
 		"flags": flags, "affection": affection, "play_time": play_time, "current_map": current_map,
 		"spawn_point": spawn_point, "seen_skits": seen_skits, "recipes": recipes, "cook_successes": cook_successes,
@@ -419,8 +431,35 @@ func load_save(slot: int = 0) -> bool:
 	seen_skits.assign(data.get("seen_skits", []))
 	recipes.assign(data.get("recipes", []))
 	cook_successes = int(data.get("cook_successes", 0))
+	var p = data.get("pos", null)
+	pending_load_pos = Vector3(float(p[0]), float(p[1]) + 0.1, float(p[2])) if p is Array and p.size() == 3 else null
+	last_field_position = Vector3.ZERO
+	return_to_field = false
 	party_changed.emit()
 	return true
+
+## Summary of a slot for menus: {} when empty.
+func slot_info(slot: int) -> Dictionary:
+	var path := SAVE_PATH % slot
+	if not FileAccess.file_exists(path):
+		return {}
+	var data = JSON.parse_string(FileAccess.get_file_as_string(path))
+	if not (data is Dictionary):
+		return {}
+	var meta: Dictionary = data.get("meta", {})
+	if meta.is_empty():
+		meta = {"map": data.get("current_map", "?"), "map_title": MAP_TITLES.get(str(data.get("current_map", "")), "?"), "time": data.get("play_time", 0), "date": "", "party": [], "gald": data.get("gald", 0)}
+	return meta
+
+func any_save() -> bool:
+	for i in SLOT_COUNT:
+		if save_exists(i):
+			return true
+	return false
+
+func delete_save(slot: int) -> void:
+	if save_exists(slot):
+		DirAccess.remove_absolute(ProjectSettings.globalize_path(SAVE_PATH % slot))
 
 func save_exists(slot: int = 0) -> bool:
 	return FileAccess.file_exists(SAVE_PATH % slot)
