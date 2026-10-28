@@ -98,6 +98,11 @@ func _run(start: int = 0) -> void:
 			ok = await _interact(st["interact"])
 		if ok:
 			print("[OK] step %d" % i)
+			if st.has("flag") and st["flag"] in ["temple_arrived", "vidarr_defeated", "ranch_visited", "night_dirk", "raid_fight_done", "exiled", "triet_arrived"]:
+				var lv := []
+				for id in Game.party:
+					lv.append("%s %d" % [id, Game.members[id]["level"]])
+				print("[LEVELS] at %s: %s" % [st["flag"], ", ".join(lv)])
 		else:
 			_fails += 1
 			var f := _field()

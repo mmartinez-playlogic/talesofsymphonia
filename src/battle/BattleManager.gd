@@ -222,7 +222,11 @@ func lowest_hp_ally(b: Battler) -> Battler:
 	return best
 
 # ---------- events ----------
+var debug_log := false
+
 func on_damage(attacker: Battler, victim: Battler, dmg: int, crit: bool) -> void:
+	if debug_log:
+		print("[DMG] f%d %s -> %s %d (hp %d/%d)" % [Engine.get_physics_frames(), attacker.id if attacker else "?", victim.id, dmg, victim.stats["hp"], victim.stats["max_hp"]])
 	var color := Color(1, 1, 1)
 	if victim.player_side:
 		color = Color(1, 0.4, 0.4)

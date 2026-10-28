@@ -70,6 +70,8 @@ func open(shop_id: String) -> void:
 	_root.visible = true
 	_render()
 	while not _closed:
+		if not is_inside_tree():
+			return
 		await get_tree().process_frame
 	_root.visible = false
 	_open = false

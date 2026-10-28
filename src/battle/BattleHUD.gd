@@ -187,6 +187,8 @@ func item_menu(bm: BattleManager) -> void:
 	_menu_panel.visible = true
 	_render_menu(bm)
 	while not _menu_done:
+		if not is_inside_tree():
+			return
 		await get_tree().process_frame
 	_menu_panel.visible = false
 	_menu_mode = ""

@@ -140,3 +140,15 @@ Mateo en reunión: NADA se ha ejecutado (ni Godot headless). Todo escrito a cieg
 - Bug real encontrado por el test: niveles de EX del JSON llegan como float y no casaban con el hueco.
 - Nuevo `tools/SystemsTest.tscn`: 146 aserciones, incluidas pulsaciones reales en tienda, menú (cocinar) y anillo. 146/146.
 - Referencia: `docs/SYSTEMS.md`.
+
+## 2026-10-28 — Sesión 3i (harness: Claude Code 2.1.287, Opus 5.5) — "pruébalo bien"
+- Bot de combate REAL (`tools/CombatTest`): pelea con las teclas, sin trampas. Destapó que el juego estaba roto de
+  equilibrio: combates de 2 s, los enemigos morían antes de atacar (0 de daño recibido) y Lloyd mataba lobos en 3 golpes.
+- Reequilibrado iterando con el bot (5 rondas × 13 combates): HP enemigos ×5,4 (jefes ×6,4 y luego ajustados),
+  ATK enemigos ×1,35, multiplicador de daño del jugador 1,15→0,85 (físico) y 1,4→1,05 (mágico), IA enemiga más rápida,
+  y "rompe combo": tras 5 golpes seguidos un enemigo normal aguanta 1,2 s sin tambalearse (como en el original).
+  Resultado: 65/65 victorias, combates normales 12-28 s, jefes ~60 s acabando con ~60% de vida. Detalle en `docs/QA.md`.
+- `tools/QATest`: barrido de todas las interacciones (15 estados), fuzz de menús/tienda/combate, guardar y Continuar.
+  Destapó un bug real: tienda, menú de pausa y menú de combate seguían esperando sobre una escena borrada al cambiar
+  de mapa con el menú abierto (error de script). Corregido.
+- Regresión completa en verde: Systems 146/146, Smoke 0 errores, Playthrough 0 fallos, QA 128/0, Combate 65/65.

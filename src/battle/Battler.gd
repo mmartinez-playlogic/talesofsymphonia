@@ -38,6 +38,7 @@ var _death_done := false
 var ol_gauge := 0.0            # 0..100, fills when taking damage (player side)
 var over_limit_t := 0.0        # seconds remaining of Over Limit
 var ex: Dictionary = {}        # EX skill effects (player side)
+var poise_t := 0.0             # enemies: seconds of stagger immunity after a long combo
 var status := ""               # "" | "poison" | "stun"
 var status_t := 0.0
 
@@ -142,7 +143,7 @@ func face_target() -> void:
 ## Physical hit. Returns damage dealt.
 func deal_physical(victim: Battler, power: float, knock := 1.5, elem := "none", launch := false) -> int:
 	var crit := randf() < 0.04 + stat("luck") * 0.002 + float(ex.get("crit", 0.0))
-	var base := stat("atk") * power * 1.15 - victim.stat("def") * 0.45
+	var base := stat("atk") * power * (0.85 if player_side else 1.15) - victim.stat("def") * 0.45
 	base = max(base, stat("atk") * power * 0.12)
 	base *= randf_range(0.92, 1.08)
 	base *= _element_mult(victim, elem)
@@ -153,7 +154,7 @@ func deal_physical(victim: Battler, power: float, knock := 1.5, elem := "none", 
 	return dmg
 
 func deal_magic(victim: Battler, power: float, elem := "none", knock := 1.0) -> int:
-	var base := stat("int") * power * 1.4 - victim.stat("spr") * 0.4
+	var base := stat("int") * power * (1.05 if player_side else 1.4) - victim.stat("spr") * 0.4
 	base = max(base, stat("int") * power * 0.15)
 	base *= randf_range(0.92, 1.08) * _element_mult(victim, elem)
 	var dmg := int(round(base))
@@ -191,8 +192,13 @@ func take_hit(attacker: Battler, dmg: int, knock: float, crit: bool, magical: bo
 		add_ol(float(dmg) / max(1.0, float(stats["max_hp"])) * 100.0 * 0.9)
 	if blocked:
 		return
-	if over_limit_t > 0 or (bool(ex.get("super_armor", false)) and dmg < stats["max_hp"] * 0.08):
+	if over_limit_t > 0 or poise_t > 0 or (bool(ex.get("super_armor", false)) and dmg < stats["max_hp"] * 0.08):
 		return  # no stagger
+	if not player_side and not is_boss and combo_received >= 5:
+		combo_received = 0
+		poise_t = 1.2
+		manager.spawn_popup(global_position + Vector3(0, 2.0, 0), "¡Rompe!", Color(1, 0.4, 0.3), 0.6)
+		return
 	if is_boss and randf() < 0.6 and not magical:
 		return  # bosses resist stagger
 	# stagger
@@ -234,6 +240,8 @@ func apply_buff(stat_name: String, mult: float, duration: float) -> void:
 func _physics_process(delta: float) -> void:
 	if over_limit_t > 0:
 		over_limit_t -= delta
+	if poise_t > 0:
+		poise_t -= delta
 	if status != "":
 		status_t -= delta
 		if status == "poison" and int(Time.get_ticks_msec() / 1000) != int((Time.get_ticks_msec() - delta * 1000) / 1000) and is_alive():

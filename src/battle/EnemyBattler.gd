@@ -30,7 +30,7 @@ func setup_from_data(enemy_id: String, level_bonus := 0) -> void:
 	init_model(data.get("model", enemy_id), float(data.get("size", 1.0)))
 	if flying:
 		model.position.y = 0.0
-	ai_cooldown = randf_range(0.6, 1.5)
+	ai_cooldown = randf_range(0.2, 0.7)
 
 func think(delta: float) -> void:
 	ai_cooldown -= delta
@@ -47,7 +47,7 @@ func think(delta: float) -> void:
 	var reach: float = float(atk.get("range", 1.5)) + radius
 	if move_toward_target(delta, reach):
 		if ai_cooldown <= 0:
-			ai_cooldown = randf_range(0.9, 2.0) if not is_boss else randf_range(0.6, 1.3)
+			ai_cooldown = randf_range(0.6, 1.4) if not is_boss else randf_range(0.5, 1.1)
 			_attack(atk)
 		else:
 			strafe_timer -= delta
