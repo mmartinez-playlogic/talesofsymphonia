@@ -205,3 +205,13 @@ Mateo en reunión: NADA se ha ejecutado (ni Godot headless). Todo escrito a cieg
 - Escenas con animación: tropiezo de Colette (`cs.trip`, escena del templo partida en pastor.01a/01b), Raine
   (raine.01a/01b) pega y patea, Dirk golpea, arrodillarse en tumba y altar, Remiel desciende, salto del acantilado.
 - `tools/ArteTest.tscn` 201/201 añadido a `tools/run_all_tests.sh`. Detalle en `docs/ANIMATIONS.md`.
+
+## 2026-10-28 — Sesión 3n (harness: Claude Code 2.1.287, Opus 5.5) — build de Windows
+- Plantillas de exportación oficiales de Godot 4.7.2 descargadas (GitHub release) e instaladas solo las de Windows x86_64
+  en `~/Library/Application Support/Godot/export_templates/4.7.2.stable/`.
+- `export_presets.cfg`: "Windows Desktop" x86_64, pck separado, excluye tools/, docs/, assets/ref/, UAL en bruto.
+  Exportar: `godot --headless --path . --export-release "Windows Desktop" build/windows/TalesOfSymphonia.exe`.
+- Verificado el .pck exportado con el mismo motor: 108/108 recursos cargan (mapas, modelos, música, sfx, datos) y
+  arrancando con `-- --new-game` entra en la escuela y lanza la primera escena sin errores.
+- Paquete: `build/TalesOfSymphonia_Demo_C1_Windows.zip` (exe + pck + LEEME.txt). build/ está en .gitignore.
+- No probado en un Windows real (no hay uno aquí).

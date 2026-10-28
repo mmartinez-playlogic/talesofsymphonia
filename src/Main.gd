@@ -78,6 +78,10 @@ func _ready() -> void:
 	_cursor = 1 if _has_save else 0
 	_refresh()
 	Audio.play_music("title", 1.5)
+	if OS.get_cmdline_user_args().has("--new-game"):
+		_busy = true
+		Game.new_game()
+		Router.goto_map("iselia_school", "default")
 
 func _process(delta: float) -> void:
 	_t += delta
