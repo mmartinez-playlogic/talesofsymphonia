@@ -46,9 +46,13 @@ func _physics_process(delta: float) -> void:
 ## Smoothly look at a world position; pass null to return to following the target.
 func focus(pos, time := 0.6) -> void:
 	_focus_pos = pos
+	if not is_inside_tree():
+		return
 	await get_tree().create_timer(time).timeout
 
 func shake(strength := 0.3, duration := 0.5) -> void:
 	_shake_s = strength
 	_shake_t = duration
+	if not is_inside_tree():
+		return
 	await get_tree().create_timer(duration).timeout

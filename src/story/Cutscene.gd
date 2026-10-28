@@ -188,6 +188,8 @@ func shake(id: String, times := 2) -> void:
 
 # ---------- timing / screen ----------
 func wait(seconds: float) -> void:
+	if not is_instance_valid(field) or not field.is_inside_tree():
+		return
 	await field.get_tree().create_timer(seconds).timeout
 
 func fade_out(d := 0.4) -> void:
