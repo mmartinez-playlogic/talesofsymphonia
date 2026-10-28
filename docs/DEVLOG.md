@@ -71,3 +71,16 @@ Mateo en reunión: NADA se ha ejecutado (ni Godot headless). Todo escrito a cieg
 - Fidelidad de trama C1: añadido Botta (Renegados) retirándose tras Vidarr; Juramentos Enanos nº 1, 2 y 7; Dirk golpea a Lloyd.
 - Desviaciones conocidas pendientes: puzle de gólems/Anillo del Hechicero del templo (ahora un sello), posada/tienda de Iselia,
   Noishe acompañando en el mapa del mundo, cartel de "se busca" de Lloyd en Triet (C2).
+
+## 2026-10-28 — Sesión 3e (harness: Claude Code 2.1.287, Claude Fable 5.1) — "al dedillo"
+- Mateo: todo comprobable y perfecto. Validación headless activada: `godot --headless --path . --import` (regenera la caché
+  de clases) y `godot --headless --path . res://tools/CheckScripts.tscn` (carga TODOS los scripts con autoloads activos).
+  Errores corregidos: `DB.script` chocaba con `Node.script` (→ `story_script`), `sc` duplicada en PlayerBattler, inferencias
+  de tipo con `Game.get_flag` (→ `: bool`).
+- Investigado el capítulo 1 real escena por escena (lparchive + Wikiquote) → `docs/STORY_C1.md` (tabla de cotejo).
+- Reescritos con la secuencia real: iselia_school, iselia_village (Frank, casa de Colette, casa de Genis, puerta/Noishe,
+  carta, ataque, Forcystus, Exbelua, destierro), iselia_forest (tutoriales tras peleas, Noishe huye), martel_temple_ext
+  (pastor, Botta, Vidarr, Kratos, elección), martel_temple (manual, gólems, anillo, Remiel completo, Raine), iselia_ranch
+  (Marble, acantilado, Lloyd solo, Forcystus). Nuevo: `Field.on_return(cs)` tras batallas normales, `cs.battle(..., party_override)`,
+  `cs.restore_party()`, `cs.affection()`, enemigos golem/ghost (modelo golem generado), ítems clave, 11 skits reales.
+- Pendiente en esta sesión: dirks_house, world_sylvarant (Casa de la Salvación, carta de Dirk, renegados), triet_desert (cartel).

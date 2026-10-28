@@ -51,6 +51,7 @@ func _start_events(returning: bool) -> void:
 		await run_event(Callable(self, "on_resume").bind(resume))
 		return
 	if returning:
+		await run_event(Callable(self, "on_return"))
 		return
 	if map_title != "":
 		dialogue.show_caption(map_title, 1.6)
@@ -66,6 +67,13 @@ func on_enter(_cs: Cutscene) -> void:
 ## Called after returning from a story battle started with cs.battle(..., event_name).
 func on_resume(_cs: Cutscene, _event: String) -> void:
 	pass
+
+## Called after returning from a normal (field monster) battle.
+func on_return(_cs: Cutscene) -> void:
+	pass
+
+func defeated_count() -> int:
+	return Game.flags.get("defeated_" + map_id, []).size()
 
 ## Run a scripted event: locks the player, awaits fn(cs), unlocks.
 func run_event(fn: Callable) -> void:

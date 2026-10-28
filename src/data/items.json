@@ -255,5 +255,41 @@
   "users": [
    "lloyd"
   ]
+ },
+ "training_manual": {
+  "name": "Manual de entrenamiento",
+  "type": "key",
+  "price": 0,
+  "desc": "Manual de Kratos con las bases del combate."
+ },
+ "travelers_guide": {
+  "name": "Guía del viajero",
+  "type": "key",
+  "price": 0,
+  "desc": "Regalo de Dirk: los siete Juramentos Enanos más conocidos y consejos de viaje."
+ },
+ "dirk_letter": {
+  "name": "Carta de Dirk",
+  "type": "key",
+  "price": 0,
+  "desc": "Carta que Dirk metió en la bolsa de Lloyd."
+ },
+ "colette_letter": {
+  "name": "Carta de Colette",
+  "type": "key",
+  "price": 0,
+  "desc": "La carta de despedida de Colette."
+ },
+ "exsphere": {
+  "name": "Exsfera",
+  "type": "accessory",
+  "price": 0,
+  "stats": {
+   "atk": 6,
+   "def": 3,
+   "int": 6,
+   "spr": 3
+  },
+  "desc": "Amplifica las capacidades latentes de quien la lleva. Necesita una Cresta Clave."
  }
 }

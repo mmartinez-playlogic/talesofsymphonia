@@ -42,15 +42,15 @@
    },
    {
     "enemies": [
-     "zombie",
-     "bee"
+     "ghost",
+     "zombie"
     ],
     "weight": 2
    },
    {
     "enemies": [
-     "zombie",
-     "zombie"
+     "bee",
+     "bee"
     ],
     "weight": 1
    }

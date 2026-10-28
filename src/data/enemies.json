@@ -417,5 +417,74 @@
    }
   ],
   "ai": "melee"
+ },
+ "golem": {
+  "name": "Golem",
+  "model": "golem",
+  "hp": 260,
+  "tp": 0,
+  "atk": 26,
+  "def": 22,
+  "int": 4,
+  "spr": 6,
+  "acc": 14,
+  "eva": 2,
+  "exp": 30,
+  "gald": 0,
+  "element": "earth",
+  "weak": [
+   "wind"
+  ],
+  "resist": [
+   "earth"
+  ],
+  "drops": [],
+  "speed": 2.5,
+  "size": 1.35,
+  "attacks": [
+   {
+    "name": "smash",
+    "power": 1.3,
+    "range": 2.0,
+    "anim": "Sword_Regular_C",
+    "knockback": 3.0
+   }
+  ],
+  "ai": "melee"
+ },
+ "ghost": {
+  "name": "Ghost",
+  "model": "zombie",
+  "hp": 90,
+  "tp": 0,
+  "atk": 16,
+  "def": 4,
+  "int": 12,
+  "spr": 16,
+  "acc": 18,
+  "eva": 18,
+  "exp": 16,
+  "gald": 20,
+  "element": "dark",
+  "weak": [
+   "fire",
+   "light"
+  ],
+  "resist": [
+   "dark"
+  ],
+  "drops": [],
+  "speed": 4.0,
+  "size": 0.9,
+  "flying": true,
+  "attacks": [
+   {
+    "name": "touch",
+    "power": 1.0,
+    "range": 1.5,
+    "anim": "Zombie_Scratch"
+   }
+  ],
+  "ai": "melee"
  }
 }

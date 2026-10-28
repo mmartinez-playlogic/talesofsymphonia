@@ -237,6 +237,15 @@ func leave(char_id: String) -> void:
 func set_party(ids: Array) -> void:
 	Game.set_party(ids)
 
+## Restore the party saved by battle(..., party_override).
+func restore_party() -> void:
+	if Game.flags.has("party_before_battle"):
+		Game.set_party(Game.flags["party_before_battle"])
+		Game.flags.erase("party_before_battle")
+
+func affection(char_id: String, delta: int) -> void:
+	Game.affection[char_id] = int(Game.affection.get(char_id, 0)) + delta
+
 func heal_party() -> void:
 	Game.heal_all()
 
@@ -250,7 +259,10 @@ func goto(map_id: String, spawn := "default") -> void:
 ## Start a story battle. The field scene is replaced; when the party wins, the map reloads and
 ## Field will run the event named `resume_event` (see Field.on_resume). Callers must `return`
 ## right after awaiting this.
-func battle(enemies: Array, resume_event: String, advantage := "normal", guests: Array = []) -> void:
+func battle(enemies: Array, resume_event: String, advantage := "normal", guests: Array = [], party_override: Array = []) -> void:
+	if not party_override.is_empty():
+		Game.flags["party_before_battle"] = Game.party.duplicate()
+		Game.set_party(party_override)
 	for g in guests:
 		if not Game.members.has(g):
 			Game.add_member(g)

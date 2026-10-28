@@ -1,5 +1,5 @@
 extends Field
-## Iselia Forest: the woods between the village, the Martel Temple (north) and the Desian ranch (east).
+## Iselia Forest: the path to the Martel Temple (north) and the branch to the Desian ranch (east).
 
 func build() -> void:
 	map_id = "iselia_forest"
@@ -38,40 +38,60 @@ func build() -> void:
 	add_wall(Vector3(5, 0, -55), Vector3(35, 0, -55))
 	add_sign(Vector3(2.5, 0, 14), "Norte: Templo de Martel.\nSur: Aldea de Iselia.\nEste: Rancho humano de Iselia. PROHIBIDO EL PASO.")
 	add_chest("forest1", Vector3(-10, 0, -20), "orange_gel")
-	add_npc("villager1", Vector3(-3, 0, 12), "Aldeano", "frank",
-		[{"speaker": "Aldeano", "text": "Ten cuidado en el bosque, Lloyd. Últimamente los lobos se acercan mucho al camino."},
-		 {"speaker": "Lloyd", "text": "Tranquilo, unos lobos no son nada para mí."}])
 	add_monster(Vector3(-4, 0, -2), ["wolf"])
-	add_monster(Vector3(5, 0, -12), ["wolf", "wolf"])
+	add_monster(Vector3(5, 0, -12), ["ghost", "zombie"])
 	add_monster(Vector3(-3, 0, -24), ["rabbit", "rabbit", "bee"])
 	add_monster(Vector3(4, 0, -36), ["wolf", "rabbit", "bee"])
 	add_monster(Vector3(22, 0, -10), ["wolf", "bee"])
 	add_exit(Vector3(0, 1, 26), Vector3(10, 3, 1.5), "iselia_village", "from_forest")
 	add_exit(Vector3(0, 1, -56), Vector3(10, 3, 1.5), "martel_temple_ext", "default")
 	add_exit(Vector3(36, 1, -12), Vector3(1.5, 3, 8), "iselia_ranch", "default",
-		func(): return Game.get_flag("temple_done", false) and not Game.get_flag("ranch_visited", false),
-		[{"speaker": "Lloyd", "text": "Por ahí se va al rancho de los desianos. El alcalde nos mataría si nos acercáramos..."}] if not Game.get_flag("ranch_visited", false) else
+		func(): return Game.get_flag("noishe_ran_off", false) and not Game.get_flag("ranch_visited", false),
+		[{"speaker": "Lloyd", "text": "Por ahí se va al rancho de los desianos. Ni se nos ocurra acercarnos."}] if not Game.get_flag("ranch_visited", false) else
 		[{"speaker": "Lloyd", "text": "No deberíamos volver al rancho. Ya nos han visto una vez."}])
 
 func on_enter(c: Cutscene) -> void:
-	if c.has("temple_done") and not c.has("ranch_visited") and not c.has("genis_ran_off") and Game.spawn_point == "from_temple":
-		await _genis_runs_off(c)
+	if c.has("colette_house_done") and not c.has("noishe_ran_off") and Game.spawn_point == "from_village":
+		await _noishe(c)
 
-func _genis_runs_off(c: Cutscene) -> void:
-	c.flag("genis_ran_off")
-	c.spawn("genis", "genis", Vector3(1.5, 0, -44), 0.0, "Genis")
-	await c.walk("player", Vector3(0, 0, -24), 4.0, true, false)
-	await c.walk("genis", Vector3(1.5, 0, -22), 4.0, true)
-	await c.script("iselia_forest.genis_runs_off.01", [
-		{"speaker": "Genis", "text": "Lloyd... ¿puedo pedirte un favor? Tengo que ir a un sitio antes de volver a la aldea. Tú sigue sin mí."},
-		{"speaker": "Lloyd", "text": "¿Ir adónde? Por aquí solo está... Genis, ¿no estarás pensando en el rancho?"},
-		{"speaker": "Genis", "text": "¡No! Bueno... Es que hay alguien allí. Una anciana. Marble. Hablo con ella a través de la valla. No le hago daño a nadie."},
-		{"speaker": "Lloyd", "text": "¡Genis! ¡Si los desianos te ven, te meterán dentro con ella!"},
-		{"speaker": "Genis", "text": "¡Lo sé! Pero hoy está muy débil y quiero llevarle algo de comer. Solo será un momento. ¡Lo siento!"},
+## Tutorial talk after the first fight on the temple path (Exsphere, magic vs spirits).
+func on_return(c: Cutscene) -> void:
+	if not c.has("temple_arrived"):
+		if not c.has("forest_fight_1"):
+			c.flag("forest_fight_1")
+			await c.script("iselia_forest.first_fight.01", [
+				{"speaker": "Colette", "text": "¡Lloyd, has estado increíble!"},
+				{"speaker": "Lloyd", "text": "Es gracias a mi Exsfera. Está hecha para el combate: saca toda mi fuerza."},
+				{"speaker": "Genis", "text": "Al menos con la espada se defiende..."},
+				{"speaker": "Colette", "text": "Aquí al norte es terreno sagrado y aun así hay monstruos. Debe de ser parte de la prueba de Martel."},
+			])
+		elif not c.has("forest_fight_2"):
+			c.flag("forest_fight_2")
+			await c.script("iselia_forest.second_fight.01", [
+				{"speaker": "Colette", "text": "Raine dice que la magia funciona mejor contra los monstruos espirituales, como los fantasmas."},
+				{"speaker": "Genis", "text": "Entonces yo me encargo de los fantasmas y Lloyd de los zombis. Lloyd, cambia de objetivo con el botón de selección."},
+				{"speaker": "Lloyd", "text": "¡Entendido!"},
+			])
+
+func _noishe(c: Cutscene) -> void:
+	c.flag("noishe_ran_off")
+	c.spawn("genis", "genis", Vector3(1.5, 0, 20), 180.0, "Genis")
+	c.spawn("noishe", "wolf", Vector3(-2, 0, 21), 180.0, "Noishe")
+	await c.walk("player", Vector3(0, 0, 10), 3.5, false, false)
+	await c.walk("genis", Vector3(1.5, 0, 12), 3.5, false, false)
+	await c.walk("noishe", Vector3(-2, 0, 14), 3.5)
+	await c.script("iselia_forest.noishe.01", [
+		{"speaker": "Noishe", "text": "¡Guau... guau...!"},
+		{"speaker": "Lloyd", "text": "¿Qué pasa, Noishe? Ah, ya. No quieres entrar en el bosque. Siempre huyes de los sitios con monstruos."},
 	])
-	await c.run_to("genis", Vector3(30, 0, -12))
+	await c.run_to("noishe", Vector3(-3, 0, 24))
+	c.despawn("noishe")
+	await c.script("iselia_forest.noishe.02", [
+		{"speaker": "Lloyd", "text": "Genis... tu amiga. ¿Dónde está exactamente?"},
+		{"speaker": "Genis", "text": "...En el rancho humano de los desianos."},
+		{"speaker": "Lloyd", "text": "¡¿En el rancho?! ¡Eso viola el tratado!"},
+		{"speaker": "Genis", "text": "¡Los desianos ya lo han violado atacando el templo! Lloyd, solo voy a verla un momento. Puedes volver si quieres."},
+		{"speaker": "Lloyd", "text": "...Voy contigo. No pienso dejarte ir solo."},
+	])
 	c.despawn("genis")
-	await c.script("iselia_forest.genis_runs_off.02", [
-		{"speaker": "Lloyd", "text": "¡Genis, espera! ...Maldita sea. No puedo dejarlo ir solo."},
-	])
-	await c.caption("Sigue a Genis hacia el este, al Rancho humano de Iselia.", 2.2)
+	await c.caption("El rancho está al este, por el desvío del bosque.", 2.2)

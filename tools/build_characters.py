@@ -490,6 +490,7 @@ NPCS = {
     "desian_whip": {"colors": {"hair": "#1a1a2a", "skin": "#1a1a2a", "top": "#5a2a7a", "bottom": "#3a1a5a", "boots": "#111122", "accent": "#c0c0d0"}, "hair": "helmet", "eyes": "#ff3030", "weapon": "whip", "features": ["pauldrons"]},
 }
 ENEMY_HUMANOIDS = {
+    "golem": {"colors": {"hair": "#6a6a70", "skin": "#7a7a80", "top": "#6a6a72", "bottom": "#5a5a62", "boots": "#4a4a50", "accent": "#8a8a90"}, "hair": "bald", "eyes": "#f0c040", "weapon": "none", "features": ["pauldrons", "greaves", "belt"]},
     "zombie": {"colors": {"hair": "#3a4a3a", "skin": "#7fa37a", "top": "#4a4a3a", "bottom": "#3a3a2a", "boots": "#222222", "accent": "#555555"}, "hair": "bald", "eyes": "#d0d040", "weapon": "none", "features": []},
     "desian": {"colors": {"hair": "#1a1a2a", "skin": "#1a1a2a", "top": "#2a3a7a", "bottom": "#1a2a5a", "boots": "#111122", "accent": "#c0c0d0"}, "hair": "helmet", "eyes": "#ff3030", "weapon": "sword", "features": ["pauldrons"]},
     "vidarr": {"colors": {"hair": "#5a3a1a", "skin": "#d9a877", "top": "#6a4a2a", "bottom": "#3a2a1a", "boots": "#222222", "accent": "#999999"}, "hair": "bald", "eyes": "#3a2a1a", "weapon": "hammer", "features": ["belt", "pauldrons", "beard"]},
