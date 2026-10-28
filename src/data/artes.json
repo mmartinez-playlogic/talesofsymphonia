@@ -1,0 +1,28 @@
+{
+  "demon_fang":   {"name": "Demon Fang",   "user": "lloyd", "level": 1,  "tp": 4,  "type": "base", "element": "none", "power": 1.1, "hits": 1, "range": 8.0, "anim": "Sword_Regular_A", "projectile": "ground_wave", "desc": "A shockwave that travels along the ground."},
+  "sonic_thrust": {"name": "Sonic Thrust", "user": "lloyd", "level": 3,  "tp": 5,  "type": "base", "element": "none", "power": 1.3, "hits": 1, "range": 2.0, "anim": "Sword_Regular_B", "knockback": 4.0, "desc": "A powerful thrust that knocks the enemy back."},
+  "tiger_blade":  {"name": "Tiger Blade",  "user": "lloyd", "level": 6,  "tp": 7,  "type": "base", "element": "none", "power": 0.8, "hits": 2, "range": 1.8, "anim": "Sword_Regular_C", "launch": true, "desc": "Slash upward then slam down."},
+  "sword_rain":   {"name": "Sword Rain",   "user": "lloyd", "level": 10, "tp": 8,  "type": "base", "element": "none", "power": 0.45, "hits": 5, "range": 1.8, "anim": "Sword_Regular_Combo", "desc": "A flurry of rapid thrusts."},
+  "tempest":      {"name": "Tempest",      "user": "lloyd", "level": 14, "tp": 9,  "type": "base", "element": "none", "power": 0.6, "hits": 3, "range": 2.5, "anim": "Sword_Dash_RM", "desc": "A spinning aerial slash."},
+  "beast":        {"name": "Beast",        "user": "lloyd", "level": 18, "tp": 12, "type": "master", "element": "none", "power": 2.0, "hits": 1, "range": 2.2, "anim": "Sword_Regular_B", "knockback": 7.0, "desc": "Unleash a beast-shaped shockwave that sends enemies flying."},
+
+  "pow_hammer":   {"name": "Pow Hammer",   "user": "colette", "level": 1, "tp": 5, "type": "base", "element": "none", "power": 0.9, "hits": 1, "range": 9.0, "anim": "OverhandThrow", "projectile": "hammer", "stun": 0.25, "desc": "Throw a toy hammer that may stun."},
+  "ray_thrust":   {"name": "Ray Thrust",   "user": "colette", "level": 4, "tp": 6, "type": "base", "element": "none", "power": 1.2, "hits": 1, "range": 9.0, "anim": "OverhandThrow", "projectile": "chakram", "desc": "Hurl a chakram straight ahead."},
+  "angel_feathers": {"name": "Angel Feathers", "user": "colette", "level": 7, "tp": 10, "type": "angel", "element": "light", "power": 0.7, "hits": 3, "range": 10.0, "anim": "Spell_Simple_Shoot", "projectile": "feathers", "desc": "Fire feathers of light."},
+
+  "fire_ball":    {"name": "Fire Ball",    "user": "genis", "level": 1, "tp": 6,  "type": "spell", "element": "fire",  "power": 1.0, "hits": 3, "cast": 1.4, "anim": "Spell_Simple_Shoot", "desc": "Hurl three balls of flame."},
+  "stone_blast":  {"name": "Stone Blast",  "user": "genis", "level": 3, "tp": 7,  "type": "spell", "element": "earth", "power": 1.2, "hits": 3, "cast": 1.5, "anim": "Spell_Simple_Shoot", "desc": "Rocks burst from the ground."},
+  "aqua_edge":    {"name": "Aqua Edge",    "user": "genis", "level": 5, "tp": 7,  "type": "spell", "element": "water", "power": 1.1, "hits": 3, "cast": 1.4, "anim": "Spell_Simple_Shoot", "desc": "Blades of water."},
+  "wind_blade":   {"name": "Wind Blade",   "user": "genis", "level": 8, "tp": 8,  "type": "spell", "element": "wind",  "power": 1.3, "hits": 1, "cast": 1.6, "anim": "Spell_Simple_Shoot", "desc": "A slashing gust."},
+  "lightning":    {"name": "Lightning",    "user": "genis", "level": 10, "tp": 9, "type": "spell", "element": "lightning", "power": 1.6, "hits": 1, "cast": 1.8, "anim": "Spell_Simple_Shoot", "desc": "A bolt from the sky."},
+
+  "first_aid":    {"name": "First Aid",    "user": "raine", "level": 4, "tp": 8,  "type": "heal", "element": "light", "power": 0.0, "heal": 0.3, "cast": 1.6, "target": "ally", "anim": "Spell_Simple_Shoot", "desc": "Restore some HP to one ally."},
+  "photon":       {"name": "Photon",       "user": "raine", "level": 6, "tp": 10, "type": "spell", "element": "light", "power": 1.5, "hits": 1, "cast": 2.0, "anim": "Spell_Simple_Shoot", "desc": "A burst of light."},
+  "barrier":      {"name": "Barrier",      "user": "raine", "level": 9, "tp": 12, "type": "support", "element": "light", "cast": 1.8, "target": "ally", "buff": {"def": 1.3, "duration": 20}, "anim": "Spell_Simple_Shoot", "desc": "Raise an ally's defense."},
+  "nurse":        {"name": "Nurse",        "user": "raine", "level": 12, "tp": 20, "type": "heal", "element": "light", "heal": 0.25, "cast": 2.4, "target": "all_allies", "anim": "Spell_Simple_Shoot", "desc": "Heal the whole party a little."},
+
+  "k_demon_fang": {"name": "Demon Fang",   "user": "kratos", "level": 1, "tp": 4, "type": "base", "element": "none", "power": 1.1, "hits": 1, "range": 8.0, "anim": "Sword_Regular_A", "projectile": "ground_wave", "desc": "A shockwave that travels along the ground."},
+  "k_sonic_thrust": {"name": "Sonic Thrust", "user": "kratos", "level": 1, "tp": 5, "type": "base", "element": "none", "power": 1.3, "hits": 1, "range": 2.0, "anim": "Sword_Regular_B", "knockback": 4.0, "desc": "A powerful thrust."},
+  "k_first_aid":  {"name": "First Aid",    "user": "kratos", "level": 1, "tp": 8, "type": "heal", "element": "light", "heal": 0.3, "cast": 1.6, "target": "ally", "anim": "Spell_Simple_Shoot", "desc": "Restore some HP to one ally."},
+  "k_lightning":  {"name": "Lightning",    "user": "kratos", "level": 8, "tp": 9, "type": "spell", "element": "lightning", "power": 1.6, "hits": 1, "cast": 1.8, "anim": "Spell_Simple_Shoot", "desc": "A bolt from the sky."}
+}

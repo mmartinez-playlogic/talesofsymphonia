@@ -1,0 +1,65 @@
+{
+  "lloyd": {
+    "name": "Lloyd Irving", "weapon": "twin_swords", "model": "lloyd", "start_level": 1,
+    "base":   {"hp": 220, "tp": 30, "atk": 24, "def": 18, "int": 10, "spr": 9, "acc": 20, "eva": 12, "luck": 10},
+    "growth": {"hp": 38, "tp": 3.2, "atk": 4.2, "def": 3.1, "int": 1.4, "spr": 1.6, "acc": 2.2, "eva": 1.9, "luck": 0.6},
+    "start_equipment": {"weapon": "wooden_blade", "body": "cloak", "head": "", "arm": "", "acc1": "", "acc2": ""},
+    "start_title": "Drifting Swordsman", "colors": {"hair": "#6b3a1e", "skin": "#f1c9a5", "top": "#c61f1f", "bottom": "#c61f1f", "boots": "#2a1a10", "accent": "#f3e7c3"}
+  },
+  "colette": {
+    "name": "Colette Brunel", "weapon": "chakram", "model": "colette", "start_level": 1,
+    "base":   {"hp": 190, "tp": 40, "atk": 20, "def": 15, "int": 16, "spr": 18, "acc": 24, "eva": 14, "luck": 14},
+    "growth": {"hp": 33, "tp": 4.0, "atk": 3.6, "def": 2.6, "int": 2.4, "spr": 2.8, "acc": 2.6, "eva": 2.1, "luck": 0.9},
+    "start_equipment": {"weapon": "chakram", "body": "white_cloak", "head": "", "arm": "", "acc1": "", "acc2": ""},
+    "start_title": "Chosen", "colors": {"hair": "#f2d37a", "skin": "#f6d6bb", "top": "#f4f1ea", "bottom": "#f4f1ea", "boots": "#3b5a9a", "accent": "#3b5a9a"}
+  },
+  "genis": {
+    "name": "Genis Sage", "weapon": "kendama", "model": "genis", "start_level": 1,
+    "base":   {"hp": 150, "tp": 60, "atk": 12, "def": 11, "int": 28, "spr": 20, "acc": 16, "eva": 16, "luck": 12},
+    "growth": {"hp": 26, "tp": 6.5, "atk": 2.0, "def": 2.0, "int": 4.6, "spr": 3.4, "acc": 1.8, "eva": 2.4, "luck": 0.8},
+    "start_equipment": {"weapon": "kendama", "body": "blue_tunic", "head": "", "arm": "", "acc1": "", "acc2": ""},
+    "start_title": "Genius Mage", "colors": {"hair": "#d9e3ec", "skin": "#f4d3b8", "top": "#2f6fd0", "bottom": "#2f6fd0", "boots": "#2a2a2a", "accent": "#f4f1ea"}
+  },
+  "raine": {
+    "name": "Raine Sage", "weapon": "staff", "model": "raine", "start_level": 4,
+    "base":   {"hp": 180, "tp": 58, "atk": 14, "def": 14, "int": 26, "spr": 26, "acc": 18, "eva": 12, "luck": 11},
+    "growth": {"hp": 30, "tp": 6.0, "atk": 2.4, "def": 2.6, "int": 4.2, "spr": 4.4, "acc": 2.0, "eva": 1.8, "luck": 0.7},
+    "start_equipment": {"weapon": "rod", "body": "orange_robe", "head": "", "arm": "", "acc1": "", "acc2": ""},
+    "start_title": "Scholar", "colors": {"hair": "#d9e3ec", "skin": "#f4d3b8", "top": "#e6872c", "bottom": "#f4f1ea", "boots": "#2a2a2a", "accent": "#f4f1ea"}
+  },
+  "kratos": {
+    "name": "Kratos Aurion", "weapon": "sword", "model": "kratos", "start_level": 6,
+    "base":   {"hp": 320, "tp": 48, "atk": 36, "def": 26, "int": 20, "spr": 18, "acc": 28, "eva": 16, "luck": 10},
+    "growth": {"hp": 40, "tp": 4.2, "atk": 4.6, "def": 3.4, "int": 3.0, "spr": 2.8, "acc": 2.4, "eva": 2.0, "luck": 0.6},
+    "start_equipment": {"weapon": "long_sword", "body": "purple_coat", "head": "", "arm": "", "acc1": "", "acc2": ""},
+    "start_title": "Mercenary", "colors": {"hair": "#a0392b", "skin": "#efc8a6", "top": "#5a2d8a", "bottom": "#3b2a6a", "boots": "#2a1a10", "accent": "#d7c7e8"}
+  },
+  "sheena": {
+    "name": "Sheena Fujibayashi", "weapon": "cards", "model": "sheena", "start_level": 10,
+    "base":   {"hp": 260, "tp": 52, "atk": 28, "def": 20, "int": 22, "spr": 20, "acc": 26, "eva": 20, "luck": 13},
+    "growth": {"hp": 36, "tp": 4.8, "atk": 4.0, "def": 3.0, "int": 3.2, "spr": 3.0, "acc": 2.6, "eva": 2.6, "luck": 0.8},
+    "start_equipment": {"weapon": "cards", "body": "ninja_garb", "head": "", "arm": "", "acc1": "", "acc2": ""},
+    "start_title": "Assassin", "colors": {"hair": "#2b1f1a", "skin": "#f1c9a5", "top": "#5a2a8a", "bottom": "#f4f1ea", "boots": "#2a2a2a", "accent": "#e8a8c8"}
+  },
+  "zelos": {
+    "name": "Zelos Wilder", "weapon": "sword", "model": "zelos", "start_level": 22,
+    "base":   {"hp": 300, "tp": 50, "atk": 32, "def": 24, "int": 22, "spr": 20, "acc": 26, "eva": 18, "luck": 15},
+    "growth": {"hp": 38, "tp": 4.4, "atk": 4.3, "def": 3.2, "int": 3.2, "spr": 3.0, "acc": 2.4, "eva": 2.2, "luck": 0.9},
+    "start_equipment": {"weapon": "long_sword", "body": "pink_vest", "head": "", "arm": "", "acc1": "", "acc2": ""},
+    "start_title": "Chosen of Tethe'alla", "colors": {"hair": "#d8402a", "skin": "#f1c9a5", "top": "#f08ab0", "bottom": "#f4f1ea", "boots": "#2a2a2a", "accent": "#f4f1ea"}
+  },
+  "presea": {
+    "name": "Presea Combatir", "weapon": "axe", "model": "presea", "start_level": 24,
+    "base":   {"hp": 330, "tp": 36, "atk": 42, "def": 30, "int": 12, "spr": 14, "acc": 22, "eva": 10, "luck": 9},
+    "growth": {"hp": 42, "tp": 3.4, "atk": 5.0, "def": 3.8, "int": 1.6, "spr": 2.0, "acc": 2.2, "eva": 1.6, "luck": 0.5},
+    "start_equipment": {"weapon": "axe", "body": "pink_dress", "head": "", "arm": "", "acc1": "", "acc2": ""},
+    "start_title": "Lumberjack", "colors": {"hair": "#f0a0c0", "skin": "#f6d6bb", "top": "#f06090", "bottom": "#f06090", "boots": "#2a2a2a", "accent": "#f4f1ea"}
+  },
+  "regal": {
+    "name": "Regal Bryant", "weapon": "greaves", "model": "regal", "start_level": 26,
+    "base":   {"hp": 360, "tp": 40, "atk": 36, "def": 34, "int": 14, "spr": 20, "acc": 24, "eva": 14, "luck": 10},
+    "growth": {"hp": 44, "tp": 3.6, "atk": 4.4, "def": 4.0, "int": 1.8, "spr": 2.6, "acc": 2.2, "eva": 1.8, "luck": 0.6},
+    "start_equipment": {"weapon": "greaves", "body": "prisoner_garb", "head": "", "arm": "", "acc1": "", "acc2": ""},
+    "start_title": "Convict", "colors": {"hair": "#3a5aa0", "skin": "#efc8a6", "top": "#4a3a80", "bottom": "#4a3a80", "boots": "#2a2a2a", "accent": "#d0d0d0"}
+  }
+}

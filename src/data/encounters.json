@@ -1,0 +1,17 @@
+{
+  "iselia_forest": {
+    "groups": [
+      {"enemies": ["wolf"], "weight": 3},
+      {"enemies": ["wolf", "wolf"], "weight": 3},
+      {"enemies": ["rabbit", "rabbit", "bee"], "weight": 2},
+      {"enemies": ["wolf", "rabbit", "bee"], "weight": 2}
+    ]
+  },
+  "martel_temple": {
+    "groups": [
+      {"enemies": ["zombie"], "weight": 3},
+      {"enemies": ["zombie", "bee"], "weight": 2},
+      {"enemies": ["zombie", "zombie"], "weight": 1}
+    ]
+  }
+}
