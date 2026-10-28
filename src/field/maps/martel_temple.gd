@@ -41,10 +41,7 @@ func build() -> void:
 	for i in 3:
 		var filled: bool = defeated_count() > i
 		add_patch(Vector3(-15 + i * 3, 0, 12), Vector2(1.6, 1.6), Color(0.1, 0.1, 0.12) if not filled else Color(0.6, 0.58, 0.62), 0.03)
-	if not Game.get_flag("got_ring", false):
-		add_interactable("pedestal", Vector3(-12, 0, 4), Vector3(1.0, 1.1, 1.0), Color(0.75, 0.65, 0.35), _on_pedestal)
-	else:
-		add_box(Vector3(-12, 0, 4), Vector3(1.0, 1.1, 1.0), Color(0.75, 0.65, 0.35))
+	add_interactable("pedestal", Vector3(-12, 0, 4), Vector3(1.0, 1.1, 1.0), Color(0.75, 0.65, 0.35), _on_pedestal)
 	add_box(Vector3(0, 0, -36), Vector3(10, 0.6, 6), Color(0.85, 0.82, 0.9))
 	add_box(Vector3(0, 0.6, -38), Vector3(2.5, 1.2, 1.2), Color(0.95, 0.9, 0.7))
 	add_light(Vector3(0, 5, -36), Color(1.0, 0.95, 0.8), 3.0, 16)
@@ -107,6 +104,9 @@ func on_return(c: Cutscene) -> void:
 		])
 
 func _on_pedestal(c: Cutscene) -> void:
+	if c.has("got_ring"):
+		await c.line("", "El pedestal está vacío.")
+		return
 	var golems: int = 0
 	for i in Game.flags.get("defeated_" + map_id, []):
 		if int(i) < 3:
@@ -125,10 +125,6 @@ func _on_pedestal(c: Cutscene) -> void:
 	])
 	await c.give_item("sorcerers_ring")
 	c.flag("got_ring")
-	var p := get_node_or_null("pedestal")
-	if p:
-		p.queue_free()
-	add_box(Vector3(-12, 0, 4), Vector3(1.0, 1.1, 1.0), Color(0.75, 0.65, 0.35))
 	await c.caption("Anillo del Hechicero: dispara fuego. Pulsa Arte en el campo para aturdir enemigos (próximamente).", 2.6)
 
 func _on_seal(c: Cutscene) -> void:

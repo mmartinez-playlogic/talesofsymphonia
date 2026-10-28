@@ -83,10 +83,11 @@ func run_event(fn: Callable) -> void:
 	if player:
 		player.can_move = false
 	await fn.call(cs)
+	# wait for any fade/scene change to finish; if this map was replaced, just stop
+	while is_inside_tree() and Router._busy:
+		await get_tree().process_frame
 	if not is_inside_tree() or not is_instance_valid(player):
 		return
-	if Router._busy:
-		return  # a scene change is in progress; keep the player locked
 	event_running = false
 	player.can_move = true
 
@@ -201,8 +202,16 @@ func _on_interact(target: Node) -> void:
 	event_running = true
 	player.can_move = false
 	player.face(target.global_position)
-	await target.interact(self)
-	if is_instance_valid(player):
+	# Run handlers from here (not as coroutines of the target) so a target that frees itself
+	# mid-interaction cannot swallow the resume and leave the player locked.
+	if "handler" in target and (target.get("handler") as Callable).is_valid():
+		await (target.get("handler") as Callable).call(self)
+	elif target is Npc and (target as Npc).on_interact.is_valid():
+		(target as Npc).face_pos(player.global_position)
+		await (target as Npc).on_interact.call(self)
+	else:
+		await target.interact(self)
+	if is_inside_tree() and is_instance_valid(player):
 		player.can_move = true
 	event_running = false
 

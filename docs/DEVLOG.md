@@ -93,3 +93,22 @@ Mateo en reunión: NADA se ha ejecutado (ni Godot headless). Todo escrito a cieg
 - Trazas `[EV] <id>` en consola por cada escena de guion ejecutada (útil para seguir la historia en los logs).
 - Plantilla de guion regenerada: `src/data/script/_template_es.json`.
 - Queda por probar CON VENTANA (cuando Mateo pueda): posiciones de cámara/actores, legibilidad de HUD, sensación de combate.
+
+## 2026-10-28 — Sesión 3f (harness: Claude Code 2.1.287, Claude Fable 5.1) — "asegúrate de que funciona"
+- Nuevo `tools/Playthrough.tscn`: bot que JUEGA la demo entera en headless (físicas reales): camina con el input del
+  jugador hacia waypoints, avanza diálogos y elecciones, interactúa con puertas/NPC/objetos, gana los combates (mata a
+  los enemigos tras 1 s) y comprueba mapa y flags en cada paso. `godot --headless --path . res://tools/Playthrough.tscn`.
+  Log: `[STEP]`, `[OK]`, `[FAIL]`, `[FALLBACK]`. Tarda ~6-8 min.
+- Bugs REALES del juego que ha destapado y se han corregido:
+  1. Al entrar en un mapa sin evento de entrada el jugador quedaba congelado para siempre (run_event salía mientras
+     el fundido de Router seguía activo). Ahora espera a que termine el fundido.
+  2. Al coger el Anillo del Hechicero se creaba una caja con colisión encima del jugador → atrapado. El pedestal ya no
+     se sustituye por una caja.
+  3. Los .glb generados después del último `--import` (golem) no existían para Godot. Regla: tras generar modelos,
+     `godot --headless --path . --import`.
+  4. Spawn `from_school` en la aldea estaba pegado a la puerta de la escuela: al andar hacia el norte volvías a entrar.
+- Ajustes del bot (no del juego): cada "ir a" termina al cambiar de mapa; reinicio del detector de atasco al recuperar
+  el control; waypoints por los caminos para no cruzar edificios.
+  5. El altar (y cualquier interactuable) que se borraba a sí mismo en mitad de su interacción dejaba al jugador
+     bloqueado: la corrutina del nodo borrado nunca reanudaba. Ahora `Field._on_interact` ejecuta el manejador desde el
+     propio Field (vale para Interactable y para `Npc.on_interact`).

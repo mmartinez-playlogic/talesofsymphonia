@@ -8,7 +8,7 @@ func build() -> void:
 	spawns["default"] = Vector3(0, 0.1, 20)
 	spawns["from_world"] = Vector3(0, 0.1, 24)
 	spawns["from_forest"] = Vector3(0, 0.1, -26)
-	spawns["from_school"] = Vector3(-14, 0.1, -2)
+	spawns["from_school"] = Vector3(-14, 0.1, 1)
 	spawn_yaw["from_forest"] = 0.0
 	spawn_yaw["from_school"] = 0.0
 	var raid: bool = Game.get_flag("raid_started", false) and not Game.get_flag("exiled", false)
