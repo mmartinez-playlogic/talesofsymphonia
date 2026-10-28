@@ -559,7 +559,9 @@
   {
    "speaker": "Lloyd",
    "text": "Ni idea. Pero por aquí tiene que haber algo que lance fuego."
-  },
+  }
+ ],
+ "martel_temple.on_seal.02": [
   {
    "speaker": "Lloyd",
    "text": "Vale, anillo... ¡Fuego!"
@@ -807,6 +809,16 @@
   {
    "speaker": "Genis",
    "text": "Colette, Raine, Kratos... Os vamos a alcanzar."
+  }
+ ],
+ "world_sylvarant.on_enter.01": [
+  {
+   "speaker": "Genis",
+   "text": "Desde aquí se ve todo el sur de Sylvarant. La casa de Dirk está siguiendo el camino, al suroeste de la aldea."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Y más allá, el desierto. Nunca he ido tan lejos..."
   }
  ]
 }
