@@ -152,3 +152,21 @@ Mateo en reunión: NADA se ha ejecutado (ni Godot headless). Todo escrito a cieg
   Destapó un bug real: tienda, menú de pausa y menú de combate seguían esperando sobre una escena borrada al cambiar
   de mapa con el menú abierto (error de script). Corregido.
 - Regresión completa en verde: Systems 146/146, Smoke 0 errores, Playthrough 0 fallos, QA 128/0, Combate 65/65.
+
+## 2026-10-28 — Sesión 3j (harness: Claude Code 2.1.287, Opus 5.5) — modelos estilo Vesperia
+- Mateo: "mejora todos los modelos 3D, fieles pero con mejoras gráficas como Tales of Vesperia".
+- `tools/build_characters.py`: proporciones anime (cabeza ×1,1-1,25 según personaje, `head_scale`), cuerpo esbelto
+  (brazos ×0,82, piernas ×0,86, torso ×0,9 hacia el eje del hueso; desactivable con `"slim": False` para Vidarr, gólem,
+  Botta, Dirk), pelo por mechones cónicos orientados (`_locks`, 10 estilos), flequillos que caen, ojos grandes con
+  iris, pupila, brillo, pestañas, cejas, nariz y boca; bordes de color limpios (clasificación por cara, no por vértice).
+- Vestuario fiel: Lloyd (chaqueta roja con faldones, tirantes blancos, guantes negros, Exsfera), Colette (vestido largo
+  blanco, fajín azul, Cristal de Cruxis), Genis, Raine (abrigo naranja), Kratos (correas cruzadas), Sheena (lazo rosa),
+  Zelos (cinta), Presea, Regal (grilletes, grebas, coleta baja). Colores revisados en `characters.json`.
+- Shader `toon.gdshader`: 3 tonos (luz / sombra / sombra profunda), sombra cálida en piel, anillo de brillo anisótropo en
+  el pelo, rim de Fresnel en el lado iluminado; partes de la cara sin contorno; contorno teñido del color del material.
+  `ToonMaterial.make_character` elige parámetros por nombre de material.
+- Postproceso Vesperia en campo y combate: bloom suave, SSAO, saturación ×1,12, contraste ×1,04.
+- Preview sin ventana: `tools/render_toon_sheet.py` (EEVEE con rampa toon + contorno). Hojas en
+  `docs/images/cast_vesperia.png` y `docs/images/npcs_vesperia.png`.
+- Regresión completa en verde tras el cambio (Check 46/0, Smoke 0, Systems 146/146, Combat 0 derrotas, QA 128/0, Play 0).
+- Pendiente visual: ver el shader real en Godot con ventana (la preview es aproximada); texturas pintadas para caras y ropa.

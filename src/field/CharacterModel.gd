@@ -74,9 +74,12 @@ func _apply_toon(root: Node, thickness: float) -> void:
 		for i in mesh.get_surface_count():
 			var src := mesh.surface_get_material(i)
 			var color := Color(0.8, 0.8, 0.8)
+			var mname := ""
+			if src:
+				mname = src.resource_name
 			if src is BaseMaterial3D:
 				color = (src as BaseMaterial3D).albedo_color
-			mi.set_surface_override_material(i, ToonMaterial.make(color, true, thickness))
+			mi.set_surface_override_material(i, ToonMaterial.make_character(color, mname, thickness))
 
 func _make_placeholder() -> void:
 	var mi := MeshInstance3D.new()

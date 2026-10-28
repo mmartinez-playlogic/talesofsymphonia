@@ -58,6 +58,7 @@ func _build_arena() -> void:
 	e.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
 	e.ambient_light_energy = 0.7
 	e.tonemap_mode = Environment.TONE_MAPPER_FILMIC
+	Field._vesperia_post(e)
 	env.environment = e
 	add_child(env)
 	var sun := DirectionalLight3D.new()

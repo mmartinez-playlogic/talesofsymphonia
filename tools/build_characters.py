@@ -119,6 +119,53 @@ def hex_to_rgb(h):
     h = h.lstrip("#")
     return tuple(int(h[i:i + 2], 16) / 255.0 for i in (0, 2, 4))
 
+def _region_from(best, p):
+    if best is None:
+        return "top"
+    if best in ("DEF-head", "DEF-neck"):
+        if p.z > 1.665 or (p.z > 1.595 and p.y > 0.015):
+            return "hair"
+        return "skin"
+    if "hand" in best or "f_" in best or "thumb" in best:
+        return "hands"
+    if "foot" in best or "toe" in best or ("shin" in best and p.z < 0.25):
+        return "boots"
+    if "thigh" in best or "shin" in best or best == "DEF-hips":
+        return "bottom"
+    return "top"
+
+SLIM = {"upper_arm": 0.82, "forearm": 0.82, "thigh": 0.86, "shin": 0.86, "spine": 0.9, "hips": 0.92, "shoulder": 0.9}
+
+def slim_body(mesh_obj):
+    """Vesperia-like slender build: pull each vertex toward its dominant bone axis."""
+    me = mesh_obj.data
+    gi = {g.index: g.name for g in mesh_obj.vertex_groups}
+    for v in me.vertices:
+        if not v.groups:
+            continue
+        g = max(v.groups, key=lambda g: g.weight)
+        name = gi[g.group]
+        k = None
+        for key, val in SLIM.items():
+            if key in name:
+                k = val
+        if k is None:
+            continue
+        b = rig.data.bones.get(name)
+        if b is None:
+            continue
+        a, c = rig.matrix_world @ b.head_local, rig.matrix_world @ b.tail_local
+        ab = c - a
+        t = max(0.0, min(1.0, (v.co - a).dot(ab) / max(ab.length_squared, 1e-9)))
+        on = a + ab * t
+        off = v.co - on
+        if "spine" in name or "hips" in name:
+            off.z = off.z  # keep height, slim in x/y only
+            off = Vector((off.x * k, off.y * k, off.z))
+            v.co = on + off
+        else:
+            v.co = on + off * k
+
 def region_of_vertex(v, groups_by_index):
     """Classify a mannequin vertex into a region by dominant bone weight and position."""
     best, bw = None, 0.0
@@ -133,14 +180,14 @@ def region_of_vertex(v, groups_by_index):
             return "hair"
         return "skin"
     if "hand" in best or "f_" in best or "thumb" in best:
-        return "skin"
+        return "hands"
     if "foot" in best or "toe" in best or ("shin" in best and p.z < 0.25):
         return "boots"
     if "thigh" in best or "shin" in best or best == "DEF-hips":
         return "bottom"
     return "top"
 
-REGIONS = ["skin", "hair", "top", "bottom", "boots", "accent", "metal", "wood", "dark"]
+REGIONS = ["skin", "hair", "top", "bottom", "boots", "accent", "metal", "wood", "dark", "hands", "gem"]
 
 def colorize_body(mesh_obj, colors):
     me = mesh_obj.data
@@ -148,14 +195,22 @@ def colorize_body(mesh_obj, colors):
     me.materials.clear()
     mats = {}
     for r in REGIONS:
-        mats[r] = new_material(f"{mesh_obj.name}_{r}", hex_to_rgb(colors.get(r, "#888888")))
+        c = colors.get(r, colors.get("skin", "#888888") if r == "hands" else "#888888")
+        mats[r] = new_material(f"{mesh_obj.name}_{r}", hex_to_rgb(c))
         me.materials.append(mats[r])
-    vreg = [region_of_vertex(v, groups_by_index) for v in me.vertices]
     for poly in me.polygons:
-        counts = {}
+        # sum bone weights over the face and classify using the face centre -> clean, straight borders
+        wsum = {}
         for vi in poly.vertices:
-            counts[vreg[vi]] = counts.get(vreg[vi], 0) + 1
-        region = max(counts, key=counts.get)
+            for g in me.vertices[vi].groups:
+                n = groups_by_index[g.group]
+                wsum[n] = wsum.get(n, 0.0) + g.weight
+        class _V: pass
+        fake = _V()
+        fake.co = poly.center
+        best = max(wsum, key=wsum.get) if wsum else None
+        fake.groups = []
+        region = _region_from(best, poly.center)
         poly.material_index = REGIONS.index(region)
 
 def skin_to_bone(obj, bone):
@@ -315,58 +370,117 @@ def make_box_along(name, size, start, d, material, bone):
     return o
 
 def make_eyes(mats, eye_color):
-    """Anime eyes: white, colored iris, dark pupil, thin brow. Mannequin forward is -Y."""
+    """Large anime eyes: white, colored iris, pupil, two highlights, upper lash line, brow, nose tick, mouth.
+    Mannequin forward is -Y."""
     parts = []
     iris = new_material("iris", hex_to_rgb(eye_color))
-    white = new_material("eye_white", (0.97, 0.97, 0.97))
+    white = new_material("eye_white", (0.98, 0.98, 0.98))
+    shine = new_material("eye_shine", (1.0, 1.0, 1.0))
+    lash = mats["dark"]
     for sx in (-1, 1):
-        parts.append(make_sphere(f"eyew{sx}", 0.026, Vector((sx * 0.038, -0.092, 1.612)), white, HEAD, scale=(1.0, 0.45, 1.5), segs=10))
-        parts.append(make_sphere(f"iris{sx}", 0.015, Vector((sx * 0.038, -0.104, 1.610)), iris, HEAD, scale=(1.0, 0.5, 1.5), segs=8))
-        parts.append(make_sphere(f"pupil{sx}", 0.007, Vector((sx * 0.038, -0.111, 1.611)), mats["dark"], HEAD, scale=(1.0, 0.5, 1.5), segs=6))
-        parts.append(make_box(f"brow{sx}", (0.045, 0.008, 0.008), Vector((sx * 0.04, -0.1, 1.655)), mats["hair"], HEAD))
-    parts.append(make_box("mouth", (0.03, 0.006, 0.005), Vector((0, -0.105, 1.548)), mats["dark"], HEAD))
+        x = sx * 0.04
+        parts.append(make_sphere(f"eyew{sx}", 0.03, Vector((x, -0.094, 1.612)), white, HEAD, scale=(1.0, 0.4, 1.45), segs=12))
+        parts.append(make_sphere(f"iris{sx}", 0.019, Vector((x, -0.105, 1.608)), iris, HEAD, scale=(0.95, 0.45, 1.45), segs=10))
+        parts.append(make_sphere(f"pupil{sx}", 0.009, Vector((x, -0.112, 1.607)), lash, HEAD, scale=(1.0, 0.5, 1.5), segs=8))
+        parts.append(make_sphere(f"shine{sx}", 0.0055, Vector((x + sx * 0.006, -0.115, 1.622)), shine, HEAD, segs=6))
+        parts.append(make_box(f"lash{sx}", (0.066, 0.01, 0.009), Vector((x, -0.106, 1.647)), lash, HEAD))
+        parts.append(make_box(f"brow{sx}", (0.05, 0.008, 0.008), Vector((x, -0.104, 1.672)), mats["hair"], HEAD))
+    parts.append(make_box("nose", (0.008, 0.012, 0.016), Vector((0, -0.112, 1.578)), mats["skin"], HEAD))
+    parts.append(make_box("mouth", (0.026, 0.006, 0.005), Vector((0, -0.106, 1.548)), lash, HEAD))
     return parts
 
+def make_strand(name, root, direction, length, radius, material, bone=None, segs=6, curl=0.0):
+    """Tapered hair lock: a cone from `root` along `direction`, optionally bent downward (curl)."""
+    bone = bone or HEAD
+    d = Vector(direction).normalized()
+    bm = bmesh.new()
+    bmesh.ops.create_cone(bm, cap_ends=True, segments=segs, radius1=radius, radius2=radius * 0.08, depth=length)
+    for v in bm.verts:
+        t = (v.co.z + length / 2) / length          # 0 at root, 1 at tip
+        v.co.z += length / 2                        # root at origin
+        v.co.y += curl * t * t * length             # bend
+    o = mesh_from_bmesh(name, bm, material)
+    quat = Vector((0, 0, 1)).rotation_difference(d)
+    for v in o.data.vertices:
+        v.co = quat @ v.co + Vector(root)
+    skin_to_bone(o, bone)
+    return o
+
+HEAD_C = Vector((0, -0.005, 1.63))
+
+def _locks(prefix, mats, specs, r_base=0.118):
+    """specs: list of (theta_deg around Z from front, phi_deg elevation, length, radius, curl)."""
+    out = []
+    for i, (th, ph, ln, rad, curl) in enumerate(specs):
+        if prefix == "bang":
+            # bangs fall over the forehead/temples instead of sticking out
+            ph, curl = (-48.0 if abs(th) < 50 else -80.0), 0.05
+            ln = max(ln, 0.1)
+            if abs(th) >= 50:
+                rad *= 0.75
+        t, p = math.radians(th), math.radians(ph)
+        dirv = Vector((math.sin(t) * math.cos(p), -math.cos(t) * math.cos(p), math.sin(p)))
+        root = HEAD_C + dirv * (r_base * 0.75)
+        if prefix == "bang":
+            k = 0.85 if abs(th) < 50 else 0.78
+            root = HEAD_C + Vector((math.sin(t) * r_base * k, -math.cos(t) * r_base * k, r_base * (0.55 if abs(th) < 50 else 0.2)))
+        out.append(make_strand(f"{prefix}{i}", root, dirv, ln, rad, mats["hair"], curl=curl))
+    return out
+
 def make_hair(style, mats):
-    top = Vector((0, 0, 1.66))
     parts = []
-    def base(r=0.115, off=(0, 0.015, 0.03), scale=(1.0, 1.05, 0.9)):
-        parts.append(make_sphere("hair_base", r, top + Vector(off), mats["hair"], HEAD, scale=scale))
-    def spikes(spec, scale=(1, 1, 1.8)):
-        for i, (x, y, z, s) in enumerate(spec):
-            parts.append(make_sphere(f"hair_spike{i}", s, top + Vector((x, y, z)), mats["hair"], HEAD, scale=scale))
-    if style == "spiky":          # Lloyd: big spikes up and out
-        base(0.118)
-        spikes([(-0.05, 0.02, 0.1, 0.055), (0.03, -0.01, 0.12, 0.055), (0.0, 0.07, 0.09, 0.05), (-0.09, 0.06, 0.06, 0.045),
-                (0.09, 0.05, 0.06, 0.045), (0.07, -0.06, 0.08, 0.045), (-0.07, -0.06, 0.08, 0.045), (0.0, -0.09, 0.05, 0.04)])
-    elif style == "spiky_back":   # Kratos / Forcystus: swept back
-        base(0.118, (0, 0.03, 0.03))
-        spikes([(-0.05, 0.1, 0.05, 0.05), (0.05, 0.1, 0.05, 0.05), (0.0, 0.12, 0.0, 0.05), (-0.09, 0.07, 0.0, 0.045), (0.09, 0.07, 0.0, 0.045),
-                (0.0, -0.06, 0.07, 0.04)], scale=(1, 1.9, 1.1))
-    elif style == "long":         # Colette / Zelos / Regal / Remiel
-        base(0.118, (0, 0.015, 0.02), (1.0, 1.1, 0.9))
-        parts.append(make_sphere("hair_back", 0.1, top + Vector((0, 0.07, -0.16)), mats["hair"], HEAD, scale=(1.05, 0.7, 2.0)))
+    cap = lambda r=0.122, off=(0, 0.012, 0.035), sc=(1.0, 1.06, 0.92): parts.append(
+        make_sphere("hair_cap", r, HEAD_C + Vector(off), mats["hair"], HEAD, scale=sc, segs=16))
+    if style == "spiky":            # Lloyd: big brown spikes up/back/out, short bangs
+        cap()
+        parts += _locks("spike", mats, [(0, 55, 0.14, 0.04, 0), (35, 50, 0.15, 0.042, 0), (-35, 50, 0.15, 0.042, 0),
+            (70, 35, 0.15, 0.04, 0), (-70, 35, 0.15, 0.04, 0), (110, 40, 0.16, 0.045, 0), (-110, 40, 0.16, 0.045, 0),
+            (150, 35, 0.17, 0.048, 0), (-150, 35, 0.17, 0.048, 0), (180, 45, 0.16, 0.05, 0), (180, 15, 0.13, 0.045, 0),
+            (15, 20, 0.08, 0.028, 0.6), (-15, 20, 0.08, 0.028, 0.6), (0, 25, 0.07, 0.025, 0.8)])
+    elif style == "spiky_back":     # Kratos / Forcystus: swept back, locks over the eyes
+        cap(0.122, (0, 0.025, 0.03))
+        parts += _locks("lock", mats, [(150, 25, 0.17, 0.045, 0), (-150, 25, 0.17, 0.045, 0), (180, 30, 0.18, 0.05, 0),
+            (120, -30, 0.15, 0.04, 0.1), (-120, -30, 0.15, 0.04, 0.1), (180, 0, 0.15, 0.045, 0.4),
+            (10, 15, 0.11, 0.03, 1.0), (-20, 15, 0.1, 0.028, 1.0), (40, 10, 0.12, 0.03, 0.9)])
+    elif style == "long":           # Colette / Zelos / Remiel / Yuan / Mithos: long straight with bangs
+        cap(0.124, (0, 0.012, 0.02), (1.02, 1.1, 0.95))
+        parts.append(make_sphere("hair_back", 0.105, HEAD_C + Vector((0, 0.075, -0.17)), mats["hair"], HEAD, scale=(1.08, 0.62, 2.3), segs=14))
+        parts += _locks("bang", mats, [(0, 20, 0.09, 0.03, 1.2), (20, 18, 0.09, 0.03, 1.2), (-20, 18, 0.09, 0.03, 1.2),
+            (40, 10, 0.12, 0.032, 1.3), (-40, 10, 0.12, 0.032, 1.3), (80, -72, 0.3, 0.04, 0.15), (-80, -72, 0.3, 0.04, 0.15),
+            (120, -74, 0.36, 0.045, 0.1), (-120, -74, 0.36, 0.045, 0.1), (160, -78, 0.4, 0.05, 0.1), (-160, -78, 0.4, 0.05, 0.1), (180, -80, 0.42, 0.055, 0.1)])
+    elif style == "bob":            # Raine / Phaidra: silver bob to the jaw
+        cap(0.126, (0, 0.015, 0.005), (1.04, 1.08, 1.08))
+        parts += _locks("bob", mats, [(0, 22, 0.08, 0.03, 1.0), (25, 18, 0.09, 0.03, 1.0), (-25, 18, 0.09, 0.03, 1.0),
+            (70, -62, 0.15, 0.05, 0.2), (-70, -62, 0.15, 0.05, 0.2), (120, -65, 0.15, 0.055, 0.2), (-120, -65, 0.15, 0.055, 0.2),
+            (180, -68, 0.14, 0.06, 0.2)])
+    elif style == "short":          # Genis / Frank / Botta: short and tufty
+        cap(0.12, (0, 0.012, 0.03), (1.0, 1.05, 0.88))
+        parts += _locks("tuft", mats, [(0, 30, 0.08, 0.03, 0.7), (25, 25, 0.08, 0.03, 0.7), (-25, 25, 0.08, 0.03, 0.7),
+            (90, 20, 0.08, 0.032, 0.5), (-90, 20, 0.08, 0.032, 0.5), (150, 25, 0.09, 0.035, 0.3), (-150, 25, 0.09, 0.035, 0.3),
+            (180, 40, 0.09, 0.035, 0.2)])
+    elif style == "ponytail":       # Sheena: high ponytail tied with a pink ribbon
+        cap()
+        parts += _locks("bang", mats, [(0, 18, 0.09, 0.03, 1.1), (30, 15, 0.1, 0.03, 1.1), (-30, 15, 0.1, 0.03, 1.1),
+            (70, -65, 0.18, 0.035, 0.2), (-70, -65, 0.18, 0.035, 0.2)])
+        tail_root = HEAD_C + Vector((0, 0.12, 0.08))
+        parts.append(make_strand("tail", tail_root, (0, 0.6, -0.8), 0.42, 0.06, mats["hair"], curl=0.3))
+        parts.append(make_strand("tail2", tail_root, (0.15, 0.5, -0.85), 0.36, 0.045, mats["hair"], curl=0.2))
+        parts.append(make_box("hair_tie", (0.07, 0.05, 0.04), tail_root, mats["accent"], HEAD))
+    elif style == "twintails":      # Presea: pink twintails with black ribbons
+        cap()
+        parts += _locks("bang", mats, [(0, 18, 0.09, 0.03, 1.1), (25, 15, 0.09, 0.03, 1.1), (-25, 15, 0.09, 0.03, 1.1)])
         for sx in (-1, 1):
-            parts.append(make_sphere(f"hair_side{sx}", 0.045, top + Vector((sx * 0.1, 0.0, -0.1)), mats["hair"], HEAD, scale=(1, 1, 2.4)))
-    elif style == "bob":          # Raine / Phaidra
-        base(0.122, (0, 0.015, 0.0), (1.0, 1.08, 1.1))
-        for sx in (-1, 1):
-            parts.append(make_sphere(f"hair_side{sx}", 0.05, top + Vector((sx * 0.1, 0.0, -0.06)), mats["hair"], HEAD, scale=(1, 1, 1.6)))
-    elif style == "short":        # Genis / Frank / Botta
-        base(0.114, (0, 0.012, 0.03), (1.0, 1.05, 0.85))
-        spikes([(0.0, -0.02, 0.1, 0.04), (-0.06, 0.0, 0.08, 0.035), (0.06, 0.0, 0.08, 0.035)], scale=(1, 1, 1.4))
-    elif style == "ponytail":     # Sheena
-        base()
-        parts.append(make_sphere("hair_tail", 0.06, top + Vector((0, 0.13, 0.0)), mats["hair"], HEAD, scale=(1, 1, 2.4)))
-        parts.append(make_box("hair_tie", (0.05, 0.05, 0.03), top + Vector((0, 0.11, 0.05)), mats["accent"], HEAD))
-    elif style == "twintails":    # Presea
-        base()
-        for sx in (-1, 1):
-            parts.append(make_sphere(f"hair_tail{sx}", 0.05, top + Vector((sx * 0.13, 0.04, -0.06)), mats["hair"], HEAD, scale=(1, 1, 2.8)))
-            parts.append(make_box(f"hair_tie{sx}", (0.04, 0.04, 0.03), top + Vector((sx * 0.13, 0.04, 0.04)), mats["accent"], HEAD))
-    elif style == "bun":          # Marble
-        base(0.114, (0, 0.015, 0.03), (1.0, 1.05, 0.85))
-        parts.append(make_sphere("hair_bun", 0.05, top + Vector((0, 0.09, 0.06)), mats["hair"], HEAD))
+            root = HEAD_C + Vector((sx * 0.12, 0.05, 0.02))
+            parts.append(make_strand(f"twin{sx}", root, (sx * 0.4, 0.3, -0.85), 0.34, 0.05, mats["hair"], curl=0.2))
+            parts.append(make_box(f"tie{sx}", (0.05, 0.05, 0.04), root, mats["dark"], HEAD))
+    elif style == "bun":            # Marble
+        cap(0.12, (0, 0.012, 0.03), (1.0, 1.05, 0.88))
+        parts.append(make_sphere("hair_bun", 0.055, HEAD_C + Vector((0, 0.1, 0.07)), mats["hair"], HEAD, segs=12))
+    elif style == "tied_long":      # Regal: long hair tied low at the back
+        cap(0.124, (0, 0.02, 0.02))
+        parts += _locks("bang", mats, [(30, 15, 0.12, 0.03, 1.2), (-30, 15, 0.12, 0.03, 1.2), (65, -65, 0.2, 0.035, 0.2), (-65, -65, 0.2, 0.035, 0.2)])
+        root = HEAD_C + Vector((0, 0.11, -0.08))
+        parts.append(make_strand("tail", root, (0, 0.25, -1.0), 0.45, 0.05, mats["hair"], curl=0.1))
     elif style == "bald":
         pass
     return parts
@@ -419,6 +533,30 @@ def make_feature(kind, mats, colors):
     elif kind == "pauldrons":
         for sx in (-1, 1):
             parts.append(make_sphere(f"pauldron{sx}", 0.085, (sx * 0.2, 0.0, cz + 0.08), mats["metal"], f"DEF-shoulder.{'L' if sx < 0 else 'R'}", scale=(1.0, 1.0, 0.7)))
+    elif kind == "suspenders":   # Lloyd: white straps over the shoulders down to the belt
+        for sx in (-1, 1):
+            parts.append(make_box(f"susp_f{sx}", (0.03, 0.012, 0.42), (sx * 0.075, -0.118, cz - 0.1), mats["accent"], "DEF-spine.003"))
+            parts.append(make_box(f"susp_b{sx}", (0.03, 0.012, 0.42), (sx * 0.075, 0.118, cz - 0.1), mats["accent"], "DEF-spine.003"))
+    elif kind == "x_straps":     # Kratos: crossed white belts on the chest
+        for sx in (-1, 1):
+            o = make_box(f"xstrap{sx}", (0.03, 0.012, 0.4), (0, -0.12, cz - 0.05), mats["accent"], "DEF-spine.003")
+            for v in o.data.vertices:
+                x, z = v.co.x, v.co.z - (cz - 0.05)
+                a = math.radians(28 * sx)
+                v.co.x = x * math.cos(a) - z * math.sin(a)
+                v.co.z = (cz - 0.05) + x * math.sin(a) + z * math.cos(a)
+            parts.append(o)
+    elif kind == "coattails":    # Lloyd: jacket tails behind the legs
+        parts.append(make_half_cone("tails", 0.2, 0.24, 0.5, (0, 0.01, hips_h.z - 0.22), mats["top"], "DEF-hips"))
+    elif kind == "skirt_long":   # Colette: long robe to the knees
+        parts.append(make_cone("skirt", 0.21, 0.17, 0.6, (0, 0.0, hips_h.z - 0.27), mats["bottom"], "DEF-hips", segs=22))
+    elif kind == "sash":
+        parts.append(make_sphere("sash", 0.172, (0, 0.0, hips_h.z + 0.08), mats["accent"], "DEF-hips", scale=(1.0, 0.8, 0.28)))
+    elif kind == "exsphere":     # green gem on the back of the left hand
+        h, d = hand_frame("L")
+        parts.append(make_sphere("exsphere", 0.02, h + d * 0.04 + Vector((0, 0.0, 0.03)), mats["gem"], "DEF-hand.L", segs=10))
+    elif kind == "cruxis_crystal":
+        parts.append(make_sphere("cruxis", 0.022, (0, -0.128, cz - 0.04), mats["gem"], "DEF-spine.003", scale=(1, 0.5, 1.2), segs=10))
     elif kind == "greaves":
         for side in ("L", "R"):
             sh, st = bone_pos(f"DEF-shin.{side}")
@@ -466,36 +604,36 @@ def make_weapon(weapon, mats):
 CHARACTERS = json.load(open(os.path.join(ROOT, "src/data/characters.json")))
 # Symphonia cast: hair style, eye color, weapon, outfit features. Colors come from characters.json.
 EXTRA = {
-    "lloyd":   {"hair": "spiky",      "eyes": "#6a4030", "weapon": "twin_swords", "features": ["collar", "straps", "belt"]},
-    "colette": {"hair": "long",       "eyes": "#3a7ad8", "weapon": "chakram",     "features": ["fringe", "headband", "skirt", "collar"]},
-    "genis":   {"hair": "short",      "eyes": "#3a7ad8", "weapon": "kendama",     "features": ["collar", "belt"]},
-    "raine":   {"hair": "bob",        "eyes": "#3a7ad8", "weapon": "staff",       "features": ["long_coat", "collar", "belt"]},
-    "kratos":  {"hair": "spiky_back", "eyes": "#7a3a2a", "weapon": "sword",       "features": ["long_coat", "collar", "belt", "pauldrons"]},
-    "sheena":  {"hair": "ponytail",   "eyes": "#4a3020", "weapon": "cards",       "features": ["fringe", "bow_back", "belt", "skirt"]},
-    "zelos":   {"hair": "long",       "eyes": "#3a7ad8", "weapon": "sword",       "features": ["fringe", "long_coat", "collar", "belt"]},
-    "presea":  {"hair": "twintails",  "eyes": "#3a7ad8", "weapon": "axe",         "features": ["fringe", "skirt", "collar"]},
-    "regal":   {"hair": "long",       "eyes": "#3a4a8a", "weapon": "none",        "features": ["shackles", "collar", "belt", "greaves"]},
+    "lloyd":   {"hair": "spiky",      "eyes": "#6a3a24", "weapon": "twin_swords", "features": ["collar", "suspenders", "belt", "coattails", "exsphere"]},
+    "colette": {"hair": "long",       "eyes": "#2f6fd6", "weapon": "chakram",     "features": ["collar", "skirt_long", "sash", "cruxis_crystal"]},
+    "genis":   {"hair": "short",      "eyes": "#2f6fd6", "weapon": "kendama",     "features": ["collar", "belt", "exsphere"], "head_scale": 1.24},
+    "raine":   {"hair": "bob",        "eyes": "#2f6fd6", "weapon": "staff",       "features": ["long_coat", "collar", "belt", "exsphere"]},
+    "kratos":  {"hair": "spiky_back", "eyes": "#7a3020", "weapon": "sword",       "features": ["long_coat", "collar", "x_straps", "belt", "exsphere"], "head_scale": 1.12},
+    "sheena":  {"hair": "ponytail",   "eyes": "#3a2418", "weapon": "cards",       "features": ["collar", "sash", "bow_back", "exsphere"]},
+    "zelos":   {"hair": "long",       "eyes": "#2f6fd6", "weapon": "sword",       "features": ["long_coat", "collar", "headband", "belt", "exsphere"], "head_scale": 1.14},
+    "presea":  {"hair": "twintails",  "eyes": "#2f6fd6", "weapon": "axe",         "features": ["collar", "skirt", "exsphere"], "head_scale": 1.24},
+    "regal":   {"hair": "tied_long",  "eyes": "#2a3a7a", "weapon": "none",        "features": ["shackles", "collar", "belt", "greaves", "exsphere"], "head_scale": 1.1},
 }
 NPCS = {
-    "dirk":      {"colors": {"hair": "#6a3a1a", "skin": "#e8b890", "top": "#3a6a3a", "bottom": "#4a3a2a", "boots": "#2a1a10", "accent": "#c8a060"}, "hair": "bald", "eyes": "#3a2a1a", "weapon": "none", "features": ["beard", "belt"]},
-    "phaidra":   {"colors": {"hair": "#c8c8d0", "skin": "#efd0b8", "top": "#3a7a8a", "bottom": "#2a5a6a", "boots": "#3a2a2a", "accent": "#f0e8d0"}, "hair": "bob", "eyes": "#4a4a6a", "weapon": "staff", "features": ["long_coat", "collar"]},
-    "frank":     {"colors": {"hair": "#5a3a1a", "skin": "#efc8a6", "top": "#4a7a4a", "bottom": "#5a4a3a", "boots": "#2a1a10", "accent": "#e8e0c8"}, "hair": "short", "eyes": "#3a6ad0", "weapon": "none", "features": ["collar", "belt"]},
-    "marble":    {"colors": {"hair": "#b8b8c0", "skin": "#e8c8b0", "top": "#7a5a4a", "bottom": "#6a4a3a", "boots": "#2a1a10", "accent": "#d8c8a8"}, "hair": "bun", "eyes": "#4a4a6a", "weapon": "none", "features": ["skirt", "collar"]},
-    "mayor":     {"colors": {"hair": "#8a8a90", "skin": "#efc8a6", "top": "#3a3a4a", "bottom": "#2a2a3a", "boots": "#1a1a1a", "accent": "#c0b090"}, "hair": "bald", "eyes": "#2a2a2a", "weapon": "none", "features": ["long_coat", "collar", "belt", "beard"]},
-    "remiel":    {"colors": {"hair": "#f0d890", "skin": "#f4dcc8", "top": "#f4f0e8", "bottom": "#e8e4dc", "boots": "#d0c8b8", "accent": "#f8f4e0"}, "hair": "long", "eyes": "#3a7ad8", "weapon": "none", "features": ["wings", "long_coat", "collar"]},
-    "forcystus": {"colors": {"hair": "#3aa0a0", "skin": "#efc8a6", "top": "#2a4a9a", "bottom": "#1a2a5a", "boots": "#111122", "accent": "#d0d0e0"}, "hair": "spiky_back", "eyes": "#3a3a3a", "weapon": "none", "features": ["cannon_arm", "pauldrons", "collar", "belt"]},
-    "botta":     {"colors": {"hair": "#2a2a2a", "skin": "#d8a880", "top": "#3a4a8a", "bottom": "#2a2a4a", "boots": "#1a1a1a", "accent": "#a0a8c0"}, "hair": "short", "eyes": "#2a2a2a", "weapon": "sword", "features": ["collar", "belt", "pauldrons"]},
-    "yuan":      {"colors": {"hair": "#5ab0e0", "skin": "#f0d0b8", "top": "#4a4a8a", "bottom": "#2a2a5a", "boots": "#1a1a2a", "accent": "#e0e8f8"}, "hair": "long", "eyes": "#3a7ad8", "weapon": "none", "features": ["cape", "collar", "pauldrons"]},
-    "mithos":    {"colors": {"hair": "#f0e090", "skin": "#f4dcc8", "top": "#3a8a6a", "bottom": "#2a6a4a", "boots": "#2a2a2a", "accent": "#f0f0e0"}, "hair": "long", "eyes": "#3a7ad8", "weapon": "none", "features": ["fringe", "collar"]},
-    "desian_whip": {"colors": {"hair": "#1a1a2a", "skin": "#1a1a2a", "top": "#5a2a7a", "bottom": "#3a1a5a", "boots": "#111122", "accent": "#c0c0d0"}, "hair": "helmet", "eyes": "#ff3030", "weapon": "whip", "features": ["pauldrons"]},
+    "dirk":      {"colors": {"hair": "#6a3a1a", "skin": "#e8b890", "top": "#4a6a3a", "bottom": "#4a3a2a", "boots": "#2a1a10", "accent": "#c8a060"}, "hair": "bald", "eyes": "#3a2a1a", "weapon": "none", "features": ["beard", "belt"], "head_scale": 1.25, "slim": False},
+    "phaidra":   {"colors": {"hair": "#d0d0d8", "skin": "#efd0b8", "top": "#3a7a8a", "bottom": "#2a5a6a", "boots": "#3a2a2a", "accent": "#f0e8d0"}, "hair": "bun", "eyes": "#4a4a6a", "weapon": "staff", "features": ["skirt_long", "collar"]},
+    "frank":     {"colors": {"hair": "#5a3a1a", "skin": "#efc8a6", "top": "#4a7a4a", "bottom": "#5a4a3a", "boots": "#2a1a10", "accent": "#e8e0c8"}, "hair": "short", "eyes": "#3a6ad0", "weapon": "none", "features": ["collar", "belt"], "head_scale": 1.1},
+    "marble":    {"colors": {"hair": "#b8b8c0", "skin": "#e8c8b0", "top": "#7a5a4a", "bottom": "#6a4a3a", "boots": "#2a1a10", "accent": "#d8c8a8"}, "hair": "bun", "eyes": "#4a4a6a", "weapon": "none", "features": ["skirt_long", "collar", "exsphere"]},
+    "mayor":     {"colors": {"hair": "#8a8a90", "skin": "#efc8a6", "top": "#3a3a4a", "bottom": "#2a2a3a", "boots": "#1a1a1a", "accent": "#c0b090"}, "hair": "bald", "eyes": "#2a2a2a", "weapon": "none", "features": ["long_coat", "collar", "belt", "beard"], "head_scale": 1.08},
+    "remiel":    {"colors": {"hair": "#f0d890", "skin": "#f4dcc8", "top": "#f4f0e8", "bottom": "#e8e4dc", "boots": "#d0c8b8", "accent": "#f8f4e0"}, "hair": "long", "eyes": "#3a7ad8", "weapon": "none", "features": ["wings", "long_coat", "collar"], "head_scale": 1.1},
+    "forcystus": {"colors": {"hair": "#3aa0a0", "skin": "#efc8a6", "top": "#2a4a9a", "bottom": "#1a2a5a", "boots": "#111122", "accent": "#d0d0e0"}, "hair": "spiky_back", "eyes": "#3a3a3a", "weapon": "none", "features": ["cannon_arm", "pauldrons", "collar", "belt"], "head_scale": 1.08},
+    "botta":     {"colors": {"hair": "#2a2a2a", "skin": "#d8a880", "top": "#3a4a8a", "bottom": "#2a2a4a", "boots": "#1a1a1a", "accent": "#a0a8c0"}, "hair": "short", "eyes": "#2a2a2a", "weapon": "sword", "features": ["collar", "belt", "pauldrons"], "head_scale": 1.05, "slim": False},
+    "yuan":      {"colors": {"hair": "#5ab0e0", "skin": "#f0d0b8", "top": "#4a4a8a", "bottom": "#2a2a5a", "boots": "#1a1a2a", "accent": "#e0e8f8"}, "hair": "long", "eyes": "#3a7ad8", "weapon": "none", "features": ["cape", "collar", "pauldrons"], "head_scale": 1.12},
+    "mithos":    {"colors": {"hair": "#f0e090", "skin": "#f4dcc8", "top": "#3a8a6a", "bottom": "#2a6a4a", "boots": "#2a2a2a", "accent": "#f0f0e0"}, "hair": "long", "eyes": "#3a7ad8", "weapon": "none", "features": ["collar"], "head_scale": 1.24},
+    "desian_whip": {"colors": {"hair": "#1a1a2a", "skin": "#1a1a2a", "top": "#5a2a7a", "bottom": "#3a1a5a", "boots": "#111122", "accent": "#c0c0d0"}, "hair": "helmet", "eyes": "#ff3030", "weapon": "whip", "features": ["pauldrons"], "head_scale": 1.0},
 }
 ENEMY_HUMANOIDS = {
-    "golem": {"colors": {"hair": "#6a6a70", "skin": "#7a7a80", "top": "#6a6a72", "bottom": "#5a5a62", "boots": "#4a4a50", "accent": "#8a8a90"}, "hair": "bald", "eyes": "#f0c040", "weapon": "none", "features": ["pauldrons", "greaves", "belt"]},
-    "zombie": {"colors": {"hair": "#3a4a3a", "skin": "#7fa37a", "top": "#4a4a3a", "bottom": "#3a3a2a", "boots": "#222222", "accent": "#555555"}, "hair": "bald", "eyes": "#d0d040", "weapon": "none", "features": []},
-    "desian": {"colors": {"hair": "#1a1a2a", "skin": "#1a1a2a", "top": "#2a3a7a", "bottom": "#1a2a5a", "boots": "#111122", "accent": "#c0c0d0"}, "hair": "helmet", "eyes": "#ff3030", "weapon": "sword", "features": ["pauldrons"]},
-    "vidarr": {"colors": {"hair": "#5a3a1a", "skin": "#d9a877", "top": "#6a4a2a", "bottom": "#3a2a1a", "boots": "#222222", "accent": "#999999"}, "hair": "bald", "eyes": "#3a2a1a", "weapon": "hammer", "features": ["belt", "pauldrons", "beard"]},
+    "golem": {"colors": {"hair": "#6a6a70", "skin": "#7a7a80", "top": "#6a6a72", "bottom": "#5a5a62", "boots": "#4a4a50", "accent": "#8a8a90"}, "hair": "bald", "eyes": "#f0c040", "weapon": "none", "features": ["pauldrons", "greaves", "belt"], "head_scale": 0.9, "slim": False},
+    "zombie": {"colors": {"hair": "#3a4a3a", "skin": "#7fa37a", "top": "#4a4a3a", "bottom": "#3a3a2a", "boots": "#222222", "accent": "#555555"}, "hair": "bald", "eyes": "#d0d040", "weapon": "none", "features": [], "head_scale": 1.0},
+    "desian": {"colors": {"hair": "#1a1a2a", "skin": "#1a1a2a", "top": "#2a3a7a", "bottom": "#1a2a5a", "boots": "#111122", "accent": "#c0c0d0"}, "hair": "helmet", "eyes": "#ff3030", "weapon": "sword", "features": ["pauldrons"], "head_scale": 1.0},
+    "vidarr": {"colors": {"hair": "#5a3a1a", "skin": "#d9a877", "top": "#6a4a2a", "bottom": "#3a2a1a", "boots": "#222222", "accent": "#999999"}, "hair": "bald", "eyes": "#3a2a1a", "weapon": "hammer", "features": ["belt", "pauldrons", "beard"], "head_scale": 0.95, "slim": False},
 }
-COMMON = {"metal": "#d8dde6", "wood": "#5a3a1e", "dark": "#1a1216"}
+COMMON = {"metal": "#d8dde6", "wood": "#5a3a1e", "dark": "#1a1216", "gem": "#2fd07a"}
 
 def build_character(cid, colors, spec):
     new_body = body.copy()
@@ -503,6 +641,8 @@ def build_character(cid, colors, spec):
     new_body.name = f"Body_{cid}"
     bpy.context.collection.objects.link(new_body)
     allc = dict(COMMON); allc.update(colors)
+    if spec.get("slim", True):
+        slim_body(new_body)
     colorize_body(new_body, allc)
     mats = {r: new_body.data.materials[REGIONS.index(r)] for r in REGIONS}
     parts = [new_body]
@@ -516,7 +656,28 @@ def build_character(cid, colors, spec):
     for f in spec.get("features", []):
         parts += make_feature(f, mats, allc)
     parts += make_weapon(spec.get("weapon", "none"), mats)
+    _anime_head(parts, float(spec.get("head_scale", 1.18)))
     return parts
+
+def _anime_head(parts, k):
+    """Scale the head (body verts weighted to DEF-head, plus everything skinned to the head) around the neck top."""
+    if abs(k - 1.0) < 1e-3:
+        return
+    pivot = bone_pos(HEAD)[0]
+    for o in parts:
+        vg = o.vertex_groups.get(HEAD)
+        if vg is None:
+            continue
+        idx = vg.index
+        for v in o.data.vertices:
+            w = 0.0
+            for g in v.groups:
+                if g.group == idx:
+                    w = g.weight
+            if w <= 0:
+                continue
+            f = 1.0 + (k - 1.0) * w
+            v.co = pivot + (v.co - pivot) * f
 
 def export_selection(path, objs, animations):
     bpy.ops.object.select_all(action='DESELECT')

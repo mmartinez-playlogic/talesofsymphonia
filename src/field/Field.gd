@@ -110,6 +110,7 @@ func _setup_environment() -> void:
 	e.fog_light_color = sky_horizon()
 	e.fog_density = 0.004
 	e.tonemap_mode = Environment.TONE_MAPPER_FILMIC
+	_vesperia_post(e)
 	env.environment = e
 	add_child(env)
 	var sun := DirectionalLight3D.new()
@@ -122,6 +123,22 @@ func _setup_environment() -> void:
 	sun.shadow_blur = 2.0
 	sun.shadow_normal_bias = 2.0
 	add_child(sun)
+
+## Vesperia-like post: soft bloom, gentle AO in creases, slightly richer colour.
+static func _vesperia_post(e: Environment) -> void:
+	e.glow_enabled = true
+	e.glow_intensity = 0.6
+	e.glow_strength = 0.9
+	e.glow_bloom = 0.08
+	e.glow_hdr_threshold = 0.95
+	e.glow_blend_mode = Environment.GLOW_BLEND_MODE_SOFTLIGHT
+	e.ssao_enabled = true
+	e.ssao_radius = 0.8
+	e.ssao_intensity = 1.2
+	e.adjustment_enabled = true
+	e.adjustment_saturation = 1.12
+	e.adjustment_contrast = 1.04
+	e.tonemap_white = 1.2
 
 # Overridable lighting per map (night, desert, interiors).
 func sky_top() -> Color: return Color(0.25, 0.45, 0.85)
