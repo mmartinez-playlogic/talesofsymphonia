@@ -41,10 +41,10 @@ func build() -> void:
 	add_exit(Vector3(0, 1.5, -26.5), Vector3(3.5, 4, 1.4), "martel_temple", "default",
 		func(): return Game.get_flag("vidarr_defeated", false), [{"speaker": "Lloyd", "text": "La puerta está cerrada."}])
 	if Game.get_flag("vidarr_defeated", false) and not Game.get_flag("temple_done", false):
-		add_npc("phaidra", Vector3(4, 0, -12), "Phaidra", "raine",
+		add_npc("phaidra", Vector3(4, 0, -12), "Phaidra", "phaidra",
 			[{"speaker": "Phaidra", "text": "La Elegida debe recibir el oráculo en el altar, en lo más profundo del templo. Que la diosa Martel os proteja."}])
 	elif Game.get_flag("temple_done", false):
-		add_npc("priest", Vector3(4, 0, -12), "Sacerdote", "regal",
+		add_npc("priest", Vector3(4, 0, -12), "Sacerdote", "mayor",
 			[{"speaker": "Sacerdote", "text": "La Torre de la Salvación ha aparecido en el cielo. ¡La regeneración del mundo ha comenzado!"}])
 
 func on_enter(c: Cutscene) -> void:
@@ -63,8 +63,8 @@ func _ambush(c: Cutscene) -> void:
 	c.flag("temple_ambush_started")
 	c.spawn("genis", "genis", Vector3(-1.5, 0, 28), 180.0, "Genis")
 	c.spawn("colette", "colette", Vector3(1.5, 0, 28), 180.0, "Colette")
-	c.spawn("phaidra", "raine", Vector3(2, 0, -8), 0.0, "Phaidra")
-	c.spawn("priest_dead", "regal", Vector3(-4, 0, 2), 0.0, "Sacerdote")
+	c.spawn("phaidra", "phaidra", Vector3(2, 0, -8), 0.0, "Phaidra")
+	c.spawn("priest_dead", "mayor", Vector3(-4, 0, 2), 0.0, "Sacerdote")
 	c.anim("priest_dead", "Death01")
 	c.spawn("desian1", "desian", Vector3(-2, 0, -4), 0.0, "Desiano")
 	c.spawn("desian2", "desian", Vector3(3, 0, -5), 0.0, "Desiano")
@@ -89,11 +89,8 @@ func _vidarr(c: Cutscene) -> void:
 	c.teleport("player", Vector3(0, 0.1, 8), 180.0)
 	c.spawn("genis", "genis", Vector3(-1.5, 0, 11), 180.0, "Genis")
 	c.spawn("colette", "colette", Vector3(1.5, 0, 11), 180.0, "Colette")
-	c.spawn("phaidra", "raine", Vector3(2, 0, -8), 0.0, "Phaidra")
+	c.spawn("phaidra", "phaidra", Vector3(2, 0, -8), 0.0, "Phaidra")
 	c.spawn("vidarr", "vidarr", Vector3(0, 0, -6), 0.0, "Vidarr")
-	var v := c.actor("vidarr")
-	if v:
-		v.scale = Vector3.ONE * 1.5
 	await c.shake_camera(0.3, 0.5)
 	await c.say([
 		{"speaker": "Vidarr", "text": "Inútiles. Si quieres algo bien hecho, hazlo tú mismo. Elegida... entrégate, y tus amigos morirán rápido."},
@@ -121,7 +118,7 @@ func _kratos_intro(c: Cutscene) -> void:
 	c.spawn("genis", "genis", Vector3(-2, 0, 9), 180.0, "Genis")
 	c.spawn("colette", "colette", Vector3(2, 0, 9), 180.0, "Colette")
 	c.spawn("kratos", "kratos", Vector3(-3, 0, 4), 90.0, "Kratos")
-	c.spawn("phaidra", "raine", Vector3(2, 0, -8), 0.0, "Phaidra")
+	c.spawn("phaidra", "phaidra", Vector3(2, 0, -8), 0.0, "Phaidra")
 	await c.wait(0.4)
 	await c.say([
 		{"speaker": "Lloyd", "text": "¡Lo hemos conseguido! ...Oye, tú. Eres bueno. ¿Quién eres?"},

@@ -52,22 +52,22 @@ func _populate() -> void:
 	var exiled := Game.get_flag("exiled", false)
 	var temple_done := Game.get_flag("temple_done", false)
 	if exiled:
-		add_npc("villager_a", Vector3(-6, 0, 4), "Aldeano", "regal",
+		add_npc("villager_a", Vector3(-6, 0, 4), "Aldeano", "frank",
 			[{"speaker": "Aldeano", "text": "...Por favor, marchaos. El alcalde ha dicho que no podéis estar aquí."}])
-		add_npc("frank", Vector3(13, 0, -5), "Frank", "zelos",
+		add_npc("frank", Vector3(13, 0, -5), "Frank", "frank",
 			[{"speaker": "Frank", "text": "Lloyd... Sé que no es justo. Pero cuida de Colette. Y de Genis. Es lo único que te pido."}])
 		return
-	add_npc("villager_a", Vector3(-6, 0, 4), "Aldeano", "regal",
+	add_npc("villager_a", Vector3(-6, 0, 4), "Aldeano", "frank",
 		[{"speaker": "Aldeano", "text": "¡Menuda luz la de esta mañana! Ha tenido que ser el oráculo. ¡Hoy es un gran día para Iselia!"}] if not temple_done else
 		[{"speaker": "Aldeano", "text": "Dicen que la Torre de la Salvación ha aparecido en el cielo. ¡La Elegida va a salvarnos!"}])
 	add_npc("villager_b", Vector3(6, 0, 12), "Aldeana", "sheena",
 		[{"speaker": "Aldeana", "text": "Gracias al tratado con el rancho, los desianos no nos atacan. Pero no me gusta tenerlos tan cerca..."}], 180.0)
-	add_npc("merchant", Vector3(-8, 0, 15), "Mercader", "zelos",
+	add_npc("merchant", Vector3(-8, 0, 15), "Mercader", "botta",
 		[{"speaker": "Mercader", "text": "Geles de manzana, geles de naranja... Hoy no abro, chico. Con el oráculo, todo el mundo está en el templo."}])
-	add_npc("frank", Vector3(13, 0, -5), "Frank", "zelos",
+	add_npc("frank", Vector3(13, 0, -5), "Frank", "frank",
 		[{"speaker": "Frank", "text": "Lloyd, ¿has visto la luz? Mi madre, Phaidra, ya ha subido al templo. Por favor, no dejes sola a Colette."}] if not temple_done else
 		[{"speaker": "Frank", "text": "Colette está descansando en casa. Mañana parte con ese mercenario y con Raine. Es duro ser el padre de la Elegida..."}])
-	add_npc("mayor", Vector3(15, 0, 3.5), "Alcalde", "regal",
+	add_npc("mayor", Vector3(15, 0, 3.5), "Alcalde", "mayor",
 		[{"speaker": "Alcalde", "text": "Lloyd Irving. Recuerda el tratado: nadie de esta aldea se acerca al rancho de los desianos. ¿Está claro?"}])
 	add_npc("noishe", Vector3(-4, 0, -28), "Noishe", "wolf",
 		[{"speaker": "Noishe", "text": "¡Guau! ¡Guaaau...!"}, {"speaker": "Lloyd", "text": "Tranquilo, Noishe. Sé que odias el bosque. Espérame aquí."}])
@@ -87,7 +87,7 @@ func on_resume(c: Cutscene, event: String) -> void:
 func _day_two(c: Cutscene) -> void:
 	c.teleport("player", Vector3(0, 0.1, 24), 180.0)
 	c.spawn("genis", "genis", Vector3(-1.5, 0, 26), 180.0, "Genis")
-	c.spawn("phaidra", "raine", Vector3(2, 0, 10), 0.0, "Phaidra")
+	c.spawn("phaidra", "phaidra", Vector3(2, 0, 10), 0.0, "Phaidra")
 	await c.wait(0.3)
 	await c.walk("player", Vector3(0, 0, 13), 4.0, true, false)
 	await c.walk("genis", Vector3(-1.5, 0, 14), 4.0, true)
@@ -128,10 +128,7 @@ func _forcystus(c: Cutscene) -> void:
 		c.hide_actor(id)
 	c.teleport("player", Vector3(0, 0.1, 1), 180.0)
 	c.spawn("genis", "genis", Vector3(-1.5, 0, 2), 180.0, "Genis")
-	c.spawn("forcystus", "desian", Vector3(0, 0, -10), 0.0, "Forcystus")
-	var f := c.actor("forcystus")
-	if f:
-		f.scale = Vector3.ONE * 1.15
+	c.spawn("forcystus", "forcystus", Vector3(0, 0, -10), 0.0, "Forcystus")
 	c.spawn("exbelua", "zombie", Vector3(3, 0, -9), 0.0, "Exbelua")
 	var ex := c.actor("exbelua")
 	if ex:
@@ -161,7 +158,7 @@ func _marble_death(c: Cutscene) -> void:
 		c.hide_actor(id)
 	c.teleport("player", Vector3(0, 0.1, 1), 180.0)
 	c.spawn("genis", "genis", Vector3(-1.5, 0, 2), 180.0, "Genis")
-	c.spawn("forcystus", "desian", Vector3(0, 0, -10), 0.0, "Forcystus")
+	c.spawn("forcystus", "forcystus", Vector3(0, 0, -10), 0.0, "Forcystus")
 	c.spawn("exbelua", "zombie", Vector3(2.5, 0, -4), 0.0, "Exbelua")
 	var ex := c.actor("exbelua")
 	if ex:
@@ -184,10 +181,10 @@ func _marble_death(c: Cutscene) -> void:
 	])
 	await c.walk("forcystus", Vector3(0, 0, -34), 5.0, true)
 	c.despawn("forcystus")
-	c.spawn("mayor", "regal", Vector3(6, 0, -3), 270.0, "Alcalde")
-	c.spawn("frank", "zelos", Vector3(-6, 0, -3), 90.0, "Frank")
-	c.spawn("villager_a", "regal", Vector3(8, 0, 3), 270.0, "Aldeano")
-	c.spawn("villager_b", "sheena", Vector3(-8, 0, 3), 90.0, "Aldeana")
+	c.spawn("mayor", "mayor", Vector3(6, 0, -3), 270.0, "Alcalde")
+	c.spawn("frank", "frank", Vector3(-6, 0, -3), 90.0, "Frank")
+	c.spawn("villager_a", "frank", Vector3(8, 0, 3), 270.0, "Aldeano")
+	c.spawn("villager_b", "marble", Vector3(-8, 0, 3), 90.0, "Aldeana")
 	await c.wait(0.6)
 	await c.say([
 		{"speaker": "Alcalde", "text": "¡Mirad lo que habéis hecho! La mitad de la aldea en llamas. Casas destruidas. ¡Todo porque rompisteis el tratado!"},

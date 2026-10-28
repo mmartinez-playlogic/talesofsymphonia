@@ -46,10 +46,10 @@ func build() -> void:
 	var left := Game.get_flag("left_for_journey", false)
 	var exiled := Game.get_flag("exiled", false)
 	if left:
-		add_npc("dirk", Vector3(5, 0, 0), "Dirk", "regal",
+		add_npc("dirk", Vector3(5, 0, 0), "Dirk", "dirk",
 			[{"speaker": "Dirk", "text": "¿Todavía aquí? El desierto de Triet está al suroeste. Y no te olvides de comer, muchacho."}], 90.0)
 	elif not exiled and not _night:
-		add_npc("dirk", Vector3(5, 0, 0), "Dirk", "regal",
+		add_npc("dirk", Vector3(5, 0, 0), "Dirk", "dirk",
 			[{"speaker": "Dirk", "text": "¿Vas a la aldea? Vuelve antes de que anochezca. Y recuerda: ni una palabra de tu Exsfera a nadie."}], 90.0)
 		add_npc("noishe", Vector3(-5, 0, 6), "Noishe", "wolf", [{"speaker": "Noishe", "text": "¡Guau!"}])
 
@@ -66,7 +66,7 @@ func _grave(c: Cutscene) -> void:
 	])
 
 func _evening(c: Cutscene) -> void:
-	c.spawn("dirk", "regal", Vector3(2, 0, 2), 180.0, "Dirk")
+	c.spawn("dirk", "dirk", Vector3(2, 0, 2), 180.0, "Dirk")
 	npc("dirk").lines = [{"speaker": "Dirk", "text": "Ve a ver a tu madre, Lloyd. Y luego a dormir."}]
 	c.spawn("genis", "genis", Vector3(-2, 0, 22), 180.0, "Genis")
 	c.teleport("player", Vector3(0, 0.1, 20), 180.0)
@@ -131,7 +131,7 @@ func _kratos_at_grave(c: Cutscene) -> void:
 	Router.goto_map("dirks_house", "default")
 
 func _departure(c: Cutscene) -> void:
-	c.spawn("dirk", "regal", Vector3(2, 0, 2), 180.0, "Dirk")
+	c.spawn("dirk", "dirk", Vector3(2, 0, 2), 180.0, "Dirk")
 	npc("dirk").lines = [{"speaker": "Dirk", "text": "El desierto de Triet está al suroeste. Y no te olvides de comer, muchacho."}]
 	c.spawn("genis", "genis", Vector3(-2, 0, 22), 180.0, "Genis")
 	c.spawn("noishe", "wolf", Vector3(-6, 0, 4), 90.0, "Noishe")

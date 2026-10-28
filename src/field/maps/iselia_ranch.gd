@@ -49,7 +49,7 @@ func on_resume(c: Cutscene, event: String) -> void:
 func _marble(c: Cutscene) -> void:
 	c.flag("ranch_event_started")
 	c.spawn("genis", "genis", Vector3(3.5, 0, 0), 90.0, "Genis")
-	c.spawn("marble", "sheena", Vector3(8, 0, 0), 270.0, "Marble")
+	c.spawn("marble", "marble", Vector3(8, 0, 0), 270.0, "Marble")
 	c.anim("marble", "Idle_Talking")
 	await c.walk("player", Vector3(0, 0, 0), 5.0, true)
 	await c.look_at_actor("genis", 0.6)
@@ -85,11 +85,8 @@ func _marble(c: Cutscene) -> void:
 func _escape(c: Cutscene) -> void:
 	c.teleport("player", Vector3(0, 0.1, 0), 90.0)
 	c.spawn("genis", "genis", Vector3(2, 0, 2), 90.0, "Genis")
-	c.spawn("marble", "sheena", Vector3(10, 0, -4), 270.0, "Marble")
-	c.spawn("forcystus", "desian", Vector3(12, 2.0, -10), 270.0, "Forcystus")
-	var f := c.actor("forcystus")
-	if f:
-		f.scale = Vector3.ONE * 1.15
+	c.spawn("marble", "marble", Vector3(10, 0, -4), 270.0, "Marble")
+	c.spawn("forcystus", "forcystus", Vector3(12, 2.0, -10), 270.0, "Forcystus")
 	await c.wait(0.3)
 	await c.look_at_actor("forcystus", 0.8)
 	await c.say([

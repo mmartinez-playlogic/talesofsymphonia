@@ -229,7 +229,7 @@
  },
  "desian_whip": {
   "name": "Desian Whipmaster",
-  "model": "desian",
+  "model": "desian_whip",
   "hp": 210,
   "tp": 0,
   "atk": 24,

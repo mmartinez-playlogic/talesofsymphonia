@@ -49,3 +49,16 @@ Mateo en reunión: NADA se ha ejecutado (ni Godot headless). Todo escrito a cieg
 - Escritos (sin ejecutar): `tools/vesperia_extract.py` (wrapper CLI de la API), `tools/vesperia_ref.py` (Blender:
   OBJ+DDS → GLB de referencia + `vesperia_style.json` con proporciones), `docs/VESPERIA_REF.md`.
 - Hace falta: copia de Vesperia DE (PC) para los .SVO. Sin ella no hay nada que extraer.
+
+## 2026-10-28 — Sesión 3c (harness: Claude Code 2.1.287, Claude Fable 5.1)
+- Mateo: "crea modelos parecidos a todos los personajes de Symphonia". Hecho con Blender en background (sin ventana).
+- `tools/build_characters.py` reescrito: ojos anime (blanco + iris de color + pupila + ceja + boca), 9 peinados
+  (spiky, spiky_back, long, bob, short, ponytail, twintails, bun, bald), rasgos de vestuario (collar, cinturón,
+  tirantes de Lloyd, flequillo, falda en cono, abrigo largo en medio cono, capa, lazo de Sheena, alas de Remiel,
+  grilletes de Regal, barba, brazo cañón de Forcystus, hombreras, grebas), armas (espadas, chakrams x2, kendama,
+  bastón, cartas, hacha, martillo, látigo). Args opcionales: `-- . [--no-anim] [ids...]` para regenerar solo algunos.
+- 23 modelos humanoides en `assets/characters/`: 9 jugables + NPC (dirk, phaidra, frank, marble, mayor, remiel,
+  forcystus, botta, yuan, mithos) + enemigos (zombie, desian, desian_whip, vidarr). Hoja de contacto en
+  `docs/images/characters_sheet.png` (generada con `tools/render_sheet.py`, Workbench, sin ventana).
+- Mapas actualizados para usar los NPC propios; `Npc.MODEL_SCALE` escala a Dirk (0.78), Genis, Presea, Forcystus, Vidarr.
+- PENDIENTE: Godot aún no ha importado los .glb nuevos (sin .import). Lo hace el `godot --headless --path . --quit` de la próxima sesión.

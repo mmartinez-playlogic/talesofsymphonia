@@ -118,7 +118,7 @@ func _oracle(c: Cutscene) -> void:
 		{"speaker": "Colette", "text": "Diosa Martel... Soy Colette Brunel, la Elegida de Sylvarant. Acudo a recibir el oráculo."},
 	])
 	await c.flash(Color(1, 1, 0.85), 1.4)
-	c.spawn("remiel", "zelos", Vector3(0, 2.0, -40), 0.0, "Remiel")
+	c.spawn("remiel", "remiel", Vector3(0, 2.0, -40), 0.0, "Remiel")
 	await c.look_at_pos(Vector3(0, 0, -38), 0.8)
 	await c.say([
 		{"speaker": "Remiel", "text": "Colette, Elegida de la regeneración. Soy Remiel, ángel de Cruxis, enviado de la diosa Martel."},

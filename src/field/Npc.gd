@@ -7,6 +7,7 @@ extends StaticBody3D
 @export var lines: Array = []     # [{"speaker": "...", "text": "..."}]
 @export var face_player := true
 @export var idle_anim := "Idle"
+const MODEL_SCALE := {"dirk": 0.78, "genis": 0.82, "presea": 0.85, "colette": 0.95, "marble": 0.92, "phaidra": 0.9, "mithos": 0.85, "forcystus": 1.12, "vidarr": 1.5}
 var model: CharacterModel
 var on_interact: Callable  # optional custom handler(field) -> void (awaitable)
 
@@ -24,6 +25,8 @@ func _ready() -> void:
 	add_child(model)
 	model.load_model(model_id)
 	model.rotation.y = PI  # glb faces -Z; node forward is +Z (same convention as FieldPlayer)
+	var sc: float = MODEL_SCALE.get(model_id, 1.0)
+	model.scale = Vector3.ONE * sc
 	model.play(idle_anim)
 
 func interact(field) -> void:

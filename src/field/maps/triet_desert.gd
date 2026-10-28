@@ -45,7 +45,7 @@ func build() -> void:
 	add_monster(Vector3(30, 0, -10), ["sand_wolf"])
 	add_monster(Vector3(0, 0, 12), ["sand_wolf", "desert_hornet"])
 	add_monster(Vector3(-24, 0, -12), ["desert_hornet", "desert_hornet", "hare"])
-	add_npc("traveler", Vector3(-50, 0, -4), "Viajero", "zelos",
+	add_npc("traveler", Vector3(-50, 0, -4), "Viajero", "botta",
 		[{"speaker": "Viajero", "text": "¿Vais a Triet? Esta mañana ha pasado un grupo con una chica rubia y un tipo con capa morada. Iban a la posada."},
 		 {"speaker": "Lloyd", "text": "¡Colette! ¡Van un paso por delante!"}])
 	add_interactable("triet_gate", Vector3(-62, 0, 0), Vector3(2, 6, 12), Color(0.5, 0.4, 0.3), _gate)

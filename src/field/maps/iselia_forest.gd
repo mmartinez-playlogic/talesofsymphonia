@@ -38,7 +38,7 @@ func build() -> void:
 	add_wall(Vector3(5, 0, -55), Vector3(35, 0, -55))
 	add_sign(Vector3(2.5, 0, 14), "Norte: Templo de Martel.\nSur: Aldea de Iselia.\nEste: Rancho humano de Iselia. PROHIBIDO EL PASO.")
 	add_chest("forest1", Vector3(-10, 0, -20), "orange_gel")
-	add_npc("villager1", Vector3(-3, 0, 12), "Aldeano", "regal",
+	add_npc("villager1", Vector3(-3, 0, 12), "Aldeano", "frank",
 		[{"speaker": "Aldeano", "text": "Ten cuidado en el bosque, Lloyd. Últimamente los lobos se acercan mucho al camino."},
 		 {"speaker": "Lloyd", "text": "Tranquilo, unos lobos no son nada para mí."}])
 	add_monster(Vector3(-4, 0, -2), ["wolf"])
