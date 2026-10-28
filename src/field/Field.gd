@@ -217,6 +217,7 @@ func _on_interact(target: Node) -> void:
 
 func _spawn_monsters() -> void:
 	var defeated: Array = Game.flags.get("defeated_" + map_id, [])
+	print("[FIELD] %s monsters=%d defeated=%s" % [map_id, _monster_defs.size(), str(defeated)])
 	for i in _monster_defs.size():
 		if i in defeated:
 			continue

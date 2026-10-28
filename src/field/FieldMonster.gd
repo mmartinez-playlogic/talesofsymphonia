@@ -14,6 +14,8 @@ var _target: Vector3
 var _wait := 0.0
 var _field: Node
 var _triggered := false
+var _stuck_t := 0.0
+var _last_pos := Vector3.ZERO
 
 func setup(field: Node, enemies: Array, index: int) -> void:
 	_field = field
@@ -90,6 +92,16 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.y = 0
 	move_and_slide()
+	# unstick: if pushing against something without moving, pick another wander target
+	if velocity.length() > 0.5 and global_position.distance_to(_last_pos) < 0.02:
+		_stuck_t += delta
+		if _stuck_t > 0.8:
+			_stuck_t = 0.0
+			_pick_target()
+			_wait = 0.0
+	else:
+		_stuck_t = 0.0
+	_last_pos = global_position
 
 func _anim_idle() -> void:
 	model.play("Idle" if not model.humanoid else "Zombie_Idle" if model_id == "zombie" else "Idle")

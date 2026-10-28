@@ -35,13 +35,13 @@ const STEPS := [
 	{"goto": [0, 29.3]}, {"map": "world_sylvarant"},
 	{"goto": [60, -60]}, {"goto": [70, -88]}, {"goto": [70, -93.5]}, {"map": "iselia_village"},
 	{"flag": "raid_started"},
-	{"goto": [0, 10]}, {"goto": [-4, 6]}, {"goto": [8, -8]}, {"wait_defeated": 2}, {"flag": "raid_fight_done"},
+	{"goto": [0, 10]}, {"goto": [-4, 6]}, {"goto": [4, -20]}, {"wait_defeated": 2}, {"flag": "raid_fight_done"},
 	{"goto": [0, 2]}, {"flag": "exiled"}, {"map": "world_sylvarant"},
 	{"goto": [10, -10]}, {"goto": [-20, 22]}, {"interact": "salvation_woman"}, {"flag": "house_of_salvation"},
 	{"goto": [-50, 50]}, {"goto": [-62, 60]}, {"flag": "renegades_cordon"},
 	{"goto": [-80, 78]}, {"goto": [-92, 92]}, {"map": "triet_desert"}, {"flag": "triet_arrived"},
 	{"goto": [-20, 4]}, {"goto": [-54, 0]}, {"interact": "poster"}, {"flag": "poster_seen"},
-	{"interact": "triet_gate"},
+	{"goto": [-59.5, 0]}, {"interact": "triet_gate"},
 ]
 
 var _tap_timer := 0.0
@@ -56,11 +56,29 @@ func _ready() -> void:
 	await get_tree().process_frame
 	await get_tree().process_frame
 	Game.new_game()
-	Router.goto_map("iselia_school", "default")
-	await _run()
+	var start := 0
+	var args := OS.get_cmdline_user_args()
+	for i in args.size():
+		if args[i] == "--from" and i + 1 < args.size() and PRESETS.has(args[i + 1]):
+			var pr: Dictionary = PRESETS[args[i + 1]]
+			for f in pr["flags"]:
+				Game.set_flag(f, true)
+			Game.set_party(pr["party"])
+			start = int(pr["step"])
+			Router.goto_map(pr["map"], pr["spawn"])
+	if start == 0:
+		Router.goto_map("iselia_school", "default")
+	await _run(start)
 
-func _run() -> void:
-	for i in STEPS.size():
+const PRESETS := {
+	"raid": {"step": 80, "map": "world_sylvarant", "spawn": "dirk", "party": ["lloyd", "genis"],
+		"flags": ["oracle_seen", "frank_talked", "temple_done", "colette_house_done", "genis_house_done", "gate_done", "noishe_ran_off", "ranch_visited", "world_first_time", "dirk_argument", "terrace_done", "night_dirk", "dirk_morning"]},
+	"exile": {"step": 92, "map": "world_sylvarant", "spawn": "iselia", "party": ["lloyd", "genis"],
+		"flags": ["oracle_seen", "frank_talked", "temple_done", "colette_house_done", "ranch_visited", "night_dirk", "raid_started", "raid_fight_done", "exiled"]},
+}
+
+func _run(start: int = 0) -> void:
+	for i in range(start, STEPS.size()):
 		var st: Dictionary = STEPS[i]
 		print("[STEP %d] %s" % [i, JSON.stringify(st)])
 		var ok := false
@@ -190,31 +208,43 @@ func _walk_to(target: Vector3, timeout: float) -> bool:
 	return false
 
 func _interact(node_name: String) -> bool:
-	var f := _field()
-	if f == null:
-		return false
-	var n := f.get_node_or_null(node_name)
-	if n == null:
-		print("[FAIL] no node named ", node_name)
-		return false
-	var target: Vector3 = n.global_position + Vector3(0, 0, 1.3)
-	var ok := await _walk_to(target, 40.0)
-	if not ok:
-		print("[FALLBACK] could not reach %s, calling interact directly" % node_name)
-	else:
-		f.player.face(n.global_position)
-	# try the real confirm press first
-	await _until(func(): return _field() != null and _field().player.can_move, 10.0)
-	var before := f.event_running
-	_tap("confirm")
-	await get_tree().process_frame
-	await get_tree().process_frame
-	if not f.event_running and not before:
-		print("[FALLBACK] confirm did not start interaction with %s; calling _on_interact (can_move=%s event_running=%s pos=%s)" % [node_name, f.player.can_move, f.event_running, f.player.global_position])
-		f._on_interact(n)
-	# wait for the interaction to finish (dialogue etc.), ticking
-	await _until(func(): return _field() == null or not _field().event_running, 120.0)
-	return true
+	for attempt in 3:
+		# wait for any running event to finish and for the node to exist (events spawn actors late)
+		await _until(func(): return _field() != null and not _field().event_running and _field().get_node_or_null(node_name) != null, 120.0)
+		var f := _field()
+		var n: Node3D = f.get_node_or_null(node_name) if f else null
+		if n == null:
+			print("[FAIL] no node named ", node_name)
+			return false
+		var target: Vector3 = n.global_position + Vector3(0, 0, 1.3)
+		var start_map := f.map_id
+		var ok := await _walk_to(target, 40.0)
+		f = _field()
+		if f == null or f.map_id != start_map or not is_instance_valid(n) or not n.is_inside_tree():
+			print("    (interaction interrupted by a scene change; retrying %s)" % node_name)
+			continue
+		if not ok:
+			print("[FALLBACK] could not reach %s, calling interact directly" % node_name)
+		else:
+			f.player.face(n.global_position)
+		await _until(func(): return _field() != null and _field().player.can_move, 10.0)
+		for i in 3:
+			await get_tree().physics_frame
+		f = _field()
+		if f == null or f.map_id != start_map or not is_instance_valid(n):
+			continue
+		var before := f.event_running
+		_tap("confirm")
+		await get_tree().process_frame
+		await get_tree().process_frame
+		if not is_instance_valid(f) or not is_instance_valid(n):
+			continue
+		if not f.event_running and not before:
+			print("[FALLBACK] confirm did not start interaction with %s; calling _on_interact (can_move=%s pos=%s)" % [node_name, f.player.can_move, f.player.global_position])
+			f._on_interact(n)
+		await _until(func(): return _field() == null or not _field().event_running, 120.0)
+		return true
+	return false
 
 func _tap(action: String) -> void:
 	var ev := InputEventAction.new()

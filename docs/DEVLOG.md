@@ -112,3 +112,9 @@ Mateo en reunión: NADA se ha ejecutado (ni Godot headless). Todo escrito a cieg
   5. El altar (y cualquier interactuable) que se borraba a sí mismo en mitad de su interacción dejaba al jugador
      bloqueado: la corrutina del nodo borrado nunca reanudaba. Ahora `Field._on_interact` ejecuta el manejador desde el
      propio Field (vale para Interactable y para `Npc.on_interact`).
+  6. Monstruos de campo que se quedaban empujando contra una pared para siempre: `FieldMonster` ahora detecta atasco
+     (0,8 s sin avanzar) y elige otro destino. Segundo grupo del ataque a Iselia recolocado en zona despejada (4, -20).
+  7. Radio de interacción del jugador ampliado (1,5 m, 0,9 m por delante) para que puertas y NPC respondan sin pegarse.
+- Resultado del bot (`tools/Playthrough.tscn`): de la escuela al desierto de Triet, 110 pasos, 0 fallos del juego.
+  74 escenas de guion ejecutadas, ~13 min de partida simulada. Presets para empezar a mitad: `-- --from raid` / `--from exile`.
+- Lo que el bot NO cubre: cámara/encuadre, legibilidad, equilibrio de combate (gana por trampa), animaciones en pantalla.

@@ -55,7 +55,7 @@ func build() -> void:
 		func(): return not Game.get_flag("temple_done", false), [{"speaker": "Lloyd", "text": "Hoy ya no hay más clase."}])
 	if raid:
 		add_monster(Vector3(-4, 0, 6), ["desian_soldier", "desian_soldier"])
-		add_monster(Vector3(8, 0, -8), ["desian_soldier", "desian_whip"])
+		add_monster(Vector3(4, 0, -20), ["desian_soldier", "desian_whip"])
 		add_npc("gate_villager", Vector3(-12, 0, -2), "Aldeano", "frank", [], 90.0)
 		npc("gate_villager").on_interact = func(_f): await _save_villager(cs)
 	add_interactable("colette_door", Vector3(14, 0, -6.3), Vector3(1.4, 2.0, 0.3), Color(0.35, 0.22, 0.12), _colette_door)

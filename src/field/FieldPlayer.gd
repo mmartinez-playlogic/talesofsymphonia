@@ -35,9 +35,9 @@ func _ready() -> void:
 	_interact_area.collision_mask = 4  # interactables
 	var s := CollisionShape3D.new()
 	var sph := SphereShape3D.new()
-	sph.radius = 1.2
+	sph.radius = 1.5
 	s.shape = sph
-	s.position = Vector3(0, 0.9, 0.8)
+	s.position = Vector3(0, 0.9, 0.9)
 	_interact_area.add_child(s)
 	add_child(_interact_area)
 
