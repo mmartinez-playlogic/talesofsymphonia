@@ -100,8 +100,21 @@ func _marble(c: Cutscene) -> void:
 		{"speaker": "", "text": "(Lloyd intenta hacer un sándwich con las galletas. No sale bien.)"},
 		{"speaker": "Genis", "text": "¡Allá voy! ¡Bola de fuego!"},
 	])
+	c.anim("genis", "Spell_Simple_Shoot")
+	c.sfx("fire")
 	await c.flash(Color(1, 0.5, 0.2), 0.5)
 	c.despawn("genis")
+	c.anim("player", "NinjaJump_Start")
+	var pl := c.actor("player")
+	if pl:
+		pl.set("scripted", true)
+		var tw := create_tween()
+		tw.tween_property(pl, "global_position", Vector3(-6, 4.0, -10), 0.35).set_ease(Tween.EASE_OUT)
+		tw.tween_property(pl, "global_position", Vector3(-2, 0.1, -4), 0.45).set_ease(Tween.EASE_IN)
+		await tw.finished
+		pl.set("scripted", false)
+	c.anim("player", "NinjaJump_Land")
+	c.sfx("hit", -4.0)
 	await c.caption("Lloyd salta desde el acantilado.", 1.6)
 	c.teleport("player", Vector3(-2, 0.1, -4), 90.0)
 	c.spawn("desian1", "desian", Vector3(8, 0, -4), 270.0, "Desiano")

@@ -82,7 +82,7 @@ func anim_name(kind: String) -> String:
 	if id == "zombie":
 		return {"idle": "Zombie_Idle", "run": "Zombie_Walk_Fwd", "attack1": "Zombie_Scratch", "attack2": "Zombie_Scratch", "attack3": "Zombie_Scratch", "hurt": "Hit_Chest", "death": "Death01", "guard": "Zombie_Idle", "cast": "Zombie_Idle", "shoot": "Zombie_Scratch", "win": "Zombie_Idle"}.get(kind, "Zombie_Idle")
 	return {"idle": "Sword_Idle" if _anim_prefix_sword else "Idle", "run": "Jog_Fwd", "attack1": "Sword_Regular_A", "attack2": "Sword_Regular_B", "attack3": "Sword_Regular_C",
-			"hurt": "Hit_Chest", "death": "Death01", "guard": "Sword_Block", "cast": "Spell_Simple_Idle", "cast_enter": "Spell_Simple_Enter", "shoot": "Spell_Simple_Shoot", "win": "Yes", "knockback": "Hit_Knockback"}.get(kind, "Idle")
+			"hurt": "Hit_Chest", "death": "Death01", "guard": "Sword_Block", "cast": "Spell_Simple_Idle", "cast_enter": "Spell_Simple_Enter", "shoot": "Spell_Simple_Shoot", "win": "Yes", "knockback": "Hit_Knockback", "revive": "LayToIdle"}.get(kind, "Idle")
 
 func play_idle() -> void:
 	model.play(anim_name("idle"))
@@ -211,7 +211,10 @@ func take_hit(attacker: Battler, dmg: int, knock: float, crit: bool, magical: bo
 		velocity.y = 7.0
 	state = State.HURT
 	pending_hits.clear()
-	play("hurt", 1.0, true)
+	if launch or knock >= 3.0:
+		play("knockback", 1.2, true)
+	else:
+		play("hurt", 1.0, true)
 
 func heal(amount: int) -> void:
 	if state == State.DEAD:
@@ -226,7 +229,8 @@ func revive(ratio: float) -> void:
 	_death_done = false
 	stats["hp"] = max(1, int(stats["max_hp"] * ratio))
 	state = State.IDLE
-	play_idle()
+	play("revive", 1.4, true)
+	schedule_hit(0.9, func(): if state == State.IDLE: play_idle())
 
 func _die() -> void:
 	Audio.sfx("ko" if player_side else "enemy_die")
@@ -241,6 +245,8 @@ func apply_buff(stat_name: String, mult: float, duration: float) -> void:
 
 # ---------- per-frame ----------
 func _physics_process(delta: float) -> void:
+	if has_method("_choreo_tick"):
+		call("_choreo_tick", delta)
 	if over_limit_t > 0:
 		over_limit_t -= delta
 	if poise_t > 0:

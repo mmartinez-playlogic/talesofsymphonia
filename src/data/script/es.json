@@ -225,28 +225,6 @@
    "text": "¡Entendido! Tú lanza fuego y yo corto. Como siempre."
   }
  ],
- "martel_temple_ext.pastor.01": [
-  {
-   "speaker": "Genis",
-   "text": "Ya casi estamos. El oráculo se va a transmitir ahí arriba, en el altar del templo. Mira cuánta luz."
-  },
-  {
-   "speaker": "Lloyd",
-   "text": "Colette, ahora que lo pienso... deberías comportarte un poco más como una Elegida, ¿no? Andar con más dignidad, o algo así."
-  },
-  {
-   "speaker": "Colette",
-   "text": "¿Más... Elegida? ¡Lo intentaré! ¿Así? Ay..."
-  },
-  {
-   "speaker": "",
-   "text": "(Colette tropieza con el primer escalón.)"
-  },
-  {
-   "speaker": "Genis",
-   "text": "Déjalo, Lloyd. Es Colette."
-  }
- ],
  "martel_temple_ext.pastor.02": [
   {
    "speaker": "Pastor",
@@ -659,28 +637,6 @@
   {
    "speaker": "Lloyd",
    "text": "¿Y qué más da? La familia es la familia, con sangre o sin ella. Frank la ha criado. Es su padre."
-  }
- ],
- "martel_temple.raine.01": [
-  {
-   "speaker": "Raine",
-   "text": "¡MARAVILLOSO! ¡Estas inscripciones! ¡Escritura de la era de Kharlan en perfecto estado! ¡Una ruina intacta de hace cuatro mil años y nadie me lo había dicho!"
-  },
-  {
-   "speaker": "Genis",
-   "text": "Ya está en modo ruinas... Haz como que no la ves."
-  },
-  {
-   "speaker": "Raine",
-   "text": "¿Genis? ¿LLOYD? ¡Os dije claramente que os quedarais en clase!"
-  },
-  {
-   "speaker": "",
-   "text": "(Raine le da un coscorrón a Genis y una patada a Lloyd.)"
-  },
-  {
-   "speaker": "Raine",
-   "text": "A casa, los dos. Hoy no hay más clase. Yo me quedo a estudiar el templo, con permiso de Phaidra. ¡Ja, ja, ja! ¡Cuatro mil años!"
   }
  ],
  "iselia_village.colette_house.01": [
@@ -1587,6 +1543,78 @@
   {
    "speaker": "Lloyd",
    "text": "Pues vamos. ¡Colette, espéranos!"
+  }
+ ],
+ "martel_temple_ext.pastor.01a": [
+  {
+   "speaker": "Genis",
+   "text": "Ya casi estamos. El oráculo se va a transmitir ahí arriba, en el altar del templo. Mira cuánta luz."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Colette, ahora que lo pienso... deberías comportarte un poco más como una Elegida, ¿no? Andar con más dignidad, o algo así."
+  },
+  {
+   "speaker": "Colette",
+   "text": "¿Más... Elegida? ¡Lo intentaré! ¿Así? Ay..."
+  }
+ ],
+ "martel_temple_ext.pastor.01b": [
+  {
+   "speaker": "",
+   "text": "(Colette tropieza con el primer escalón y cae de bruces.)"
+  },
+  {
+   "speaker": "Genis",
+   "text": "Déjalo, Lloyd. Es Colette."
+  }
+ ],
+ "iselia_village.wonder_chef.01": [
+  {
+   "speaker": "Cocinero misterioso",
+   "text": "¡Ajá! ¡Me has descubierto! No soy un simple aldeano: ¡soy el Maestro Cocinero!"
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¿El qué?"
+  },
+  {
+   "speaker": "Cocinero misterioso",
+   "text": "Viajo por el mundo enseñando recetas a quien sepa encontrarme. Hoy te toca a ti: la tortilla. Huevos y leche, nada más. ¡Hasta la próxima!"
+  }
+ ],
+ "dirks_house.wonder_chef.01": [
+  {
+   "speaker": "",
+   "text": "(¡La olla se mueve! De dentro sale un hombrecillo con gorro de cocinero.)"
+  },
+  {
+   "speaker": "Maestro Cocinero",
+   "text": "¡Ja! ¡Disfrazado de olla, el escondite perfecto! Ya que me has encontrado: la bola de arroz. Arroz y nada más. ¡Adiós!"
+  }
+ ],
+ "martel_temple.raine.01a": [
+  {
+   "speaker": "Raine",
+   "text": "¡MARAVILLOSO! ¡Estas inscripciones! ¡Escritura de la era de Kharlan en perfecto estado! ¡Una ruina intacta de hace cuatro mil años y nadie me lo había dicho!"
+  },
+  {
+   "speaker": "Genis",
+   "text": "Ya está en modo ruinas... Haz como que no la ves."
+  },
+  {
+   "speaker": "Raine",
+   "text": "¿Genis? ¿LLOYD? ¡Os dije claramente que os quedarais en clase!"
+  }
+ ],
+ "martel_temple.raine.01b": [
+  {
+   "speaker": "",
+   "text": "(Raine le da un coscorrón a Genis y una patada a Lloyd.)"
+  },
+  {
+   "speaker": "Raine",
+   "text": "A casa, los dos. Hoy no hay más clase. Yo me quedo a estudiar el templo, con permiso de Phaidra. ¡Ja, ja, ja! ¡Cuatro mil años!"
   }
  ]
 }

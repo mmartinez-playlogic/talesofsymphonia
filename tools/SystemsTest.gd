@@ -42,7 +42,10 @@ func _data() -> void:
 	for r in DB.recipes:
 		for ing in DB.recipes[r]["ingredients"]:
 			check(DB.items.has(ing), "recipe %s ingredient %s exists" % [r, ing])
-	check(DB.story_script.size() == 83, "83 script scenes loaded")
+	var tpl = JSON.parse_string(FileAccess.get_file_as_string("res://src/data/script/_template_es.json"))
+	check(DB.story_script.size() >= (tpl as Dictionary).size(), "every scene has full script text (%d/%d)" % [DB.story_script.size(), (tpl as Dictionary).size()])
+	for k in tpl:
+		check(DB.story_script.has(k), "script text for scene %s" % k)
 
 func _shop() -> void:
 	print("== shop")

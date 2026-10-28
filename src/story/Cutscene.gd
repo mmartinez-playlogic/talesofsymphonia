@@ -164,6 +164,18 @@ func anim_wait(id: String, anim_name: String) -> void:
 	await field.get_tree().create_timer(m.anim_length(anim_name)).timeout
 	m.play("Idle")
 
+## Colette's trademark trip: falls flat, then gets back up.
+func trip(id: String) -> void:
+	var m := model_of(id)
+	if m == null:
+		return
+	Audio.sfx("hit", -6.0)
+	m.play("Hit_Knockback", 0.05, 1.3, true)
+	await wait(0.55)
+	m.play("LayToIdle", 0.1, 1.2, true)
+	await wait(1.1)
+	m.play("Idle")
+
 func hop(id: String, times := 1) -> void:
 	var a := actor(id)
 	if a == null:
@@ -205,8 +217,8 @@ func flash(color := Color(1, 1, 1), d := 0.5) -> void:
 func music(id: String, fade := 1.0) -> void:
 	Audio.play_music(id, fade)
 
-func sfx(id: String) -> void:
-	Audio.sfx(id)
+func sfx(id: String, volume_db := 0.0) -> void:
+	Audio.sfx(id, volume_db)
 
 func shake_camera(strength := 0.3, d := 0.5) -> void:
 	await field.camera.shake(strength, d)

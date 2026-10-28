@@ -18,6 +18,14 @@ var _elapsed := 0.0
 var _damage_taken := 0
 var _kos := 0
 var unison_gauge := 0.0        # 0..100, fills with party hits
+var last_victory_quote := ""
+const VICTORY_QUOTES := {
+	"lloyd": ["¡Sí! ¡Lo conseguimos!", "¡Ya sabía yo que podíamos!", "Juramento Enano número uno: ¡trabajemos juntos!"],
+	"colette": ["¡Hemos ganado! Jeje.", "¡Todos estáis bien! Menos mal..."],
+	"genis": ["¡Pan comido!", "¿Habéis visto mi magia? ¡Soy un genio!"],
+	"raine": ["Estudiad siempre al enemigo antes de atacar.", "Bien. Pero podéis hacerlo mejor."],
+	"kratos": ["Aún os queda mucho por aprender.", "No bajéis la guardia."],
+}
 var _max_combo := 0
 
 func _ready() -> void:
@@ -463,11 +471,20 @@ func _check_end() -> void:
 
 func _win() -> void:
 	Audio.play_music("victory", 0.1, true)
+	var speakers: Array = []
 	for b in party:
 		if b.is_alive():
 			b.velocity = Vector3.ZERO
-			b.play("win", 1.0, true)
+			b.state = Battler.State.WIN
+			b.victory_pose()
+			speakers.append(b)
 	hud.show_center("¡Victoria!", 1.5)
+	if not speakers.is_empty():
+		var sp: PlayerBattler = speakers[randi() % speakers.size()]
+		var q: Array = VICTORY_QUOTES.get(sp.id, ["¡Bien!"])
+		var line: String = q[randi() % q.size()]
+		spawn_popup(sp.global_position + Vector3(0, 2.3, 0), line, Color(1, 0.95, 0.8), 0.55)
+		last_victory_quote = "%s: %s" % [sp.display_name.split(" ")[0], line]
 	# rewards
 	var exp_total := 0
 	var gald := 0

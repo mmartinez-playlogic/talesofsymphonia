@@ -100,7 +100,11 @@ func _argument(c: Cutscene) -> void:
 		{"speaker": "Dirk", "text": "¡He dicho que no!"},
 		{"speaker": "", "text": "(Dirk golpea a Lloyd. Lloyd cae al suelo y sale de la casa hecho una furia.)"},
 	])
+	c.face_each_other("dirk", "player")
+	await c.anim_wait("dirk", "Punch_Cross")
+	c.anim("player", "Hit_Knockback")
 	c.sfx("hit_heavy")
+	await c.wait(0.9)
 	await c.fade_out()
 	c.teleport("player", Vector3(0, 0.1, 6), 0.0)
 	c.spawn("raine", "raine", Vector3(-3, 0, 10), 0.0, "Raine")
@@ -125,6 +129,11 @@ func _genis_talk(c: Cutscene) -> void:
 	])
 
 func _kratos_talk(c: Cutscene) -> void:
+	c.face("player", Vector3(-14, 0, -10))
+	c.anim("player", "Crouch_Idle")
+	await c.wait(0.6)
+	c.anim("player", "Idle")
+	c.face_each_other("player", "kratos")
 	await c.script("dirks_house.kratos.01", [
 		{"speaker": "Kratos", "text": "¿De quién es esta tumba?"},
 		{"speaker": "Lloyd", "text": "De mi madre."},

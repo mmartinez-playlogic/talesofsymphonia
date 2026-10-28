@@ -197,3 +197,11 @@ Mateo en reunión: NADA se ha ejecutado (ni Godot headless). Todo escrito a cieg
   Iselia y en el rancho, tristeza en la muerte de Marble y el destierro.
 - `tools/AudioTest.tscn` (90/90): todos los ids de audio usados en el código existen, cada escena suena con su pista,
   y un combate jugado con teclas dispara tajos, golpes, críticos, artes, magia, ataques enemigos y subida de nivel.
+
+## 2026-10-28 — Sesión 3m (harness: Claude Code 2.1.287, Opus 5.5) — animaciones fieles
+- Coreografías de artes en datos (`moves`) + ejecutor en `PlayerBattler`: Demon Fang, Sonic Thrust, Tiger Blade
+  (salto real), Sword Rain, Tempest (salto + 720°), Beast, Pow Hammer, Ray Thrust (Lloyd, Kratos, Colette).
+- Poses y frases de victoria por personaje; retroceso con golpes fuertes; revivir con LayToIdle.
+- Escenas con animación: tropiezo de Colette (`cs.trip`, escena del templo partida en pastor.01a/01b), Raine
+  (raine.01a/01b) pega y patea, Dirk golpea, arrodillarse en tumba y altar, Remiel desciende, salto del acantilado.
+- `tools/ArteTest.tscn` 201/201 añadido a `tools/run_all_tests.sh`. Detalle en `docs/ANIMATIONS.md`.

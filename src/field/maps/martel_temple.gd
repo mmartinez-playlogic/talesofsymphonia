@@ -156,12 +156,19 @@ func _oracle(c: Cutscene) -> void:
 	c.spawn("genis", "genis", Vector3(2, 0, -31), 180.0, "Genis")
 	c.spawn("kratos", "kratos", Vector3(4, 0, -29), 180.0, "Kratos")
 	c.face("colette", Vector3(0, 0, -40))
+	c.anim("colette", "Crouch_Idle")
 	await c.script("martel_temple.oracle.01", [
 		{"speaker": "Colette", "text": "Es el altar. Y ese cristal... Es el Cristal de Cruxis. Nací sosteniéndolo en la mano."},
 	])
 	await c.flash(Color(1, 1, 0.85), 1.4)
-	c.spawn("remiel", "remiel", Vector3(0, 2.0, -40), 0.0, "Remiel")
+	c.spawn("remiel", "remiel", Vector3(0, 7.0, -40), 0.0, "Remiel")
+	c.anim("remiel", "Spell_Simple_Idle")
+	var rm := c.actor("remiel")
+	if rm:
+		create_tween().tween_property(rm, "position:y", 2.0, 2.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	await c.look_at_pos(Vector3(0, 0, -38), 0.8)
+	await c.wait(1.6)
+	c.anim("colette", "Idle")
 	await c.script("martel_temple.oracle.02", [
 		{"speaker": "Genis", "text": "¿Qué... qué es eso?"},
 		{"speaker": "Kratos", "text": "Un ángel, supongo."},
@@ -195,12 +202,25 @@ func _oracle(c: Cutscene) -> void:
 		{"speaker": "Lloyd", "text": "La familia es la familia, con sangre o sin ella."},
 	])
 	c.spawn("raine", "raine", Vector3(6, 0, -30), 270.0, "Raine")
-	await c.script("martel_temple.raine.01", [
-		{"speaker": "Raine", "text": "¡MARAVILLOSO! ¡Estas inscripciones! ¡Escritura de la era de Kharlan! ¡Una ruina intacta de hace cuatro mil años!", "mood": "happy"},
-		{"speaker": "Genis", "text": "Ya está en modo ruinas..."},
-		{"speaker": "Raine", "text": "¿Genis? ¿LLOYD? ¡Os dije que os quedarais en clase!"},
-		{"speaker": "", "text": "(Raine le da un coscorrón a Genis y una patada a Lloyd.)"},
-		{"speaker": "Raine", "text": "A casa, los dos. Hoy no hay más clase. Yo me quedo a estudiar el templo, con permiso de Phaidra. ¡Ja, ja, ja!"},
+	c.anim("raine", "Idle_Talking")
+	await c.script("martel_temple.raine.01a", [
+		{"speaker": "Raine", "text": "¡MARAVILLOSO! ¡Estas inscripciones! ¡Escritura de la era de Kharlan en perfecto estado! ¡Una ruina intacta de hace cuatro mil años y nadie me lo había dicho!"},
+		{"speaker": "Genis", "text": "Ya está en modo ruinas... Haz como que no la ves."},
+		{"speaker": "Raine", "text": "¿Genis? ¿LLOYD? ¡Os dije claramente que os quedarais en clase!"},
+	])
+	await c.walk("raine", Vector3(1.0, 0, -31), 4.0, true)
+	c.face_each_other("raine", "genis")
+	await c.anim_wait("raine", "Punch_Jab")
+	c.anim("genis", "Hit_Head")
+	c.sfx("hit")
+	await c.wait(0.3)
+	c.face_each_other("raine", "player")
+	await c.anim_wait("raine", "Melee_Hook")
+	c.anim("player", "Hit_Knockback")
+	c.sfx("hit_heavy")
+	await c.wait(0.8)
+	await c.script("martel_temple.raine.01b", [
+		{"speaker": "Raine", "text": "A casa, los dos. Hoy no hay más clase. Yo me quedo a estudiar el templo, con permiso de Phaidra. ¡Ja, ja, ja! ¡Cuatro mil años!"},
 	])
 	c.flag("temple_done")
 	Game.set_party(["lloyd", "genis"])

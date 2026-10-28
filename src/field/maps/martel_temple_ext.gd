@@ -67,10 +67,14 @@ func _pastor(c: Cutscene) -> void:
 	await c.walk("player", Vector3(0, 0, 10), 4.5, true, false)
 	await c.walk("genis", Vector3(-1.5, 0, 12), 4.5, true, false)
 	await c.walk("colette", Vector3(1.5, 0, 12), 4.5, true)
-	await c.script("martel_temple_ext.pastor.01", [
-		{"speaker": "Genis", "text": "Ya casi estamos. El oráculo se va a transmitir ahí arriba."},
-		{"speaker": "Lloyd", "text": "Colette, deberías comportarte un poco más como una Elegida, ¿no?"},
-		{"speaker": "Colette", "text": "¿Más... Elegida? ¡Lo intentaré!", "mood": "happy"},
+	await c.script("martel_temple_ext.pastor.01a", [
+		{"speaker": "Genis", "text": "Ya casi estamos. El oráculo se va a transmitir ahí arriba, en el altar del templo. Mira cuánta luz."},
+		{"speaker": "Lloyd", "text": "Colette, ahora que lo pienso... deberías comportarte un poco más como una Elegida, ¿no? Andar con más dignidad, o algo así."},
+		{"speaker": "Colette", "text": "¿Más... Elegida? ¡Lo intentaré! ¿Así? Ay..."},
+	])
+	await c.trip("colette")
+	await c.script("martel_temple_ext.pastor.01b", [
+		{"speaker": "Genis", "text": "Déjalo, Lloyd. Es Colette."},
 	])
 	await c.walk("pastor", Vector3(0.5, 0, 6), 2.0)
 	c.anim("pastor", "Death01")

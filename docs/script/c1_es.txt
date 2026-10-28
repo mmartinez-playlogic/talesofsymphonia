@@ -68,11 +68,13 @@ Colette: Raine dice que la magia funciona mejor contra los monstruos espirituale
 Genis: Entonces yo me encargo de los fantasmas con mis hechizos y Lloyd de los zombis. Lloyd, acuérdate de cambiar de objetivo con el botón de selección cuando el que tengas delante no sea el tuyo.
 Lloyd: ¡Entendido! Tú lanza fuego y yo corto. Como siempre.
 
-## martel_temple_ext.pastor.01
+## martel_temple_ext.pastor.01a
 Genis: Ya casi estamos. El oráculo se va a transmitir ahí arriba, en el altar del templo. Mira cuánta luz.
 Lloyd: Colette, ahora que lo pienso... deberías comportarte un poco más como una Elegida, ¿no? Andar con más dignidad, o algo así.
 Colette: ¿Más... Elegida? ¡Lo intentaré! ¿Así? Ay...
-(Colette tropieza con el primer escalón.)
+
+## martel_temple_ext.pastor.01b
+(Colette tropieza con el primer escalón y cae de bruces.)
 Genis: Déjalo, Lloyd. Es Colette.
 
 ## martel_temple_ext.pastor.02
@@ -210,10 +212,12 @@ Colette: Lloyd, Genis... pasaos por mi casa luego, ¿vale? Por favor.
 Genis: En la aldea siempre se ha dicho que Colette es hija de un ángel y que en realidad no tiene parentesco con Frank. Nunca pensé que fuera verdad.
 Lloyd: ¿Y qué más da? La familia es la familia, con sangre o sin ella. Frank la ha criado. Es su padre.
 
-## martel_temple.raine.01
+## martel_temple.raine.01a
 Raine: ¡MARAVILLOSO! ¡Estas inscripciones! ¡Escritura de la era de Kharlan en perfecto estado! ¡Una ruina intacta de hace cuatro mil años y nadie me lo había dicho!
 Genis: Ya está en modo ruinas... Haz como que no la ves.
 Raine: ¿Genis? ¿LLOYD? ¡Os dije claramente que os quedarais en clase!
+
+## martel_temple.raine.01b
 (Raine le da un coscorrón a Genis y una patada a Lloyd.)
 Raine: A casa, los dos. Hoy no hay más clase. Yo me quedo a estudiar el templo, con permiso de Phaidra. ¡Ja, ja, ja! ¡Cuatro mil años!
 
@@ -519,3 +523,12 @@ Lloyd: ¡Oye! ¿Tan mal está? ¿Tan feo soy?
 ## triet_desert.gate.01
 Genis: La ciudad de Triet. Colette tiene que estar ahí dentro. Preguntemos en la posada.
 Lloyd: Pues vamos. ¡Colette, espéranos!
+
+## iselia_village.wonder_chef.01
+Cocinero misterioso: ¡Ajá! ¡Me has descubierto! No soy un simple aldeano: ¡soy el Maestro Cocinero!
+Lloyd: ¿El qué?
+Cocinero misterioso: Viajo por el mundo enseñando recetas a quien sepa encontrarme. Hoy te toca a ti: la tortilla. Huevos y leche, nada más. ¡Hasta la próxima!
+
+## dirks_house.wonder_chef.01
+(¡La olla se mueve! De dentro sale un hombrecillo con gorro de cocinero.)
+Maestro Cocinero: ¡Ja! ¡Disfrazado de olla, el escondite perfecto! Ya que me has encontrado: la bola de arroz. Arroz y nada más. ¡Adiós!

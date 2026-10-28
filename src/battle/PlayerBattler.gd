@@ -184,8 +184,124 @@ func use_arte(arte_id: String) -> bool:
 			_melee_arte(arte_id, a)
 	return true
 
+# ---------- arte choreography (steps from artes.json "moves") ----------
+var _ch: Dictionary = {}
+
+func _start_choreo(a: Dictionary) -> void:
+	var steps: Array = a["moves"]
+	var total := 0.0
+	var hits_total := 0
+	for st in steps:
+		total += float(st.get("t", 0.4))
+		hits_total += int(st.get("hits", 0))
+	state = State.ARTE
+	velocity = Vector3.ZERO
+	action_timer = total + 0.25
+	_ch = {"a": a, "steps": steps, "i": -1, "t": 0.0, "step_t0": 0.0, "y0": 0.0, "rot0": model.rotation.y,
+		"fired": {}, "total": total, "hits_total": max(1, hits_total)}
+	_choreo_next()
+
+func _choreo_next() -> void:
+	_ch["i"] = int(_ch["i"]) + 1
+	var steps: Array = _ch["steps"]
+	if int(_ch["i"]) >= steps.size():
+		_choreo_end(true)
+		return
+	var st: Dictionary = steps[_ch["i"]]
+	_ch["step_t0"] = float(_ch["t"])
+	_ch["y0"] = model.position.y
+	_ch["rot0"] = model.rotation.y
+	_ch["fired"] = {}
+	var anim: String = st.get("anim", "Sword_Regular_A")
+	model.play(anim, 0.05, float(st.get("speed", 1.0)), true)
+
+func _choreo_end(finished: bool) -> void:
+	if _ch.is_empty():
+		return
+	_ch = {}
+	model.position.y = 0.0
+	set_facing(facing)
+	if finished and state == State.ARTE:
+		state = State.IDLE
+		action_timer = 0.0
+		play_idle()
+
+func _choreo_tick(delta: float) -> void:
+	if _ch.is_empty():
+		return
+	if state != State.ARTE:
+		_choreo_end(false)   # interrupted (hit, KO, battle end)
+		return
+	_ch["t"] = float(_ch["t"]) + delta
+	var st: Dictionary = (_ch["steps"] as Array)[_ch["i"]]
+	var dur: float = max(0.05, float(st.get("t", 0.4)))
+	var local: float = float(_ch["t"]) - float(_ch["step_t0"])
+	var u: float = clamp(local / dur, 0.0, 1.0)
+	# forward displacement along the battle line
+	var dx := float(st.get("dx", 0.0))
+	if dx != 0.0 and local <= dur:
+		global_position.x += facing * dx * (delta / dur)
+	# height: jump target / crouch dip (visual, on the model)
+	var y_target := float(st.get("jump", _ch["y0"]))
+	var y := lerpf(float(_ch["y0"]), y_target, ease(u, 0.6 if y_target > float(_ch["y0"]) else 1.8))
+	y -= float(st.get("crouch", 0.0)) * sin(PI * u)
+	model.position.y = y
+	# spin
+	var spin := float(st.get("spin", 0.0))
+	if spin != 0.0:
+		model.rotation.y = float(_ch["rot0"]) + deg_to_rad(spin) * u * (1 if facing > 0 else -1)
+	# hits
+	var a: Dictionary = _ch["a"]
+	var hits := int(st.get("hits", 0))
+	var fired: Dictionary = _ch["fired"]
+	if hits > 0:
+		var h0 := float(st.get("hit_at", 0.4))
+		for k in hits:
+			var at: float = h0 + (1.0 - h0) * 0.8 * float(k) / max(1, hits)
+			if u >= at and not fired.has(k):
+				fired[k] = true
+				for v in targets_in_front(float(a.get("range", 1.8)) + 0.4):
+					deal_physical(v, float(a.get("power", 1.0)), float(st.get("knock", a.get("knockback", 1.0))), a.get("element", "none"), bool(st.get("launch", a.get("launch", false))))
+				if st.get("flash", false):
+					Effects.flash(manager._fx_root, global_position + Vector3(facing * 1.2, 1.0, 0), Color(1, 0.9, 0.6, 0.9), 0.6)
+					manager.camera.shake(0.2)
+				Audio.sfx("slash%d" % (1 + k % 3), -3.0)
+	if st.has("projectile_at") and u >= float(st["projectile_at"]) and not fired.has("p"):
+		fired["p"] = true
+		manager.spawn_projectile(self, a)
+	if local >= dur:
+		_choreo_next()
+
+func victory_pose() -> void:
+	var seqs := {
+		"lloyd": [["Sword_Regular_A", 1.0, 0.45], ["Sword_Idle", 1.0, 0.3], ["Yes", 1.2, 1.6]],
+		"colette": [["Yes", 1.4, 1.2], ["Idle", 1.0, 0.6]],
+		"genis": [["Spell_Simple_Shoot", 1.0, 0.5], ["Yes", 1.3, 1.4]],
+		"raine": [["Spell_Simple_Exit", 0.8, 0.6], ["Idle_FoldArms", 1.0, 1.5]],
+		"kratos": [["Sword_Block", 0.9, 0.9], ["Idle_FoldArms", 1.0, 1.5]],
+		"sheena": [["Yes", 1.2, 1.4]], "zelos": [["Yes", 1.4, 1.4]], "presea": [["Idle", 1.0, 1.4]], "regal": [["Idle_FoldArms", 1.0, 1.5]],
+	}
+	var seq: Array = seqs.get(id, [["Yes", 1.0, 1.5]])
+	var t := 0.0
+	for st in seq:
+		var anim: String = st[0]
+		var spd: float = st[1]
+		schedule_hit(t, func(): model.play(anim, 0.12, spd, true))
+		t += float(st[2])
+	if id == "lloyd":
+		# twirl the swords: one quick turn on the first beat
+		var tw := create_tween()
+		tw.tween_property(model, "rotation:y", model.rotation.y + TAU, 0.45).set_trans(Tween.TRANS_SINE)
+	elif id == "colette":
+		var tw := create_tween()
+		tw.tween_property(model, "position:y", 0.35, 0.15).set_delay(0.2)
+		tw.tween_property(model, "position:y", 0.0, 0.15)
+
 func _melee_arte(_arte_id: String, a: Dictionary) -> void:
 	Audio.sfx("arte")
+	if a.has("moves"):
+		_start_choreo(a)
+		return
 	state = State.ARTE
 	var anim: String = a.get("anim", "Sword_Regular_A")
 	var speed := 1.0 if anim != "Sword_Regular_C" and anim != "Sword_Regular_Combo" else 1.5
