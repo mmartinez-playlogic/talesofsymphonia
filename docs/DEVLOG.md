@@ -7,3 +7,8 @@
 - Descargadas las Universal Animation Library 1 y 2 de Quaternius (CC0) desde OpenGameArt. Copiadas a assets/anim/.
 - Hallazgo: los dos rigs usan nombres de hueso distintos (Rigify DEF-* vs UE5). Hay que unificar en Blender.
 - Creados CLAUDE.md, ROADMAP.md, este diario. Repo git iniciado.
+
+## 2026-10-28 — Sesión 2 (harness: Claude Code 2.1.287, Claude Fable 5.1)
+- Creado src/battle/ (BattleManager, Battler, PlayerBattler, EnemyBattler, BattleCamera, BattleHUD, Effects, Projectile, Battle.tscn) y tools/RunBattle.tscn para lanzarlo.
+- project.godot: activados warnings de inferencia en Variant.
+- Pendiente: NO se ha probado el combate en ventana (Mateo pidió no probarlo). Próxima sesión: lanzar tools/RunBattle.tscn y corregir lo que falle.

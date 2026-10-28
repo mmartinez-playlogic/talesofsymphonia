@@ -14,10 +14,12 @@ Se construye sesión a sesión, "día a día, poco a poco". Cada sesión debe de
   Modelos y animaciones de bibliotecas CC0 (Quaternius) o generados por script en Blender.
 - Guardar contexto en archivos (este CLAUDE.md, docs/DEVLOG.md, docs/ROADMAP.md) para no perder el hilo.
 - Idioma con el usuario: español. Código y nombres de archivos en inglés.
+- Estilo de respuesta: seguir la skill `i-have-adhd` (~/.claude/plugins/cache/i-have-adhd/.../SKILL.md): acción primero, pasos numerados, estado restatado, una sola acción siguiente al final.
 
 ## Decisiones técnicas
 - Motor: Godot 4.7.2 (instalado con `brew install --cask godot`, binario `godot`). GDScript.
 - Arte: Blender 5.2.3 (`blender -b --python script.py`) para generar/retargetear modelos. Sin editor abierto.
+- Harness: Claude Code 2.1.287, modelo Claude Fable 5.1 (claude-fable-5-1). Anotar la versión en cada entrada del DEVLOG.
 - Animaciones: Quaternius Universal Animation Library 1 y 2 (CC0) en `assets/anim/`.
   - `ual1.glb`: rig Rigify (`DEF-*`, 53 huesos). Locomoción, Sword_Attack, Sword_Idle, Hit, Death01, Spell_Simple_*, Roll, Jump.
   - `ual2.glb`: rig nombres UE5 (`pelvis`, `spine_01`..., 65 huesos). Sword_Regular_A/B/C, Sword_Combo, Sword_Block, Hit_Knockback, Sword_Dash.

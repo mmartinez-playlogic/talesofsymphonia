@@ -22,6 +22,11 @@ DB="*res://src/autoload/DB.gd"
 Game="*res://src/autoload/Game.gd"
 Router="*res://src/autoload/Router.gd"
 
+[debug]
+
+gdscript/warnings/inference_on_variant=1
+gdscript/warnings/untyped_declaration=0
+
 [display]
 
 window/size/viewport_width=1920
