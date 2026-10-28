@@ -3,6 +3,7 @@ extends Field
 
 func build() -> void:
 	map_id = "iselia_forest"
+	bgm = "field"
 	map_title = "Bosque de Iselia"
 	encounter_table = "iselia_forest"
 	spawns["default"] = Vector3(0, 0.1, 18)

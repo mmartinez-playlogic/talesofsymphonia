@@ -120,20 +120,28 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("move_down"):
 		_cursor = (_cursor + 1) % Game.SLOT_COUNT
 		_confirm_overwrite = false
+		Audio.sfx("ui_cursor")
 	elif event.is_action_pressed("move_up"):
 		_cursor = (_cursor - 1 + Game.SLOT_COUNT) % Game.SLOT_COUNT
 		_confirm_overwrite = false
+		Audio.sfx("ui_cursor")
 	elif event.is_action_pressed("confirm"):
 		if _mode == "save":
 			if Game.save_exists(_cursor) and not _confirm_overwrite:
 				_confirm_overwrite = true
+				Audio.sfx("ui_error")
 			else:
 				Game.save(_cursor, _pos)
+				Audio.sfx("save")
 				_result = _cursor
 		else:
 			if Game.save_exists(_cursor) and Game.load_save(_cursor):
+				Audio.sfx("save")
 				_result = _cursor
+			else:
+				Audio.sfx("ui_error")
 	elif event.is_action_pressed("cancel") or event.is_action_pressed("menu"):
+		Audio.sfx("ui_cancel")
 		if _confirm_overwrite:
 			_confirm_overwrite = false
 		else:

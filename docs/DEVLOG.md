@@ -180,3 +180,20 @@ Mateo en reunión: NADA se ha ejecutado (ni Godot headless). Todo escrito a cieg
 - Título nuevo: degradado, Torre de la Salvación, Continuar abre las ranuras y sale gris sin partidas.
 - Menú de pausa y menú de guardado bloquean al jugador mientras están abiertos (lo destapó el test).
 - Nuevo `tools/FlowTest.tscn` (36 pruebas con pulsaciones reales) añadido a `tools/run_all_tests.sh`.
+
+## 2026-10-28 — Sesión 3l (harness: Claude Code 2.1.287, Opus 5.5) — música y efectos
+- No se usan las pistas de Motoi Sakuraba (copyright). Banda sonora ORIGINAL compuesta nota a nota en
+  `tools/compose_music.py` y sintetizada con `tools/audio_synth.py` (numpy; instrumentos sintetizados: lead, flauta,
+  metales, cuerdas, pad, órgano, piano, campana, arpa Karplus-Strong, bajo, timbal, batería; reverb por convolución).
+  13 pistas OGG en `assets/audio/music/` (~10 MB): title, iselia, field, temple, battle, boss, victory, sad, tension,
+  world, desert, gameover, ending. Bucles sin corte (la cola se pliega al inicio).
+- 42 efectos en `assets/audio/sfx/` generados con `tools/make_sfx.py`: UI, tajos, golpes, crítico, guardia, KO,
+  magia por elemento, curación, artes, Over Limit, Unison, encuentro, anillo, aturdir, objetos, cofre, monedas,
+  guardar, puerta, subida de nivel, título, skit, cocina, explosión, destello.
+- Generar: `python3 -m venv <dir> && <dir>/bin/pip install numpy` y `<dir>/bin/python tools/compose_music.py` /
+  `tools/make_sfx.py`. Codifica con `sox` (el ffmpeg de Homebrew de este Mac está roto: falta libx265).
+- `src/autoload/Audio.gd`: música con fundido cruzado y bucle, 14 canales de efectos, límite de repetición.
+  Cada mapa declara `bgm`; combate/jefe, victoria, Game Over, título y final con su pista; tensión en el ataque a
+  Iselia y en el rancho, tristeza en la muerte de Marble y el destierro.
+- `tools/AudioTest.tscn` (90/90): todos los ids de audio usados en el código existen, cada escena suena con su pista,
+  y un combate jugado con teclas dispara tajos, golpes, críticos, artes, magia, ataques enemigos y subida de nivel.

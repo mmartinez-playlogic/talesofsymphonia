@@ -62,6 +62,7 @@ func _attack(atk: Dictionary) -> void:
 	if not model.anim or not model.anim.has_animation(anim):
 		anim = anim_name("attack1")
 	model.play(anim, 0.06, 1.0, true)
+	Audio.sfx("enemy_attack", -4.0)
 	var length := model.anim_length(anim)
 	action_timer = min(length, 1.4)
 	var power := float(atk.get("power", 1.0))

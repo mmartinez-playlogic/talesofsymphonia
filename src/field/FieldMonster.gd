@@ -60,6 +60,7 @@ func _pick_target() -> void:
 
 ## Sorcerer's Ring hit: freeze in place and glow blue; touching a stunned monster gives player advantage.
 func stun(seconds: float) -> void:
+	Audio.sfx("stun")
 	stun_t = seconds
 	if _stun_mat == null:
 		_stun_mat = StandardMaterial3D.new()

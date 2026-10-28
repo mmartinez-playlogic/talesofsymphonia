@@ -35,6 +35,10 @@ func _ready() -> void:
 	add_child(camera)
 	_spawn_party()
 	_spawn_enemies()
+	var boss := false
+	for e in enemies:
+		boss = boss or e.is_boss
+	Audio.play_music("boss" if boss else "battle", 0.2, true)
 	camera.global_position = Vector3(0, 4, 14)
 	camera.current = true
 	phase = Phase.INTRO
@@ -242,6 +246,11 @@ func on_damage(attacker: Battler, victim: Battler, dmg: int, crit: bool) -> void
 		_max_combo = max(_max_combo, hud.combo_hits())
 	if crit:
 		camera.shake(0.12)
+		Audio.sfx("crit")
+	elif dmg > victim.stats["max_hp"] * 0.12:
+		Audio.sfx("hit_heavy", -2.0)
+	else:
+		Audio.sfx("hit", -2.0)
 	Effects.flash(_fx_root, victim.global_position + Vector3(0, 1.0, 0.3), Color(1, 1, 1, 0.8), 0.25)
 
 func spawn_popup(pos: Vector3, text: String, color: Color, scale_f := 1.0) -> void:
@@ -294,6 +303,13 @@ func spawn_projectile(b: Battler, arte: Dictionary) -> void:
 func resolve_spell(caster: PlayerBattler, a: Dictionary) -> void:
 	var kind: String = a.get("type", "spell")
 	var elem: String = a.get("element", "none")
+	match kind:
+		"heal":
+			Audio.sfx("heal")
+		"support":
+			Audio.sfx("buff")
+		_:
+			Audio.sfx({"fire": "fire", "earth": "earth", "water": "water", "wind": "wind", "lightning": "lightning", "light": "light"}.get(elem, "fire"))
 	var color := Effects.element_color(elem)
 	match kind:
 		"heal":
@@ -369,6 +385,7 @@ func try_unison() -> void:
 		return
 	unison_gauge = 0.0
 	phase = Phase.UNISON
+	Audio.sfx("unison")
 	hud.show_center("¡UNISON ATTACK!", 1.2)
 	camera.shake(0.2)
 	for e in enemies:
@@ -445,6 +462,7 @@ func _check_end() -> void:
 		_lose()
 
 func _win() -> void:
+	Audio.play_music("victory", 0.1, true)
 	for b in party:
 		if b.is_alive():
 			b.velocity = Vector3.ZERO
@@ -478,6 +496,7 @@ func _win() -> void:
 		var line: String = "%s  Lv %d" % [b.display_name, Game.members[b.id]["level"]]
 		if gained.size() > 0:
 			line += "   [color=#80ff80]¡Subida de nivel!  +%d[/color]" % gained.size()
+			Audio.sfx("level_up")
 			b.stats["max_hp"] = Game.max_hp(b.id)
 			b.stats["max_tp"] = Game.max_tp(b.id)
 			var new_artes: Array = Game.members[b.id]["artes"].filter(func(x): return not b.known_artes.has(x))
@@ -492,6 +511,7 @@ func _win() -> void:
 	_results_ready = true
 
 func _lose() -> void:
+	Audio.play_music("gameover", 0.5, true)
 	hud.show_center("Derrota...", 2.0)
 	await get_tree().create_timer(2.2).timeout
 	hud.show_results("[b]Game Over[/b]\n\nLa party ha caído.\n\n[color=#aaaaaa]Pulsa Confirmar para volver al título[/color]")

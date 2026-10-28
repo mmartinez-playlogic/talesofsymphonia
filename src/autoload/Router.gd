@@ -56,6 +56,7 @@ func start_battle(encounter: Dictionary) -> void:
 		return
 	_pending_battle = encounter
 	_busy = true
+	Audio.sfx("encounter")
 	await _battle_swirl()
 	get_tree().change_scene_to_file("res://src/battle/Battle.tscn")
 	await get_tree().process_frame

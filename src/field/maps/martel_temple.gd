@@ -9,6 +9,7 @@ func ambient_energy() -> float: return 1.2
 
 func build() -> void:
 	map_id = "martel_temple"
+	bgm = "temple"
 	map_title = "Templo de Martel · Interior"
 	encounter_table = "martel_temple"
 	spawns["default"] = Vector3(0, 0.1, 30)

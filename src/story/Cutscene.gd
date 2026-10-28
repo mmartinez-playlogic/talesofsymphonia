@@ -199,7 +199,14 @@ func fade_in(d := 0.4) -> void:
 	await Router.fade_in(d)
 
 func flash(color := Color(1, 1, 1), d := 0.5) -> void:
+	Audio.sfx("flash")
 	await Router.flash(color, d)
+
+func music(id: String, fade := 1.0) -> void:
+	Audio.play_music(id, fade)
+
+func sfx(id: String) -> void:
+	Audio.sfx(id)
 
 func shake_camera(strength := 0.3, d := 0.5) -> void:
 	await field.camera.shake(strength, d)
@@ -225,15 +232,18 @@ func has(name: String) -> bool:
 
 func give_item(item_id: String, count := 1) -> void:
 	Game.add_item(item_id, count)
+	Audio.sfx("key_item" if DB.items.get(item_id, {}).get("type", "") == "key" else "item")
 	var n: String = DB.items.get(item_id, {}).get("name", item_id)
 	await caption("Has obtenido: %s%s" % [n, (" x%d" % count) if count > 1 else ""], 1.6)
 
 func give_gald(amount: int) -> void:
 	Game.gald += amount
+	Audio.sfx("coins")
 	await caption("Has obtenido %d Gald" % amount, 1.4)
 
 func join(char_id: String) -> void:
 	Game.add_member(char_id)
+	Audio.sfx("key_item")
 	var n: String = DB.characters.get(char_id, {}).get("name", char_id)
 	await caption("%s se une al grupo" % n, 1.8)
 

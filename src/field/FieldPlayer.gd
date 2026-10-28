@@ -84,6 +84,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("arte") and Game.has_item("sorcerers_ring") and _ring_cd <= 0:
 		get_viewport().set_input_as_handled()
 		_ring_cd = 0.6
+		Audio.sfx("ring")
 		var shot := RingShot.new()
 		get_parent().add_child(shot)
 		var fwd := Vector3(sin(rotation.y), 0, cos(rotation.y))

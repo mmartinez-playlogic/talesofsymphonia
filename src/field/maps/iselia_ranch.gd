@@ -6,6 +6,7 @@ func sun_color() -> Color: return Color(0.95, 0.85, 0.8)
 
 func build() -> void:
 	map_id = "iselia_ranch"
+	bgm = "tension"
 	map_title = "Rancho humano de Iselia"
 	encounter_table = "iselia_ranch"
 	spawns["default"] = Vector3(-26, 0.1, 0)

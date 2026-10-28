@@ -139,15 +139,20 @@ func _unhandled_input(event: InputEvent) -> void:
 	var n := _entries.size()
 	if event.is_action_pressed("move_down") and n > 0:
 		_cursor = (_cursor + 1) % n
+		Audio.sfx("ui_cursor")
 	elif event.is_action_pressed("move_up") and n > 0:
 		_cursor = (_cursor - 1 + n) % n
+		Audio.sfx("ui_cursor")
 	elif event.is_action_pressed("move_right") and _mode != "top":
 		_qty = min(99, _qty + 1)
+		Audio.sfx("ui_cursor")
 	elif event.is_action_pressed("move_left") and _mode != "top":
 		_qty = max(1, _qty - 1)
+		Audio.sfx("ui_cursor")
 	elif event.is_action_pressed("confirm"):
 		_confirm()
 	elif event.is_action_pressed("cancel") or event.is_action_pressed("menu"):
+		Audio.sfx("ui_cancel")
 		_msg = ""
 		if _mode == "top":
 			_closed = true
@@ -162,6 +167,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _confirm() -> void:
 	_msg = ""
+	if _mode == "top":
+		Audio.sfx("ui_confirm")
 	match _mode:
 		"top":
 			match _cursor:
@@ -177,8 +184,10 @@ func _confirm() -> void:
 				return
 			var id: String = _entries[_cursor]
 			if Game.buy(id, _qty):
+				Audio.sfx("coins")
 				_msg = "Has comprado %s x%d." % [DB.items[id]["name"], _qty]
 			else:
+				Audio.sfx("ui_error")
 				_msg = "No tienes suficiente Gald."
 		"sell":
 			if _entries.is_empty():
@@ -186,6 +195,7 @@ func _confirm() -> void:
 			var id: String = _entries[_cursor]
 			var q: int = min(_qty, Game.item_count(id))
 			if Game.sell(id, q):
+				Audio.sfx("coins")
 				_msg = "Has vendido %s x%d." % [DB.items[id]["name"], q]
 				if not Game.has_item(id):
 					_cursor = max(0, _cursor - 1)

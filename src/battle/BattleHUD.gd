@@ -274,6 +274,7 @@ func _apply_item(item_id: String, b: PlayerBattler) -> bool:
 		if fx.has("cure"):
 			b.status = ""
 	Game.add_item(item_id, -1)
+	Audio.sfx("heal")
 	announce_arte(DB.items[item_id]["name"])
 	return true
 

@@ -12,6 +12,7 @@ $G res://tools/CombatTest.tscn -- --runs 5 > "$OUT/combat.log" 2>&1
 $G res://tools/QATest.tscn       > "$OUT/qa.log" 2>&1
 $G res://tools/Playthrough.tscn  > "$OUT/play.log" 2>&1
 $G res://tools/FlowTest.tscn     > "$OUT/flow.log" 2>&1
+$G res://tools/AudioTest.tscn    > "$OUT/audio.log" 2>&1
 echo "===== REGRESSION SUMMARY ====="
 echo "check:    $(grep -h 'CHECKED' $OUT/check.log)  script errors: $(grep -c 'SCRIPT ERROR' $OUT/check.log)"
 echo "smoke:    script errors: $(grep -c 'SCRIPT ERROR' $OUT/smoke.log)  scenarios: $(grep -c '=== SCENARIO' $OUT/smoke.log)"
@@ -20,4 +21,5 @@ echo "combat:   $(grep -h 'COMBAT TEST DONE' $OUT/combat.log)  script errors: $(
 echo "qa:       $(grep -h 'QA TEST DONE' $OUT/qa.log)  script errors: $(grep -c 'SCRIPT ERROR' $OUT/qa.log)"
 echo "play:     $(grep -h 'PLAYTHROUGH DONE' $OUT/play.log)  script errors: $(grep -c 'SCRIPT ERROR' $OUT/play.log)"
 echo "flow:     $(grep -h 'FLOW TEST DONE' $OUT/flow.log)  script errors: $(grep -c 'SCRIPT ERROR' $OUT/flow.log)"
+echo "audio:    $(grep -h 'AUDIO TEST DONE' $OUT/audio.log)  script errors: $(grep -c 'SCRIPT ERROR' $OUT/audio.log)"
 for f in $OUT/*.log; do grep -h -E "^\s*\[FAIL\]|^\[FAIL" "$f" | sed "s|^|$(basename $f): |" | head -5; done

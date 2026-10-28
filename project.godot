@@ -21,6 +21,7 @@ config/icon="res://icon.svg"
 DB="*res://src/autoload/DB.gd"
 Game="*res://src/autoload/Game.gd"
 Router="*res://src/autoload/Router.gd"
+Audio="*res://src/autoload/Audio.gd"
 
 [debug]
 

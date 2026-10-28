@@ -7,6 +7,7 @@ func ambient_energy() -> float: return 1.1
 
 func build() -> void:
 	map_id = "iselia_school"
+	bgm = "iselia"
 	map_title = "Iselia · Escuela"
 	spawns["default"] = Vector3(3, 0.1, 2)
 	spawns["from_village"] = Vector3(0, 0.1, 6)

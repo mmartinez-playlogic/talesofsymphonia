@@ -111,6 +111,7 @@ func add_ol(amount: float) -> void:
 	if ol_gauge >= 100.0:
 		ol_gauge = 0.0
 		over_limit_t = 8.0
+		Audio.sfx("over_limit")
 		manager.spawn_popup(global_position + Vector3(0, 2.1, 0), "OVER LIMIT", Color(1, 0.6, 0.2), 0.8)
 		Effects.ring(manager._fx_root, global_position, Color(1, 0.5, 0.1), 2.5, 0.6)
 
@@ -175,6 +176,7 @@ func take_hit(attacker: Battler, dmg: int, knock: float, crit: bool, magical: bo
 		return
 	var blocked: bool = guarding and attacker != null and (int(sign(attacker.global_position.x - global_position.x)) == facing)
 	if blocked:
+		Audio.sfx("guard")
 		dmg = int(dmg * 0.25)
 		manager.spawn_popup(global_position + Vector3(0, 1.6, 0), "GUARD", Color(0.6, 0.8, 1.0))
 	dmg = max(1, dmg)
@@ -227,6 +229,7 @@ func revive(ratio: float) -> void:
 	play_idle()
 
 func _die() -> void:
+	Audio.sfx("ko" if player_side else "enemy_die")
 	state = State.DEAD
 	pending_hits.clear()
 	hitstun = 0.0
@@ -351,6 +354,8 @@ func start_attack(step: int, power := 1.0, range_x := 1.8, knock := 1.2, elem :=
 	face_target()
 	var kind := "attack%d" % clamp(step, 1, 3)
 	var length := play(kind, speed, true)
+	if player_side:
+		Audio.sfx("slash%d" % clamp(step, 1, 3), -3.0)
 	action_timer = length
 	var hit_at: float = length * (0.4 if step < 3 else 0.35)
 	schedule_hit(hit_at, func():

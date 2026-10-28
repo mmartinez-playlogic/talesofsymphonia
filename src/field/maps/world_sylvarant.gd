@@ -3,6 +3,7 @@ extends Field
 
 func build() -> void:
 	map_id = "world_sylvarant"
+	bgm = "world"
 	map_title = "Sylvarant"
 	encounter_table = "world_sylvarant_south"
 	spawns["default"] = Vector3(70, 0.1, -84)

@@ -36,6 +36,8 @@ func _ready() -> void:
 	add_child(dialogue)
 	cs = Cutscene.new(self)
 	build()
+	if bgm != "":
+		Audio.play_music(bgm)
 	_spawn_player()
 	_spawn_monsters()
 	_build_hud()
@@ -197,6 +199,7 @@ func _build_hud() -> void:
 	Game.title_earned.connect(_on_title_earned)
 
 func _on_title_earned(char_id: String, title_id: String) -> void:
+	Audio.sfx("title_get")
 	if dialogue:
 		dialogue.show_caption("%s ha obtenido el título «%s»" % [str(DB.characters.get(char_id, {}).get("name", char_id)).split(" ")[0], DB.titles[title_id]["name"]], 2.2)
 
@@ -213,8 +216,10 @@ func inn(price: int, keeper := "Posadero") -> void:
 		await dialogue.show_lines([{"speaker": keeper, "text": "Lo siento, no os llega el dinero."}])
 		return
 	Game.gald -= price
+	Audio.sfx("coins")
 	await Router.fade_out(0.6)
 	Game.heal_all()
+	Audio.sfx("heal")
 	await get_tree().create_timer(0.8).timeout
 	await Router.fade_in(0.6)
 	await dialogue.show_lines([{"speaker": keeper, "text": "Buenos días. Habéis dormido como troncos."}])
@@ -335,9 +340,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		var id := _available_skit
 		_available_skit = ""
 		_skit_prompt.visible = false
+		Audio.sfx("skit")
 		run_event(func(_c): await play_skit(id))
 	elif event.is_action_pressed("menu"):
 		get_viewport().set_input_as_handled()
+		Audio.sfx("ui_confirm")
 		run_event(func(_c): await _pause.open())
 
 func play_skit(skit_id: String) -> void:
@@ -680,6 +687,7 @@ func add_exit(pos: Vector3, size: Vector3, target_map: String, spawn: String, co
 			return
 		player.can_move = false
 		Game.last_field_position = Vector3.ZERO
+		Audio.sfx("door")
 		Router.goto_map(target_map, spawn)
 	)
 	return area

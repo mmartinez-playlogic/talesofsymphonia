@@ -3,6 +3,7 @@ extends Field
 
 func build() -> void:
 	map_id = "martel_temple_ext"
+	bgm = "field" if Game.get_flag("vidarr_defeated", false) else "tension"
 	map_title = "Templo de Martel"
 	spawns["default"] = Vector3(0, 0.1, 26)
 	spawns["from_inside"] = Vector3(0, 0.1, -20)
@@ -135,6 +136,7 @@ func _vidarr(c: Cutscene) -> void:
 	return
 
 func _kratos_intro(c: Cutscene) -> void:
+	c.music("field")
 	c.flag("vidarr_defeated")
 	c.teleport("player", Vector3(0, 0.1, 4), 180.0)
 	c.spawn("genis", "genis", Vector3(-2, 0, 7), 180.0, "Genis")

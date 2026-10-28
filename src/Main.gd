@@ -77,6 +77,7 @@ func _ready() -> void:
 	_has_save = Game.any_save()
 	_cursor = 1 if _has_save else 0
 	_refresh()
+	Audio.play_music("title", 1.5)
 
 func _process(delta: float) -> void:
 	_t += delta
@@ -97,12 +98,18 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if event.is_action_pressed("move_down"):
 		_cursor = (_cursor + 1) % _options.size()
+		Audio.sfx("ui_cursor")
 		_refresh()
 	elif event.is_action_pressed("move_up"):
 		_cursor = (_cursor - 1 + _options.size()) % _options.size()
+		Audio.sfx("ui_cursor")
 		_refresh()
 	elif event.is_action_pressed("confirm"):
 		get_viewport().set_input_as_handled()
+		if _cursor == 1 and not _has_save:
+			Audio.sfx("ui_error")
+		else:
+			Audio.sfx("ui_confirm")
 		match _cursor:
 			0:
 				_busy = true

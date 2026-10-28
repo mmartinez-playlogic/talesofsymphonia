@@ -4,6 +4,7 @@ extends Field
 
 func build() -> void:
 	map_id = "iselia_village"
+	bgm = "tension" if (Game.get_flag("raid_started", false) and not Game.get_flag("exiled", false)) else "iselia"
 	map_title = "Iselia · Aldea del Oráculo"
 	spawns["default"] = Vector3(0, 0.1, 20)
 	spawns["from_world"] = Vector3(0, 0.1, 24)
@@ -257,8 +258,10 @@ func _letter(c: Cutscene) -> void:
 		{"speaker": "Lloyd", "text": "Esto... parece un testamento."},
 		{"speaker": "Frank", "text": "Podría decirse así. Lloyd, hay algo que debes saber. Colette... no, la Elegida... ya está..."},
 	])
+	c.sfx("explosion")
 	await c.shake_camera(0.5, 0.8)
 	await c.flash(Color(1, 0.5, 0.3), 0.6)
+	c.music("tension")
 	await c.script("iselia_village.letter.03", [
 		{"speaker": "Genis", "text": "¡¿Qué ha sido eso?! ¡Una explosión!"},
 		{"speaker": "Phaidra", "text": "¡Humo! ¡La aldea está ardiendo!"},
@@ -342,6 +345,7 @@ func _forcystus(c: Cutscene) -> void:
 	await _plaza(c)
 
 func _marble_death(c: Cutscene) -> void:
+	c.music("sad")
 	c.teleport("player", Vector3(0, 0.1, 4), 180.0)
 	c.spawn("genis", "genis", Vector3(-1.5, 0, 5), 180.0, "Genis")
 	c.spawn("forcystus", "forcystus", Vector3(0, 0, -8), 0.0, "Forcystus")
@@ -361,6 +365,7 @@ func _marble_death(c: Cutscene) -> void:
 		{"speaker": "Genis", "text": "¿Esa voz? ¡¿Marble?! ¡No! ¡¿Qué le habéis hecho?!"},
 		{"speaker": "Marble", "text": "Genis... has sido como un nieto para mí. Gracias... Adiós..."},
 	])
+	c.sfx("explosion")
 	await c.flash(Color(1, 1, 1), 1.2)
 	await c.shake_camera(0.5, 0.8)
 	c.despawn("exbelua")

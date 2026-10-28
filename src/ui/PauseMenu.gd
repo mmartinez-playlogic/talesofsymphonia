@@ -304,9 +304,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	var n := MAIN.size() if _mode == "main" else _entries.size()
 	if event.is_action_pressed("move_down") and n > 0:
 		_cursor = (_cursor + 1) % n
+		Audio.sfx("ui_cursor")
 		_render()
 	elif event.is_action_pressed("move_up") and n > 0:
 		_cursor = (_cursor - 1 + n) % n
+		Audio.sfx("ui_cursor")
 		_render()
 	elif event.is_action_pressed("move_right") and _mode == "artes":
 		_slot_sel = (_slot_sel + 1) % 3
@@ -321,8 +323,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		Game.set_ex_gem(_char_sel, int(_entries[_cursor]), "")
 		_render()
 	elif event.is_action_pressed("confirm"):
+		Audio.sfx("ui_confirm")
 		_confirm()
 	elif event.is_action_pressed("cancel") or event.is_action_pressed("menu"):
+		Audio.sfx("ui_cancel")
 		_msg = ""
 		if _mode == "main":
 			_closed = true
@@ -383,6 +387,7 @@ func _confirm() -> void:
 			if _entries.is_empty():
 				return
 			if Game.use_item(_item_sel, _entries[_cursor]):
+				Audio.sfx("heal")
 				_msg = "Has usado %s." % _item_name(_item_sel)
 				if not Game.has_item(_item_sel):
 					_mode = "items"
@@ -438,6 +443,7 @@ func _confirm() -> void:
 			if _entries.is_empty():
 				return
 			var r: Dictionary = Game.cook(_recipe_sel, _entries[_cursor])
+			Audio.sfx("cook" if r["ok"] else "ui_error")
 			_msg = r["msg"]
 			_mode = "cook"
 			_cursor = 0

@@ -185,6 +185,7 @@ func use_arte(arte_id: String) -> bool:
 	return true
 
 func _melee_arte(_arte_id: String, a: Dictionary) -> void:
+	Audio.sfx("arte")
 	state = State.ARTE
 	var anim: String = a.get("anim", "Sword_Regular_A")
 	var speed := 1.0 if anim != "Sword_Regular_C" and anim != "Sword_Regular_Combo" else 1.5
@@ -205,6 +206,7 @@ func _melee_arte(_arte_id: String, a: Dictionary) -> void:
 		)
 
 func _cast(_arte_id: String, a: Dictionary) -> void:
+	Audio.sfx("cast", -3.0)
 	state = State.CAST
 	velocity = Vector3.ZERO
 	var cast_time := float(a.get("cast", 1.2)) * (1.0 + float(ex.get("cast", 0.0)))

@@ -174,14 +174,17 @@ func _unhandled_input(event: InputEvent) -> void:
 	if _choice_active:
 		if event.is_action_pressed("move_down"):
 			_choice_cursor = (_choice_cursor + 1) % _choice_labels.size()
+			Audio.sfx("ui_cursor")
 			_refresh_choice()
 			get_viewport().set_input_as_handled()
 		elif event.is_action_pressed("move_up"):
 			_choice_cursor = (_choice_cursor - 1 + _choice_labels.size()) % _choice_labels.size()
+			Audio.sfx("ui_cursor")
 			_refresh_choice()
 			get_viewport().set_input_as_handled()
 		elif event.is_action_pressed("confirm"):
 			get_viewport().set_input_as_handled()
+			Audio.sfx("ui_confirm")
 			choice_made.emit(_choice_cursor)
 		return
 	if not _active:
@@ -192,6 +195,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			_skip_requested = true
 			return
 		_index += 1
+		Audio.sfx("text", -6.0, 0.0)
 		if _index >= _lines.size():
 			_active = false
 			_panel.visible = false

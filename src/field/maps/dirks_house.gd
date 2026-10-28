@@ -13,6 +13,7 @@ func sun_color() -> Color: return Color(1.0, 0.75, 0.55) if _evening else Color(
 
 func build() -> void:
 	map_id = "dirks_house"
+	bgm = "iselia"
 	map_title = "Casa de Dirk"
 	spawns["default"] = Vector3(0, 0.1, 20)
 	add_ground(Vector2(60, 56), Color(0.3, 0.52, 0.27))
@@ -99,6 +100,7 @@ func _argument(c: Cutscene) -> void:
 		{"speaker": "Dirk", "text": "¡He dicho que no!"},
 		{"speaker": "", "text": "(Dirk golpea a Lloyd. Lloyd cae al suelo y sale de la casa hecho una furia.)"},
 	])
+	c.sfx("hit_heavy")
 	await c.fade_out()
 	c.teleport("player", Vector3(0, 0.1, 6), 0.0)
 	c.spawn("raine", "raine", Vector3(-3, 0, 10), 0.0, "Raine")

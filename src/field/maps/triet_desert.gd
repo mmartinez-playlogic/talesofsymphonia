@@ -8,6 +8,7 @@ func sun_color() -> Color: return Color(1.0, 0.92, 0.75)
 
 func build() -> void:
 	map_id = "triet_desert"
+	bgm = "desert"
 	map_title = "Desierto de Triet"
 	encounter_table = "triet_desert"
 	spawns["default"] = Vector3(52, 0.1, 0)

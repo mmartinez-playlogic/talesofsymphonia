@@ -66,6 +66,7 @@ func _ready() -> void:
 	_save_menu = SaveMenu.new()
 	add_child(_save_menu)
 	_refresh()
+	Audio.play_music("ending", 2.0)
 	modulate.a = 0.0
 	create_tween().tween_property(self, "modulate:a", 1.0, 1.2)
 
@@ -90,9 +91,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if event.is_action_pressed("move_down") or event.is_action_pressed("move_up"):
 		_cursor = 1 - _cursor
+		Audio.sfx("ui_cursor")
 		_refresh()
 	elif event.is_action_pressed("confirm"):
 		get_viewport().set_input_as_handled()
+		Audio.sfx("ui_confirm")
 		if _cursor == 0:
 			_busy = true
 			var slot: int = await _save_menu.open_save(Vector3(-50, 0.1, 0))
