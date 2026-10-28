@@ -1,0 +1,1596 @@
+{
+ "iselia_school.intro.01": [
+  {
+   "speaker": "Raine",
+   "text": "...y así, el maná que recorre el mundo nace del Gran Árbol de Kharlan. Sin maná no crecen las cosechas, no fluye la magia y los Espíritus Invocadores duermen. ¿Alguna pregunta? ...Lloyd Irving."
+  },
+  {
+   "speaker": "",
+   "text": "(Un borrador de pizarra cruza el aula y golpea a Lloyd en plena frente.)"
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¡Au! ...¿Eh? ¿Qué...? ¿Ya se ha acabado la clase?"
+  },
+  {
+   "speaker": "Raine",
+   "text": "Qué más quisieras tú. Llevas media lección roncando. Genis, ¿puedes responder tú por tu amigo? ¿Cómo terminó la Guerra Antigua?"
+  },
+  {
+   "speaker": "Genis",
+   "text": "El héroe Mithos puso fin a la Guerra de Kharlan en la Tierra Sagrada de Kharlan, sellando la paz entre las dos naciones que llevaban mil años en guerra."
+  },
+  {
+   "speaker": "Raine",
+   "text": "Correcto. Y después, Mithos selló un pacto con la diosa Martel: a cambio de la paz, la diosa encerró a los desianos."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¡Pero los desianos volvieron! ¡Si están ahí mismo, en el rancho!"
+  },
+  {
+   "speaker": "Raine",
+   "text": "Eso ya lo explicamos la semana pasada, Lloyd. Cuando el sello de la diosa se debilita, los desianos reaparecen y la gente vuelve a sufrir. Si hubieras estado despierto lo sabrías."
+  },
+  {
+   "speaker": "Raine",
+   "text": "Lo cual nos lleva a hoy. Hoy es el Día de la Profecía: el día en que la Elegida del Maná recibe el oráculo de la diosa Martel. Colette, ¿puedes explicarnos qué es el viaje de regeneración del mundo?"
+  },
+  {
+   "speaker": "Colette",
+   "text": "¡Sí! Es un viaje para sellar a los desianos."
+  },
+  {
+   "speaker": "Raine",
+   "text": "Bien, pero falta la mitad. Cuando el maná escasea, las cosechas fallan y llegan las sequías. Los desianos, además, consumen maná en sus ranchos humanos. Por eso el viaje de la Elegida tiene dos propósitos: recuperar el maná del mundo y derrotar a los desianos."
+  },
+  {
+   "speaker": "Raine",
+   "text": "Y una vez regenerado el mundo, la Elegida... Bueno. Eso lo veremos otro día."
+  }
+ ],
+ "iselia_school.intro.02": [
+  {
+   "speaker": "Genis",
+   "text": "¡¿Qué ha sido esa luz?! ¡Ha temblado todo el aula!"
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¡Venía del norte! ¡Del Templo de Martel!"
+  },
+  {
+   "speaker": "Raine",
+   "text": "Parece que ha llegado la hora del oráculo. Es antes de lo que esperábamos. Voy a la capilla a comprobar qué ocurre. Vosotros os quedáis aquí y estudiáis por vuestra cuenta: páginas veinte a veinticuatro."
+  },
+  {
+   "speaker": "Colette",
+   "text": "Profesora Raine, ¿no debería ir yo también? Si es el oráculo..."
+  },
+  {
+   "speaker": "Raine",
+   "text": "No. Los sacerdotes vendrán a buscarte aquí cuando esté todo preparado. Es lo que manda el protocolo. Que nadie, y digo nadie, salga del aula. ¿Está claro, Lloyd?"
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¡¿Por qué me lo dices a mí?!"
+  },
+  {
+   "speaker": "Raine",
+   "text": "Porque te conozco."
+  }
+ ],
+ "iselia_school.intro.03": [
+  {
+   "speaker": "Lloyd",
+   "text": "...Se ha ido. Oye, Genis. Quiero ver con mis propios ojos qué pasa en el oráculo. Un ángel de verdad, delante de nosotros. ¿No te da curiosidad?"
+  },
+  {
+   "speaker": "Genis",
+   "text": "¡Lloyd! ¡Raine acaba de decir que no salgamos del aula! ¡Y te lo ha dicho a ti por tu nombre!"
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Tecnicismos."
+  }
+ ],
+ "iselia_school.intro.04": [
+  {
+   "speaker": "Lloyd",
+   "text": "Es por investigación. Como cuando Raine se mete en unas ruinas. Si ella puede, nosotros también."
+  },
+  {
+   "speaker": "Genis",
+   "text": "Eso no es investigación, es cotillear. Y mi hermana nos va a matar a los dos."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Pues moriremos sabiendo cómo es un ángel."
+  }
+ ],
+ "iselia_school.intro.05": [
+  {
+   "speaker": "Lloyd",
+   "text": "Vale, está bien... Tienes razón. Pero es que es el día de Colette. Su día. ¿Y vamos a dejarla sola con los sacerdotes?"
+  },
+  {
+   "speaker": "Genis",
+   "text": "Ya sé lo que viene ahora. Y sé que voy a acabar diciendo que sí."
+  }
+ ],
+ "iselia_school.intro.06": [
+  {
+   "speaker": "Lloyd",
+   "text": "Genis, somos los mejores amigos, ¿no? Ven conmigo. Y tú también, Colette: es tu oráculo, no el de los sacerdotes."
+  },
+  {
+   "speaker": "Colette",
+   "text": "Si Lloyd tiene curiosidad... yo también la tengo. Jeje."
+  },
+  {
+   "speaker": "Genis",
+   "text": "Colette, no le des la razón..."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Juramento Enano número cuatro: «No dependas de los demás. Camina con tus propias piernas». Eso es lo que vamos a hacer."
+  },
+  {
+   "speaker": "Genis",
+   "text": "Siempre usas los Juramentos Enanos como excusa para hacer lo que te da la gana."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¡Y funciona!"
+  }
+ ],
+ "iselia_village.frank.01": [
+  {
+   "speaker": "Genis",
+   "text": "Qué raro... No hay nadie en la calle. Ni en la plaza. Es como si la aldea entera se hubiera escondido."
+  },
+  {
+   "speaker": "Frank",
+   "text": "¡Colette! ¡Lloyd, Genis! ¿Qué hacéis fuera de la escuela? Todo el mundo está encerrado en casa: los desianos han entrado en la aldea hace un rato."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¡¿Desianos?! ¡¿Aquí?! ¿Han hecho daño a alguien?"
+  },
+  {
+   "speaker": "Frank",
+   "text": "No. Han cruzado la aldea sin tocar a nadie, en dirección al templo. Eso es lo que me preocupa."
+  },
+  {
+   "speaker": "Genis",
+   "text": "Pero no tiene sentido. Iselia tiene un tratado de no agresión con los desianos del rancho..."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Sí: ellos no atacan la aldea mientras nosotros no nos acerquemos al rancho humano. Ese es el trato."
+  },
+  {
+   "speaker": "Colette",
+   "text": "Mi abuela dice que el tratado existe para protegerme a mí. Para que la Elegida llegue sana y salva al día de hoy."
+  },
+  {
+   "speaker": "Frank",
+   "text": "Y hoy es ese día. Phaidra está en el templo preparando el ritual con los sacerdotes. Colette, cumple con tu deber. Lloyd, Genis: vosotros a casa, por favor."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Ni hablar. Si hay desianos en el templo, no pienso dejar que Colette vaya sola. Yo la acompaño."
+  },
+  {
+   "speaker": "Genis",
+   "text": "Y yo. Si Lloyd va, yo también. Alguien tiene que vigilar que no haga ninguna tontería."
+  },
+  {
+   "speaker": "Frank",
+   "text": "...Está bien. No voy a poder deteneros. Os esperaré en casa. Tened cuidado, los tres."
+  }
+ ],
+ "iselia_forest.first_fight.01": [
+  {
+   "speaker": "Colette",
+   "text": "¡Lloyd, has estado increíble! ¡Ni siquiera les has dejado acercarse!"
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Es gracias a mi Exsfera. Está hecha para el combate: saca toda la fuerza que llevo dentro. Sin ella no sería ni la mitad de rápido."
+  },
+  {
+   "speaker": "Genis",
+   "text": "Bueno, al menos con las espadas se defiende. Es lo único que se le da bien."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¡Oye!"
+  },
+  {
+   "speaker": "Colette",
+   "text": "Es raro... Este bosque es terreno sagrado, al norte de la aldea nunca ha habido monstruos. Tiene que ser parte de la prueba de la diosa Martel para la Elegida."
+  }
+ ],
+ "iselia_forest.second_fight.01": [
+  {
+   "speaker": "Colette",
+   "text": "Raine dice que la magia funciona mejor contra los monstruos espirituales, como los fantasmas. A esos no se les puede golpear bien con una espada."
+  },
+  {
+   "speaker": "Genis",
+   "text": "Entonces yo me encargo de los fantasmas con mis hechizos y Lloyd de los zombis. Lloyd, acuérdate de cambiar de objetivo con el botón de selección cuando el que tengas delante no sea el tuyo."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¡Entendido! Tú lanza fuego y yo corto. Como siempre."
+  }
+ ],
+ "martel_temple_ext.pastor.01": [
+  {
+   "speaker": "Genis",
+   "text": "Ya casi estamos. El oráculo se va a transmitir ahí arriba, en el altar del templo. Mira cuánta luz."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Colette, ahora que lo pienso... deberías comportarte un poco más como una Elegida, ¿no? Andar con más dignidad, o algo así."
+  },
+  {
+   "speaker": "Colette",
+   "text": "¿Más... Elegida? ¡Lo intentaré! ¿Así? Ay..."
+  },
+  {
+   "speaker": "",
+   "text": "(Colette tropieza con el primer escalón.)"
+  },
+  {
+   "speaker": "Genis",
+   "text": "Déjalo, Lloyd. Es Colette."
+  }
+ ],
+ "martel_temple_ext.pastor.02": [
+  {
+   "speaker": "Pastor",
+   "text": "Elegida... Co... Colette..."
+  },
+  {
+   "speaker": "Colette",
+   "text": "¡Pastor! ¡Está herido! ¡¿Quién le ha hecho esto?!"
+  },
+  {
+   "speaker": "Pastor",
+   "text": "Corre... al oráculo... Los desianos... han subido... Lamento... no haber podido... protegerte..."
+  },
+  {
+   "speaker": "",
+   "text": "(El pastor cae al suelo y deja de moverse.)"
+  },
+  {
+   "speaker": "Colette",
+   "text": "¡Pastor! ¡Pastor, no!"
+  },
+  {
+   "speaker": "Genis",
+   "text": "Está... muerto. Lloyd, ahí arriba siguen los desianos. Los que entraron en la aldea."
+  },
+  {
+   "speaker": "Colette",
+   "text": "Tengo que ir igualmente. Es mi deber como Elegida. Aunque sea sola."
+  },
+  {
+   "speaker": "Genis",
+   "text": "Lloyd, ¿vas a dejar que vaya sola?"
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¡Claro que no! Juramento Enano número uno: «Trabajemos todos juntos por un mundo en paz». Colette, vamos contigo."
+  },
+  {
+   "speaker": "Genis",
+   "text": "Entonces yo también voy. Raine está ahí arriba, y si le han hecho algo..."
+  }
+ ],
+ "martel_temple_ext.botta.01": [
+  {
+   "speaker": "Desiano",
+   "text": "¡Lord Botta! ¡Ahí está! ¡La Elegida ha venido sola hasta nosotros!"
+  },
+  {
+   "speaker": "Botta",
+   "text": "Elegida del Maná... ¡Tu vida es mía!"
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¡Desianos! ¡No os acerquéis a Colette! ¡Si la queréis, tendréis que pasar por encima de mí!"
+  },
+  {
+   "speaker": "Desiano",
+   "text": "¿Desianos? ...Ja, ja, ja. Muy bien, chico: morid a manos de los desianos que tanto odiáis."
+  },
+  {
+   "speaker": "Genis",
+   "text": "¿De qué se ríe...?"
+  }
+ ],
+ "martel_temple_ext.vidarr.01": [
+  {
+   "speaker": "Botta",
+   "text": "Inútiles. Si quieres algo bien hecho... Vidarr, encárgate tú de los niños."
+  },
+  {
+   "speaker": "Vidarr",
+   "text": "¡Grrr! ¡Os voy a aplastar como a insectos!"
+  },
+  {
+   "speaker": "Genis",
+   "text": "¡Es enorme! ¡Lloyd, esa bola de hierro nos partirá en dos de un golpe!"
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¡Me da igual lo grande que sea! ¡No pienso rendirme!"
+  },
+  {
+   "speaker": "",
+   "text": "(Vidarr descarga la bola de hierro. Lloyd y Genis salen despedidos y ruedan escaleras abajo. Colette grita.)"
+  },
+  {
+   "speaker": "Colette",
+   "text": "¡Lloyd! ¡Genis!"
+  }
+ ],
+ "martel_temple_ext.vidarr.02": [
+  {
+   "speaker": "Kratos",
+   "text": "Apartaos."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¡¿Quién...?! ¿De dónde has salido?"
+  },
+  {
+   "speaker": "Kratos",
+   "text": "Si vais a luchar, cubridme el flanco. Y no os pongáis delante de esa bola de hierro, o acabaréis como el pastor."
+  },
+  {
+   "speaker": "Vidarr",
+   "text": "¡Uno más para aplastar!"
+  }
+ ],
+ "martel_temple_ext.botta.02": [
+  {
+   "speaker": "Botta",
+   "text": "...Tsk. Vidarr derrotado por un mercenario y tres críos. No pienso malgastar más hombres hoy. Nos retiramos. Elegida: esto no ha terminado."
+  }
+ ],
+ "martel_temple_ext.kratos_intro.01": [
+  {
+   "speaker": "Phaidra",
+   "text": "¡Increíble...! Nunca había visto luchar así a nadie."
+  },
+  {
+   "speaker": "Genis",
+   "text": "Este tipo es fortísimo... Ha derribado a esa mole casi sin despeinarse."
+  },
+  {
+   "speaker": "Kratos",
+   "text": "¿Alguien herido? ¿Tú, chico? ¿La chica?"
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "No, estamos bien... Oye, eso que llevas en la mano. ¿Es una Exsfera? ¿Y la llevas así, a la vista de todos?"
+  },
+  {
+   "speaker": "Kratos",
+   "text": "Sí. ...Esta chica es la próxima Elegida, ¿me equivoco?"
+  },
+  {
+   "speaker": "Colette",
+   "text": "Sí, señor. Soy Colette Brunel. Debo superar la prueba del templo y recibir el oráculo."
+  },
+  {
+   "speaker": "Kratos",
+   "text": "Hay una presencia maligna dentro del templo. Monstruos, y no pocos."
+  },
+  {
+   "speaker": "Phaidra",
+   "text": "La Elegida debe recibir el juicio del cielo en el altar, pero los sacerdotes que debían escoltarla han muerto todos a manos de los desianos. No queda nadie que pueda acompañarla."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¡Yo! ¡Yo protegeré a Colette!"
+  },
+  {
+   "speaker": "Phaidra",
+   "text": "Lloyd... Te lo agradezco, pero no me quedo tranquila solo contigo."
+  },
+  {
+   "speaker": "Kratos",
+   "text": "¿Cómo te llamas, chico?"
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¿Y tú quién eres para preguntarme el nombre?"
+  },
+  {
+   "speaker": "Kratos",
+   "text": "Kratos. Soy mercenario. Protegeré a la Elegida mientras se me pague por ello."
+  },
+  {
+   "speaker": "Phaidra",
+   "text": "Contratado. Por favor, Kratos, cuida de mi nieta. Pagaré lo que haga falta."
+  },
+  {
+   "speaker": "Kratos",
+   "text": "Hecho. Y tú, chico: solo estorbarías ahí dentro. Sé bueno y espera aquí fuera."
+  }
+ ],
+ "martel_temple_ext.kratos_intro.02": [
+  {
+   "speaker": "Lloyd",
+   "text": "¡¿Qué has dicho?! ¡Yo también he luchado contra ese monstruo!"
+  },
+  {
+   "speaker": "Kratos",
+   "text": "Y has acabado rodando por las escaleras. Eres una carga. Vete a casa."
+  }
+ ],
+ "martel_temple_ext.kratos_intro.03": [
+  {
+   "speaker": "Lloyd",
+   "text": "...Vale. Vale, lo pillo. No hace falta que lo repitas."
+  },
+  {
+   "speaker": "Kratos",
+   "text": "Bien. Al menos sabes escuchar."
+  }
+ ],
+ "martel_temple_ext.kratos_intro.04": [
+  {
+   "speaker": "Colette",
+   "text": "Señor Kratos, por favor... Deje que Lloyd venga con nosotros. Me pongo muy nerviosa cuando Lloyd no está cerca."
+  },
+  {
+   "speaker": "Kratos",
+   "text": "...Haz lo que quieras. Pero no me hago responsable de lo que le pase."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¡Vamos, Genis! ¡Tú también vienes!"
+  },
+  {
+   "speaker": "Genis",
+   "text": "¡Eh! ¡No me arrastres! ¡Que puedo andar solo!"
+  },
+  {
+   "speaker": "Kratos",
+   "text": "Esto no es una excursión escolar, niños. Mantened la boca cerrada y los ojos abiertos."
+  }
+ ],
+ "martel_temple.enter.01": [
+  {
+   "speaker": "Colette",
+   "text": "Qué raro... Conozco este templo desde pequeña y nunca se había sentido así. Como si el aire pesara."
+  },
+  {
+   "speaker": "Kratos",
+   "text": "Monstruos. Están por todo el templo. Lloyd, tu técnica con las espadas... ¿es autodidacta?"
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Sí. Me enseñé yo solo. ¿Por qué?"
+  },
+  {
+   "speaker": "Kratos",
+   "text": "Se nota. Toma esto. Al menos aprende lo básico antes de que te maten."
+  }
+ ],
+ "martel_temple.enter.02": [
+  {
+   "speaker": "Colette",
+   "text": "El camino al centro del templo está sellado. Siempre lo ha estado. Dicen que el Anillo del Hechicero que se guarda en el templo puede abrirlo... pero nunca me han dicho dónde está."
+  },
+  {
+   "speaker": "Kratos",
+   "text": "Entonces busquémoslo. Y no os separéis."
+  }
+ ],
+ "martel_temple.golem.01": [
+  {
+   "speaker": "Lloyd",
+   "text": "¡El gólem se ha convertido en un bloque de piedra!"
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Bueno... ya era una roca desde el principio, si lo piensas."
+  },
+  {
+   "speaker": "Genis",
+   "text": "Mira el suelo, Lloyd: hay agujeros. Si empujamos el bloque dentro, caerá al nivel de abajo y rellenará uno de los huecos del camino al pedestal. Y seguro que aparece otro gólem para proteger el anillo."
+  },
+  {
+   "speaker": "Kratos",
+   "text": "Entonces ya sabes lo que hay que hacer. Sigue."
+  }
+ ],
+ "martel_temple.bored.01": [
+  {
+   "speaker": "Lloyd",
+   "text": "Uf... Qué aburrimiento de puzle. Gólem, bloque, agujero. Gólem, bloque, agujero."
+  },
+  {
+   "speaker": "Genis",
+   "text": "Te aburres enseguida, Lloyd. Por eso no apruebas nada."
+  }
+ ],
+ "martel_temple.pedestal_locked.01": [
+  {
+   "speaker": "",
+   "text": "(El pedestal del anillo está al otro lado de un hueco en el suelo. Unos gólems de piedra vigilan la sala.)"
+  },
+  {
+   "speaker": "Genis",
+   "text": "Derrotemos a los gólems: sus bloques rellenarán los huecos y podremos llegar al pedestal."
+  }
+ ],
+ "martel_temple.pedestal.01": [
+  {
+   "speaker": "",
+   "text": "(Un pedestal de oro. Sobre él descansa un anillo con una gema roja que parece latir.)"
+  },
+  {
+   "speaker": "Kratos",
+   "text": "El Anillo del Hechicero. Canaliza maná en forma de fuego. Debería bastar para la mayoría de trampas y obstáculos del templo."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¡Déjame probarlo! ¡Quiero ver cómo lanza fuego!"
+  },
+  {
+   "speaker": "Genis",
+   "text": "Eres como un niño pequeño."
+  },
+  {
+   "speaker": "Colette",
+   "text": "Ten cuidado con la túnica de Raine, Lloyd. Si la quemas, nos mata."
+  }
+ ],
+ "martel_temple.seal_locked.01": [
+  {
+   "speaker": "",
+   "text": "(Una barrera de luz azul bloquea el paso al altar. No hay forma de atravesarla.)"
+  },
+  {
+   "speaker": "Colette",
+   "text": "Necesitamos el Anillo del Hechicero. Tiene que estar en alguna sala lateral del templo."
+  }
+ ],
+ "martel_temple.seal.01": [
+  {
+   "speaker": "Genis",
+   "text": "¡La barrera ha desaparecido! ¡El anillo ha funcionado!"
+  },
+  {
+   "speaker": "Kratos",
+   "text": "El altar está más adelante. Esto no ha acabado: no bajéis la guardia."
+  }
+ ],
+ "martel_temple.oracle.01": [
+  {
+   "speaker": "Colette",
+   "text": "Es el altar. Y ese cristal... Es el Cristal de Cruxis. Mi abuela dice que nací sosteniéndolo en la mano."
+  }
+ ],
+ "martel_temple.oracle.02": [
+  {
+   "speaker": "Genis",
+   "text": "¿Qué... qué es eso? ¿Esa luz?"
+  },
+  {
+   "speaker": "Kratos",
+   "text": "Un ángel, supongo."
+  },
+  {
+   "speaker": "Remiel",
+   "text": "Soy Remiel, ángel del juicio. He descendido para guiar a Colette, hija del linaje del maná, en su viaje al cielo como séptima Elegida."
+  },
+  {
+   "speaker": "Remiel",
+   "text": "Ha llegado la hora de despertar a la diosa Martel, que duerme en el centro del mundo."
+  },
+  {
+   "speaker": "",
+   "text": "(El Cristal de Cruxis flota desde el altar y se incrusta en el pecho de Colette.)"
+  },
+  {
+   "speaker": "Remiel",
+   "text": "Desde este momento, Colette es la Elegida de la Regeneración. Nosotros, los de Cruxis, bendecimos este día y concedemos a Sylvarant la Torre de la Salvación."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¡Mirad! ¡Ahí fuera! ¡Esa es la Torre de la Salvación! ¡Llega hasta el cielo!"
+  },
+  {
+   "speaker": "Colette",
+   "text": "Ahora el mundo se salvará."
+  },
+  {
+   "speaker": "Remiel",
+   "text": "Colette: libera los sellos que custodian la Torre de la Salvación y sube sus escaleras hacia el cielo, en tierras lejanas. Con cada sello que liberes, Cruxis te concederá el poder de los ángeles."
+  },
+  {
+   "speaker": "Remiel",
+   "text": "Y cuando renazcas como ángel, el mundo erosionado será regenerado. Ve primero al sur, al Sello del Fuego, y ofrece allí tus plegarias."
+  },
+  {
+   "speaker": "Colette",
+   "text": "Juro por mi vida que regeneraré el mundo."
+  },
+  {
+   "speaker": "Colette",
+   "text": "Remiel... Señor Remiel, ¿de verdad es usted mi pa...?"
+  },
+  {
+   "speaker": "Remiel",
+   "text": "Ve al Sello del Fuego. Allí volveremos a vernos... mi querida hija, Colette."
+  }
+ ],
+ "martel_temple.oracle.03": [
+  {
+   "speaker": "Colette",
+   "text": "Remiel... Remiel es mi verdadero padre... Lo ha dicho él mismo."
+  },
+  {
+   "speaker": "Genis",
+   "text": "Un ángel de verdad... Ojalá Raine hubiera visto esto. Le habría dado un ataque."
+  },
+  {
+   "speaker": "Kratos",
+   "text": "Colette, te espera un largo viaje por los sellos. Nos vamos ya. Iremos por delante a la aldea para preparar la partida."
+  },
+  {
+   "speaker": "Colette",
+   "text": "Lloyd, Genis... pasaos por mi casa luego, ¿vale? Por favor."
+  }
+ ],
+ "martel_temple.oracle.04": [
+  {
+   "speaker": "Genis",
+   "text": "En la aldea siempre se ha dicho que Colette es hija de un ángel y que en realidad no tiene parentesco con Frank. Nunca pensé que fuera verdad."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¿Y qué más da? La familia es la familia, con sangre o sin ella. Frank la ha criado. Es su padre."
+  }
+ ],
+ "martel_temple.raine.01": [
+  {
+   "speaker": "Raine",
+   "text": "¡MARAVILLOSO! ¡Estas inscripciones! ¡Escritura de la era de Kharlan en perfecto estado! ¡Una ruina intacta de hace cuatro mil años y nadie me lo había dicho!"
+  },
+  {
+   "speaker": "Genis",
+   "text": "Ya está en modo ruinas... Haz como que no la ves."
+  },
+  {
+   "speaker": "Raine",
+   "text": "¿Genis? ¿LLOYD? ¡Os dije claramente que os quedarais en clase!"
+  },
+  {
+   "speaker": "",
+   "text": "(Raine le da un coscorrón a Genis y una patada a Lloyd.)"
+  },
+  {
+   "speaker": "Raine",
+   "text": "A casa, los dos. Hoy no hay más clase. Yo me quedo a estudiar el templo, con permiso de Phaidra. ¡Ja, ja, ja! ¡Cuatro mil años!"
+  }
+ ],
+ "iselia_village.colette_house.01": [
+  {
+   "speaker": "Kratos",
+   "text": "...Entonces, partiremos mañana por la mañana. No tengo objeciones al plan."
+  },
+  {
+   "speaker": "Phaidra",
+   "text": "Gracias, Kratos. Y gracias a vosotros dos, Lloyd, Genis. Sin vuestra ayuda, Colette no habría llegado al altar. Tomad, es poca cosa."
+  }
+ ],
+ "iselia_village.colette_house.02": [
+  {
+   "speaker": "Lloyd",
+   "text": "Phaidra, Kratos... Yo también quiero ir en el viaje de regeneración. Quiero proteger a Colette."
+  },
+  {
+   "speaker": "Genis",
+   "text": "Y yo, si Raine va."
+  },
+  {
+   "speaker": "Kratos",
+   "text": "No. Solo seríais un estorbo. Lo del templo no ha sido nada comparado con lo que nos espera ahí fuera. Los desianos irán tras la Elegida todo el camino."
+  },
+  {
+   "speaker": "Kratos",
+   "text": "Los niños se quedan en casa."
+  },
+  {
+   "speaker": "Alcalde",
+   "text": "Kratos tiene toda la razón. Lloyd, Genis: a casa. La Elegida ya tiene quien la proteja."
+  }
+ ],
+ "iselia_village.colette_house.03": [
+  {
+   "speaker": "Colette",
+   "text": "Lo siento, Lloyd... Kratos es muy estricto. Pero sé que lo hace por vuestro bien."
+  },
+  {
+   "speaker": "Genis",
+   "text": "Bueno, cambiando de tema: ¡feliz cumpleaños, Colette! Te he hecho galletas. Con mucha mantequilla, como te gustan."
+  },
+  {
+   "speaker": "Colette",
+   "text": "¡Gracias, Genis! ¡Qué bien huelen! ¡Me las comeré todas esta noche!"
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Ah... Colette, el collar que te prometí... todavía no lo he terminado. Te lo daré mañana, antes de que os vayáis. Prometido."
+  },
+  {
+   "speaker": "Colette",
+   "text": "Vale. Mañana vendré a decirte a qué hora salimos."
+  },
+  {
+   "speaker": "Genis",
+   "text": "...Mentiroso."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¡Que lo tengo casi acabado! ¡Solo me falta el cierre!"
+  },
+  {
+   "speaker": "Genis",
+   "text": "Lloyd, ¿me acompañas un rato? Tengo que ir a ver a una amiga fuera de la aldea. Antes paso por casa a coger mis cosas."
+  }
+ ],
+ "iselia_village.genis_house.01": [
+  {
+   "speaker": "Genis",
+   "text": "Espera un momento, que cojo los ingredientes. Ya sabes que ninguno de los dos puede usar artes curativas, así que hay que saber cocinar bien."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¿Cocinar? Yo con un Gel de Manzana voy servido."
+  },
+  {
+   "speaker": "Genis",
+   "text": "Los Geles de Manzana no son baratos, Lloyd. Y no crecen en los árboles. Listo, ya lo tengo. Vámonos."
+  }
+ ],
+ "iselia_village.gate.01": [
+  {
+   "speaker": "Aldeano",
+   "text": "¡Lloyd! Haz algo con tu mascota. Noishe ha entrado en la aldea buscándote y ha asustado a medio pueblo. Casi tira el puesto de frutas."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¡Noishe! ¿Qué haces aquí? Te dije que esperaras en casa."
+  },
+  {
+   "speaker": "Aldeano",
+   "text": "Y otra cosa. El alcalde me ha pedido que os pregunte: ¿habéis estado jugando cerca del rancho humano, en el bosque?"
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¿Nosotros? ¡Qué va! ¡Ni se nos ocurriría!"
+  },
+  {
+   "speaker": "Genis",
+   "text": "N-no, para nada... ¿Por qué íbamos a ir al rancho?"
+  },
+  {
+   "speaker": "Aldeano",
+   "text": "Más os vale. Ya sabéis lo que dice el tratado. Y mantened a ese bicho lejos del rancho también, que como un desiano lo vea..."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Noishe es un perro, ¿vale? Un perro. Un perro grande."
+  }
+ ],
+ "iselia_forest.noishe.01": [
+  {
+   "speaker": "Noishe",
+   "text": "¡Guau... guau...!"
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¿Qué pasa, Noishe? Ah, ya. No quieres entrar en el bosque. Siempre huyes de los sitios con monstruos, cobardica."
+  }
+ ],
+ "iselia_forest.noishe.02": [
+  {
+   "speaker": "Lloyd",
+   "text": "Genis... tu amiga. Esa a la que llevas comida. ¿Dónde está exactamente?"
+  },
+  {
+   "speaker": "Genis",
+   "text": "...En el rancho humano de los desianos."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¡¿En el rancho?! ¡Genis, eso viola el tratado! ¡Si te ven, meten a toda la aldea en problemas!"
+  },
+  {
+   "speaker": "Genis",
+   "text": "¡Los desianos ya lo han violado ellos atacando el templo! Lloyd, solo voy a verla un momento. Está muy débil y quiero llevarle algo de comer. Puedes volver a casa si quieres."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "...Voy contigo. No pienso dejarte ir solo a ese sitio."
+  }
+ ],
+ "iselia_ranch.marble.01": [
+  {
+   "speaker": "Genis",
+   "text": "Marble, este es Lloyd, mi mejor amigo. Te he hablado de él mil veces."
+  },
+  {
+   "speaker": "Marble",
+   "text": "Así que tú eres Lloyd. Encantada. Genis no para de hablar de ti. He visto la Torre de la Salvación desde aquí dentro... Ojalá esta vez el viaje de la Elegida salga bien."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¿Esta vez? ¿Qué pasó con el último Elegido?"
+  },
+  {
+   "speaker": "Marble",
+   "text": "Dicen que los desianos lo mataron durante el viaje, antes de llegar a la torre. Recemos a Martel para que la nueva Elegida tenga más suerte."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Marble... Espera. Eso que llevas en la mano. Es una Exsfera. ¡Y no lleva Cresta Clave!"
+  },
+  {
+   "speaker": "Marble",
+   "text": "Nos la ponen a todos al llegar al rancho. Dicen que nos hace más fuertes para trabajar. ¿Qué es una Cresta Clave, muchacho?"
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Una Exsfera sobre la piel desnuda te va poniendo enferma, poco a poco; pero solo funciona sobre la piel, así que no se puede quitar sin más. La Cresta Clave es un amuleto tallado en un mineral especial que hace de montura y controla la Exsfera."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Yo sé tallar el amuleto, Dirk me enseñó. Pero no tengo mineral inhibidor. Es tecnología enana, no se consigue en cualquier sitio."
+  },
+  {
+   "speaker": "Genis",
+   "text": "¡Lloyd! ¡Tu padre es un enano! ¡Él tendrá mineral!"
+  }
+ ],
+ "iselia_ranch.marble.02": [
+  {
+   "speaker": "Lloyd",
+   "text": "Se lo pediré a Dirk. Esta misma noche. Marble, aguanta un poco más, ¿vale?"
+  },
+  {
+   "speaker": "Marble",
+   "text": "Gracias, muchachos... Sois muy buenos. Pero no corráis riesgos por una vieja como yo."
+  }
+ ],
+ "iselia_ranch.marble.03": [
+  {
+   "speaker": "Desiano",
+   "text": "¡Eh, vieja! ¡¿Qué haces ahí parada junto a la valla?! ¡A trabajar!"
+  },
+  {
+   "speaker": "Marble",
+   "text": "(¡Corred! ¡Escondeos, rápido!)"
+  }
+ ],
+ "iselia_ranch.marble.04": [
+  {
+   "speaker": "Desiano",
+   "text": "¿Holgazaneando otra vez? ¿Y esa actitud? ¡Vamos atrás, al patio! ¡Te voy a dar una lección que no olvidarás!"
+  },
+  {
+   "speaker": "Marble",
+   "text": "¡No! ¡Por favor! ¡Ya voy, ya voy!"
+  }
+ ],
+ "iselia_ranch.marble.05": [
+  {
+   "speaker": "Genis",
+   "text": "¡Se la llevan al patio! ¡Lloyd, vamos al acantilado! Desde ahí arriba se ve todo el rancho."
+  }
+ ],
+ "iselia_ranch.cliff.01": [
+  {
+   "speaker": "Genis",
+   "text": "¡La están golpeando! ¡Lloyd, tenemos que hacer algo! ¡La van a matar!"
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Escucha el plan. Tú atacas a los guardias con magia desde aquí arriba, donde no pueden verte, y luego vuelves a la aldea por los arbustos."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Yo haré de señuelo: bajaré por el acantilado para que no me vean la cara y huiré en dirección contraria a la aldea. Así no sabrán de dónde venimos."
+  },
+  {
+   "speaker": "Genis",
+   "text": "¡¿Vas a saltar?! ¡Lloyd, son diez metros! ...Toma, las galletas que me sobraron. Por si acaso."
+  },
+  {
+   "speaker": "",
+   "text": "(Lloyd intenta hacer un sándwich con las galletas. No sale bien. Genis suspira.)"
+  },
+  {
+   "speaker": "Genis",
+   "text": "Luego te enseño a cocinar. ¡Allá voy! ¡Bola de fuego!"
+  }
+ ],
+ "iselia_ranch.cliff.02": [
+  {
+   "speaker": "Desiano",
+   "text": "¡¿Qué ha sido eso?! ¡Fuego! ¡Ahí, en el acantilado! ¡Hay alguien! ¡Detenedlo! ¡Abrid la puerta principal!"
+  }
+ ],
+ "iselia_ranch.after.01": [
+  {
+   "speaker": "Marble",
+   "text": "Gracias... Genis, Lloyd... Gracias a los dos. Nunca lo olvidaré."
+  },
+  {
+   "speaker": "Prisionero",
+   "text": "Vamos, Marble, dentro. Antes de que vuelvan los guardias. Y vosotros, chicos, marchaos ya."
+  }
+ ],
+ "iselia_ranch.after.02": [
+  {
+   "speaker": "Lloyd",
+   "text": "He acabado con los que me vieron la cara. Los demás estaban en la torre y en el acantilado. No sabrán que fuimos nosotros."
+  },
+  {
+   "speaker": "Genis",
+   "text": "Eso espero... Si el alcalde se entera, estamos acabados."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Por cierto, hazme los deberes. Me los debes."
+  },
+  {
+   "speaker": "Genis",
+   "text": "¡Lloyd! ¡Esto no cuenta como favor!"
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Yo me voy a casa, Dirk me espera. Tú vuelve a la aldea por los arbustos. ¡Hasta mañana, Genis!"
+  }
+ ],
+ "iselia_ranch.forcystus.01": [
+  {
+   "speaker": "Desiano",
+   "text": "Lord Forcystus. Un humano ha atacado a los guardias del patio y ha huido hacia el sur. Pero hay algo raro, señor... ¿Cómo ha podido saltar desde esa altura un simple humano?"
+  },
+  {
+   "speaker": "Forcystus",
+   "text": "Interesante. Muy interesante. ¿El sistema de vigilancia ha captado su rostro?"
+  },
+  {
+   "speaker": "Desiano",
+   "text": "Sí, señor. Tenemos su imagen. Un chico joven, de rojo."
+  },
+  {
+   "speaker": "Forcystus",
+   "text": "Bien. Averiguad quién es. Y en qué mano lleva lo que creo que lleva."
+  }
+ ],
+ "dirks_house.grave.01": [
+  {
+   "speaker": "",
+   "text": "(«Anna Irving. Esposa y madre amada.» Hay flores frescas sobre la tumba.)"
+  }
+ ],
+ "dirks_house.argument.01": [
+  {
+   "speaker": "Lloyd",
+   "text": "Papá, necesito que hagas una Cresta Clave. Es urgente."
+  },
+  {
+   "speaker": "Dirk",
+   "text": "¿Una Cresta Clave? ¿Para quién? Si una Exsfera aún no la tiene, no es demasiado tarde para arreglarlo, pero quitarla sin cresta es peligroso. Lo que habría que hacer es un accesorio de mineral inhibidor, tallar el amuleto en él y usarlo de cresta."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¡Un brazalete, entonces! Hazle un brazalete. Yo tallo el amuleto."
+  },
+  {
+   "speaker": "Dirk",
+   "text": "¿Y quién lleva esa Exsfera sin cresta, si puede saberse?"
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Eh... Un mercenario de paso. Un tipo que vi en la aldea."
+  },
+  {
+   "speaker": "Dirk",
+   "text": "Tonterías. Solo los desianos usan Exsferas, y las suyas llevan cresta. Juramento Enano número once: «Mentir es el primer paso en el camino del ladrón»."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "...Vale. Vale. He estado en el rancho. Hay una anciana con una Exsfera sin cresta. Se está muriendo poco a poco y nadie hace nada."
+  },
+  {
+   "speaker": "Dirk",
+   "text": "¡¿En el rancho?! ¡¿Has entrado en el rancho de los desianos?! ¿Te han visto la Exsfera?"
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "No. ¿Pero por qué tengo que esconderla siempre? El mercenario de hoy, Kratos, lleva la suya a la vista de todo el mundo."
+  },
+  {
+   "speaker": "Dirk",
+   "text": "Porque la tuya es especial, Lloyd. Es el recuerdo de tu madre. Los desianos la mataron para quitársela."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¿Qué...? Nunca me habías dicho..."
+  },
+  {
+   "speaker": "Dirk",
+   "text": "Te encontré en el acantilado junto al rancho, hace catorce años. Tu madre aún estaba consciente y me lo contó todo antes de morir. No te lo dije para que no fueras a buscar venganza."
+  },
+  {
+   "speaker": "Dirk",
+   "text": "Ahora que ha aparecido la Torre de la Salvación, déjaselo todo a Colette. No te metas con los desianos. Tu madre te protegió a ti y a esa Exsfera con su vida. No lo tires por la borda."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¡Pues con más razón! ¡No puedo dejar que le pase lo mismo a Marble! ¡Hazme la Cresta Clave!"
+  },
+  {
+   "speaker": "Dirk",
+   "text": "¡He dicho que no!"
+  },
+  {
+   "speaker": "",
+   "text": "(Dirk golpea a Lloyd. Lloyd cae al suelo, se levanta y sale de la casa hecho una furia.)"
+  }
+ ],
+ "dirks_house.visitors.01": [
+  {
+   "speaker": "Raine",
+   "text": "Lloyd. Lo hemos oído todo desde fuera. ...No digas nada. Ve a hablar con Colette. Te espera en el banco de la terraza."
+  }
+ ],
+ "dirks_house.genis.01": [
+  {
+   "speaker": "Genis",
+   "text": "Lloyd... ¿A tu madre la mataron los semielfos? Los desianos lo son. Todos."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "No todos los semielfos son desianos, Genis. Y a mí eso me da igual. Lo que importa es lo que hace cada uno."
+  }
+ ],
+ "dirks_house.kratos.01": [
+  {
+   "speaker": "Kratos",
+   "text": "¿De quién es esta tumba?"
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "De mi madre."
+  },
+  {
+   "speaker": "Kratos",
+   "text": "«Anna»... Hmm. ¿Tu padre vive?"
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "No lo sé. No lo conocí. Pero Dirk es mi padre, el único que he tenido."
+  },
+  {
+   "speaker": "Kratos",
+   "text": "...Disculpa. Ha sido una pregunta imprudente."
+  }
+ ],
+ "dirks_house.raine.01": [
+  {
+   "speaker": "Raine",
+   "text": "¿Y el regalo de Colette? Al menos la artesanía se te da bien, es lo único que apruebas."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Casi está. Esta noche lo termino, aunque no duerma."
+  }
+ ],
+ "dirks_house.terrace.01": [
+  {
+   "speaker": "Lloyd",
+   "text": "Colette... Siento que el regalo no esté terminado. Te lo prometí para hoy."
+  },
+  {
+   "speaker": "Colette",
+   "text": "No pasa nada, de verdad. Solo deséame feliz cumpleaños. Me alegro de haber vivido hasta hoy."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Feliz cumpleaños, Colette. Oye... ¿puedo ir con vosotros? En el viaje."
+  },
+  {
+   "speaker": "Colette",
+   "text": "Los desianos irán tras nosotros todo el camino. Es peligroso, Lloyd."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "No puedo quedarme en una aldea que tiene un tratado con los desianos que mataron a mi madre. No después de lo de hoy."
+  },
+  {
+   "speaker": "Colette",
+   "text": "...Salimos mañana al mediodía. Ven a la aldea entonces, ¿vale? Te esperaremos."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Allí estaré, sin falta. Quiero verte convertida en ángel."
+  },
+  {
+   "speaker": "Colette",
+   "text": "Lloyd... Remiel es mi padre de verdad. Lo dijo él."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Pues tienes dos padres. Qué suerte. Yo solo tengo uno, y es un enano cabezota."
+  },
+  {
+   "speaker": "Colette",
+   "text": "Liberar los sellos, convertirme en ángel y, al final..."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¿Al final qué?"
+  },
+  {
+   "speaker": "Colette",
+   "text": "Eh... Nada. No es nada. En el Sello del Fuego volveré a ver a mi padre. ...Adiós, Lloyd."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¿Adiós? Hasta mañana, querrás decir."
+  }
+ ],
+ "dirks_house.night.01": [
+  {
+   "speaker": "Dirk",
+   "text": "...Toma. La Cresta Clave. Ya está tallada. Juramento Enano número dos: «Nunca abandones a quien necesite ayuda». Lo sé. Lo sé mejor que tú."
+  }
+ ],
+ "dirks_house.night.02": [
+  {
+   "speaker": "Lloyd",
+   "text": "Papá... Me voy de viaje. Para ayudar a Colette. Y para vengar a mi madre."
+  },
+  {
+   "speaker": "Dirk",
+   "text": "Lo sé. Llevo toda la noche oyéndote martillear ese collar. Llévate esto: provisiones para el camino, y algo más que encontrarás cuando toque. Esta sigue siendo tu casa, Lloyd. Eres mi hijo, lleves la sangre que lleves."
+  }
+ ],
+ "dirks_house.night.03": [
+  {
+   "speaker": "Dirk",
+   "text": "¡Y no olvides nunca el Juramento Enano número siete!"
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "«La bondad y el amor siempre vencen». Qué cursi, papá."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¡Vamos, Noishe! ¡Nos vamos de viaje!"
+  },
+  {
+   "speaker": "Noishe",
+   "text": "¡Guau!"
+  }
+ ],
+ "dirks_house.morning.01": [
+  {
+   "speaker": "Genis",
+   "text": "¡Lloyd! ¡Lloyd, despierta! ¡Colette y los demás se fueron hace un montón de tiempo! ¡Al amanecer! ¡He venido corriendo porque no aparecías!"
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¡¿Qué?! ¡Dijo que al mediodía! ¡Me lo prometió!"
+  },
+  {
+   "speaker": "Dirk",
+   "text": "¡A la aldea, Lloyd! ¡Ya! ¡Corre!"
+  }
+ ],
+ "world_sylvarant.first.01": [
+  {
+   "speaker": "Lloyd",
+   "text": "Desde aquí se ve todo el sur de Sylvarant. Mi casa está siguiendo el camino, al suroeste de la aldea, entre los árboles."
+  }
+ ],
+ "iselia_village.letter.01": [
+  {
+   "speaker": "Lloyd",
+   "text": "¡Phaidra! ¡Colette! ¿Dónde está Colette?"
+  },
+  {
+   "speaker": "Phaidra",
+   "text": "Lloyd... Colette ya se ha ido. Partieron hace horas, con Raine y el mercenario."
+  },
+  {
+   "speaker": "Frank",
+   "text": "Me pidió que te diera esto. Una carta."
+  }
+ ],
+ "iselia_village.letter.02": [
+  {
+   "speaker": "Colette",
+   "text": "«Querido Lloyd: cuando leas esto ya me habré ido. Siento haberte mentido sobre la hora. El viaje es peligroso y muchos Elegidos han fracasado antes que yo. Te aprecio demasiado para meterte en esto.»"
+  },
+  {
+   "speaker": "Colette",
+   "text": "«Acabaré con los monstruos y con los desianos para que puedas vivir feliz en el mundo regenerado. Gracias por tu amistad. He tenido mucha suerte de conocerte. Adiós. Colette.»"
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Esto... parece un testamento."
+  },
+  {
+   "speaker": "Frank",
+   "text": "Podría decirse así. Lloyd, hay algo que debes saber sobre Colette. Colette... no, la Elegida... ya está..."
+  }
+ ],
+ "iselia_village.letter.03": [
+  {
+   "speaker": "Genis",
+   "text": "¡¿Qué ha sido eso?! ¡Una explosión! ¡Viene de la entrada norte!"
+  },
+  {
+   "speaker": "Phaidra",
+   "text": "¡Humo! ¡La aldea está ardiendo!"
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¡Desianos! ¡Phaidra, Frank, escondeos en casa! ¡Genis, conmigo!"
+  }
+ ],
+ "iselia_village.raid.01": [
+  {
+   "speaker": "Genis",
+   "text": "¡Están por todas partes! ¡Están quemando las casas! ¡Y todavía hay gente en la plaza!"
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¡Acabemos con ellos y saquemos a todo el mundo de aquí!"
+  }
+ ],
+ "iselia_village.raid.02": [
+  {
+   "speaker": "Aldeano",
+   "text": "¡Lloyd! Gracias... pensaba que no salía de esta. Tomad, es lo único que tengo. Y corred, están en la plaza."
+  }
+ ],
+ "iselia_village.raid.03": [
+  {
+   "speaker": "Genis",
+   "text": "Nuestra casa... La casa de Raine y mía. La han quemado entera."
+  },
+  {
+   "speaker": "Genis",
+   "text": "Y pensar que por fin empezaba a parecer un lugar al que podríamos llamar hogar..."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¿Qué? ¿Qué quieres decir con eso?"
+  },
+  {
+   "speaker": "Genis",
+   "text": "¡N-nada! ¡Olvídalo! ¡Vamos a la plaza! ¡La gente sigue allí!"
+  }
+ ],
+ "iselia_village.plaza.01": [
+  {
+   "speaker": "Forcystus",
+   "text": "Soy Forcystus, uno de los Cinco Grandes Cardenales desianos. Un semielfo superior, señor del rancho que domina esta región."
+  },
+  {
+   "speaker": "Forcystus",
+   "text": "Tú, humano, Lloyd Irving, eres culpable de violar el tratado de no agresión. Yo traigo el castigo sobre ti y sobre esta aldea que te acogió."
+  },
+  {
+   "speaker": "Genis",
+   "text": "¡Vosotros también lo violasteis! ¡Intentasteis matar a la Elegida en el templo!"
+  },
+  {
+   "speaker": "Forcystus",
+   "text": "¿Nosotros? ¿Matar a la Elegida? Ja, ja, ja... Qué ridiculez."
+  },
+  {
+   "speaker": "Desiano",
+   "text": "Así que son ELLOS los que van tras la Elegida..."
+  },
+  {
+   "speaker": "Forcystus",
+   "text": "Lloyd Irving: contactaste con el cuerpo huésped F192 y atacaste a mis guardias. Te he preparado un adversario adecuado a tu crimen."
+  }
+ ],
+ "iselia_village.plaza.02": [
+  {
+   "speaker": "Genis",
+   "text": "¡¿Qué es esa cosa?! ¡No es un monstruo normal!"
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¡Da igual lo que sea! ¡Genis, prepárate!"
+  }
+ ],
+ "iselia_village.marble.01": [
+  {
+   "speaker": "Desiano",
+   "text": "¡Lord Forcystus! ¡Mire su mano! ¡El chico lleva una Exsfera!"
+  },
+  {
+   "speaker": "Forcystus",
+   "text": "¿Una Exsfera...? Tiene que ser la del Proyecto Angelus. La que llevamos tantos años buscando."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¡Es el recuerdo de mi madre! ¡La madre que vosotros asesinasteis!"
+  },
+  {
+   "speaker": "Forcystus",
+   "text": "¿Tu madre? Qué ironía. Tu madre era..."
+  },
+  {
+   "speaker": "Marble",
+   "text": "...A... lejaos... Genis... Lloyd... alejaos de mí..."
+  },
+  {
+   "speaker": "Genis",
+   "text": "¿Esa voz? ¡¿Marble?! ¡No! ¡No puede ser! ¡¿Qué le habéis hecho?!"
+  },
+  {
+   "speaker": "Marble",
+   "text": "Genis... has sido como un nieto para mí. Gracias por las galletas... Gracias por todo... Adiós..."
+  }
+ ],
+ "iselia_village.marble.02": [
+  {
+   "speaker": "Forcystus",
+   "text": "¡Aaargh...! Maldita... vieja... ¡Se ha hecho estallar!"
+  },
+  {
+   "speaker": "Desiano",
+   "text": "¡Lord Forcystus está herido! ¡Retirada! ¡Retirada!"
+  },
+  {
+   "speaker": "Forcystus",
+   "text": "Lloyd Irving... Mientras tengas esa Exsfera, iremos a por ti. ¡Siempre! ¡Hasta el fin del mundo!"
+  }
+ ],
+ "iselia_village.marble.03": [
+  {
+   "speaker": "Genis",
+   "text": "Marble... ¡Marble! ¡Marble, no!"
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Genis... Lo siento. Lo siento mucho. Nos ha salvado. A los dos."
+  }
+ ],
+ "iselia_village.exile.01": [
+  {
+   "speaker": "Alcalde",
+   "text": "Pedir perdón no arregla esto. Los desianos te han marcado como su enemigo, Lloyd. Mientras estés aquí, la aldea nunca tendrá paz."
+  },
+  {
+   "speaker": "Genis",
+   "text": "¿Lo está... desterrando?"
+  },
+  {
+   "speaker": "Alcalde",
+   "text": "Sí. Cualquier contacto con el rancho está prohibido por el tratado. Sin excepciones. Y vosotros lo sabíais."
+  },
+  {
+   "speaker": "Genis",
+   "text": "¿Entonces está bien dejar morir a los prisioneros del rancho mientras la aldea esté a salvo?"
+  },
+  {
+   "speaker": "Aldeano",
+   "text": "Los del rancho van a morir igualmente. No podemos hacer nada por ellos."
+  },
+  {
+   "speaker": "Alcalde",
+   "text": "Si Lloyd no hubiera hecho semejante estupidez, solo habrían muerto ellos. Ahora han muerto los nuestros."
+  },
+  {
+   "speaker": "Genis",
+   "text": "Los humanos sois todos iguales..."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¡Genis, basta! La culpa es mía. Solo mía. Me iré."
+  },
+  {
+   "speaker": "Aldeana",
+   "text": "Alcalde, ¿no está siendo demasiado duro? Son unos niños..."
+  },
+  {
+   "speaker": "Aldeano",
+   "text": "¿Y cuántos han muerto por su culpa? ¡Mira la aldea! ¡Mira mi casa!"
+  },
+  {
+   "speaker": "Alcalde",
+   "text": "Además, Lloyd ni siquiera es de aquí. Es un forastero criado por un enano en el bosque."
+  },
+  {
+   "speaker": "Genis",
+   "text": "Entonces yo también me voy. Soy tan culpable como él. Fui yo quien lo llevó al rancho."
+  },
+  {
+   "speaker": "Alcalde",
+   "text": "Como queráis. Lloyd Irving, Genis Sage: quedáis desterrados de Iselia. No volváis."
+  }
+ ],
+ "iselia_village.exile.02": [
+  {
+   "speaker": "Phaidra",
+   "text": "Lloyd, Genis... Si el mundo se salva, todos cambiarán de opinión. Es lo que Colette querría."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Expiaré lo que he hecho. Protegeré a Colette, por todos los que han muerto por mi culpa. Es lo único que puedo hacer."
+  },
+  {
+   "speaker": "Genis",
+   "text": "Y yo estaré siempre a tu lado, Lloyd. Pase lo que pase."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Genis, toma. La Exsfera de Marble. Úsala tú. Dirk me hizo una Cresta Clave; luego te explico cómo va."
+  },
+  {
+   "speaker": "Genis",
+   "text": "...Gracias, Lloyd. La llevaré por ella. Siempre."
+  },
+  {
+   "speaker": "Noishe",
+   "text": "¡Guau!"
+  },
+  {
+   "speaker": "Phaidra",
+   "text": "No tiréis vuestras vidas por la borda. Volved algún día."
+  },
+  {
+   "speaker": "Frank",
+   "text": "Que Martel os proteja. A los dos."
+  }
+ ],
+ "world_sylvarant.salvation.01": [
+  {
+   "speaker": "Genis",
+   "text": "Mira, una Casa de la Salvación. Es un refugio de la Iglesia de Martel para los peregrinos que van hacia la torre. Podríamos descansar un poco."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Hablemos con la mujer de la entrada. Pero ni una palabra de Iselia."
+  }
+ ],
+ "world_sylvarant.salvation.02": [
+  {
+   "speaker": "Mujer",
+   "text": "¿Peregrinos? Pasad, pasad, no os quedéis ahí. Aquí podéis descansar gratis. Es lo menos que puede hacer la Iglesia por los que caminan hacia la salvación."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Eh... sí, peregrinos. Eso somos. Gracias, señora."
+  }
+ ],
+ "world_sylvarant.salvation.03": [
+  {
+   "speaker": "Noishe",
+   "text": "¡Guau! ¡Guau!"
+  },
+  {
+   "speaker": "Genis",
+   "text": "Noishe trae algo en la boca. Se te ha caído de la bolsa, Lloyd."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Es... una carta. De papá. La metió en la bolsa sin decirme nada."
+  }
+ ],
+ "world_sylvarant.salvation.04": [
+  {
+   "speaker": "Dirk",
+   "text": "«Lloyd: ¿has leído la Guía del viajero que te metí en la bolsa? Tiene los siete Juramentos Enanos más conocidos y algunos consejos de viaje. Protege a Colette.»"
+  },
+  {
+   "speaker": "Dirk",
+   "text": "«Han pasado catorce años desde que te encontré, apenas sabías andar, muerto de miedo y llorando. Ahora eres un espadachín fuerte. Te agradezco que llames padre a alguien que no es humano.»"
+  },
+  {
+   "speaker": "Dirk",
+   "text": "«Cuando seas mayor, tendré un regalo para ti. P. D.: en la guía explico cómo usar las EX Gems. Léela, por una vez.»"
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Papá..."
+  },
+  {
+   "speaker": "Genis",
+   "text": "Dirk te quiere mucho, Lloyd. Aunque te pegue."
+  }
+ ],
+ "world_sylvarant.renegades.01": [
+  {
+   "speaker": "Soldado",
+   "text": "Órdenes de arriba: el humano Lloyd Irving. Código de identificación desconocido, no consta en ningún rancho. Formad un cordón por toda la región de Triet."
+  },
+  {
+   "speaker": "Soldado",
+   "text": "Su retrato ya está en los carteles de «se busca» de todas las ciudades. Que nadie lo deje pasar."
+  }
+ ],
+ "world_sylvarant.renegades.02": [
+  {
+   "speaker": "Genis",
+   "text": "Lloyd... los desianos nos buscan. Hay que encontrar a Colette cuanto antes, tanto para pedirle ayuda como para protegerla."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Pues vamos a Triet. Noishe, ¡venga, al desierto! ...Noishe. ¡Noishe, que es por aquí!"
+  }
+ ],
+ "triet_desert.arrival.01": [
+  {
+   "speaker": "Lloyd",
+   "text": "Uf... Qué calor. ¿Esto es el desierto de Triet? Se me están derritiendo las botas."
+  },
+  {
+   "speaker": "Genis",
+   "text": "Sí. La ciudad está al oeste, junto al oasis. Y las ruinas del sello del fuego, más al sur. Noishe, ¡venga, vamos!"
+  },
+  {
+   "speaker": "Noishe",
+   "text": "¡Guau... guau...!"
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "No quiere. Nunca quiere. Está bien, Noishe, espera aquí a la sombra. Genis, vamos."
+  }
+ ],
+ "triet_desert.poster.01": [
+  {
+   "speaker": "",
+   "text": "(«SE BUSCA: Lloyd Irving. Recompensa.» Hay un retrato dibujado a mano.)"
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¡¿Soy yo?! ¡Ya tienen carteles con mi cara por todas partes!"
+  },
+  {
+   "speaker": "Genis",
+   "text": "Está bien. Con este dibujo no te van a encontrar nunca... creo. No se parece en nada."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "¡Oye! ¿Tan mal está? ¿Tan feo soy?"
+  }
+ ],
+ "triet_desert.gate.01": [
+  {
+   "speaker": "Genis",
+   "text": "La ciudad de Triet. Colette tiene que estar ahí dentro. Preguntemos en la posada."
+  },
+  {
+   "speaker": "Lloyd",
+   "text": "Pues vamos. ¡Colette, espéranos!"
+  },
+  {
+   "speaker": "",
+   "text": "(Fin del contenido actual. Triet, la adivina, la captura de Lloyd y la base de los Renegados llegan en la siguiente sesión: C2.)"
+  }
+ ]
+}

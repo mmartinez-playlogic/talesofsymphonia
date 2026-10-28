@@ -118,3 +118,10 @@ Mateo en reunión: NADA se ha ejecutado (ni Godot headless). Todo escrito a cieg
 - Resultado del bot (`tools/Playthrough.tscn`): de la escuela al desierto de Triet, 110 pasos, 0 fallos del juego.
   74 escenas de guion ejecutadas, ~13 min de partida simulada. Presets para empezar a mitad: `-- --from raid` / `--from exile`.
 - Lo que el bot NO cubre: cámara/encuadre, legibilidad, equilibrio de combate (gana por trampa), animaciones en pantalla.
+
+## 2026-10-28 — Sesión 3g (harness: Claude Code 2.1.287, Claude Fable 5.1) — texto completo
+- Mateo pidió el guion completo. Decisión: NO se copia el texto verbatim de Bandai Namco. En su lugar, guion propio a
+  longitud real para las 83 escenas de C1 (357 líneas) siguiendo `docs/STORY_C1.md`, en `docs/script/c1_es.txt`
+  (fuente editable) → `src/data/script/es.json` vía `tools/import_script.py`. Cargado por `DB.story_script`.
+- Si algún día se importa el texto oficial (subtítulos ES de Chronicles/Remastered), basta sustituir `es.json`.
+- Fuentes en inglés localizadas: FAQs de guion (GameFAQs / espejo video-games-museum), "Z-Skit Scripts" (tamashii).
