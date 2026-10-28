@@ -62,3 +62,12 @@ Mateo en reunión: NADA se ha ejecutado (ni Godot headless). Todo escrito a cieg
   `docs/images/characters_sheet.png` (generada con `tools/render_sheet.py`, Workbench, sin ventana).
 - Mapas actualizados para usar los NPC propios; `Npc.MODEL_SCALE` escala a Dirk (0.78), Genis, Presea, Forcystus, Vidarr.
 - PENDIENTE: Godot aún no ha importado los .glb nuevos (sin .import). Lo hace el `godot --headless --path . --quit` de la próxima sesión.
+
+## 2026-10-28 — Sesión 3d (harness: Claude Code 2.1.287, Claude Fable 5.1)
+- Mateo: textos e historia 1:1 con Symphonia, "sin reparos". No tengo el guion verbatim; solución: guion en datos.
+- `c.script(id, fallback)` + `DB.script` (carga `src/data/script/*.json` que no empiecen por `_`). Todas las cutscenes
+  (43 escenas, ~180 líneas) ya usan ids `mapa.evento.nn`; plantilla en `src/data/script/_template_es.json`.
+  Para texto exacto: volcar el guion del juego en `src/data/script/es.json` con esos ids (ver README de la carpeta).
+- Fidelidad de trama C1: añadido Botta (Renegados) retirándose tras Vidarr; Juramentos Enanos nº 1, 2 y 7; Dirk golpea a Lloyd.
+- Desviaciones conocidas pendientes: puzle de gólems/Anillo del Hechicero del templo (ahora un sello), posada/tienda de Iselia,
+  Noishe acompañando en el mapa del mundo, cartel de "se busca" de Lloyd en Triet (C2).

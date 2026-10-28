@@ -53,7 +53,7 @@ func build() -> void:
 		add_npc("noishe", Vector3(46, 0, 4), "Noishe", "wolf", [{"speaker": "Noishe", "text": "¡Guau...! (Noishe no quiere entrar en el desierto.)"}])
 
 func _gate(c: Cutscene) -> void:
-	await c.say([
+	await c.script("triet_desert.gate.01", [
 		{"speaker": "Genis", "text": "La ciudad de Triet. Colette tiene que estar ahí dentro."},
 		{"speaker": "Lloyd", "text": "Pues vamos. ¡Colette, espéranos!"},
 		{"speaker": "", "text": "[color=#a0c0ff](Fin del contenido actual. La ciudad de Triet, la base de los Renegados y las Ruinas de Triet llegan en la siguiente sesión.)[/color]"},
@@ -66,7 +66,7 @@ func on_enter(c: Cutscene) -> void:
 	c.spawn("noishe", "wolf", Vector3(57, 0, -2), -90.0, "Noishe")
 	await c.walk("player", Vector3(44, 0, 0), 3.5, false, false)
 	await c.walk("genis", Vector3(46, 0, 2), 3.5)
-	await c.say([
+	await c.script("triet_desert.on_enter.01", [
 		{"speaker": "Lloyd", "text": "Uf... Esto es el desierto. Hace un calor horrible."},
 		{"speaker": "Genis", "text": "El desierto de Triet. La ciudad está al oeste, junto al oasis. Y las ruinas del sello del fuego, más al sur."},
 		{"speaker": "Noishe", "text": "¡Guau... guau...!"},

@@ -62,7 +62,7 @@ func _genis_runs_off(c: Cutscene) -> void:
 	c.spawn("genis", "genis", Vector3(1.5, 0, -44), 0.0, "Genis")
 	await c.walk("player", Vector3(0, 0, -24), 4.0, true, false)
 	await c.walk("genis", Vector3(1.5, 0, -22), 4.0, true)
-	await c.say([
+	await c.script("iselia_forest.genis_runs_off.01", [
 		{"speaker": "Genis", "text": "Lloyd... ¿puedo pedirte un favor? Tengo que ir a un sitio antes de volver a la aldea. Tú sigue sin mí."},
 		{"speaker": "Lloyd", "text": "¿Ir adónde? Por aquí solo está... Genis, ¿no estarás pensando en el rancho?"},
 		{"speaker": "Genis", "text": "¡No! Bueno... Es que hay alguien allí. Una anciana. Marble. Hablo con ella a través de la valla. No le hago daño a nadie."},
@@ -71,7 +71,7 @@ func _genis_runs_off(c: Cutscene) -> void:
 	])
 	await c.run_to("genis", Vector3(30, 0, -12))
 	c.despawn("genis")
-	await c.say([
+	await c.script("iselia_forest.genis_runs_off.02", [
 		{"speaker": "Lloyd", "text": "¡Genis, espera! ...Maldita sea. No puedo dejarlo ir solo."},
 	])
 	await c.caption("Sigue a Genis hacia el este, al Rancho humano de Iselia.", 2.2)

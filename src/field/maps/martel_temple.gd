@@ -61,7 +61,7 @@ func build() -> void:
 			[{"speaker": "Raine", "text": "¡Fascinante! Estas inscripciones datan de la era de Kharlan. Necesitaré días para catalogarlo todo... Marchaos sin mí, Colette y yo partiremos mañana."}], 270.0)
 
 func _on_pedestal(c: Cutscene) -> void:
-	await c.say([
+	await c.script("martel_temple.on_pedestal.01", [
 		{"speaker": "", "text": "Un pedestal de oro. Sobre él descansa un anillo con una gema roja."},
 		{"speaker": "Genis", "text": "¡Es el Anillo del Hechicero! Raine me habló de él. Dicen que canaliza maná en forma de fuego."},
 		{"speaker": "Kratos", "text": "Lo necesitaremos para romper el sello de la puerta. Cógelo, Lloyd."},
@@ -75,18 +75,18 @@ func _on_pedestal(c: Cutscene) -> void:
 
 func _on_seal(c: Cutscene) -> void:
 	if not c.has("got_ring"):
-		await c.say([
+		await c.script("martel_temple.on_seal.01", [
 			{"speaker": "", "text": "Una barrera de luz azul bloquea el paso. En el suelo hay una inscripción: «Solo el fuego del hechicero abrirá el camino»."},
 			{"speaker": "Colette", "text": "¿El fuego del hechicero? Lloyd, ¿tú entiendes algo?"},
 			{"speaker": "Lloyd", "text": "Ni idea. Pero por aquí tiene que haber algo que lance fuego."},
 		])
 		return
-	await c.say([
+	await c.script("martel_temple.on_seal.02", [
 		{"speaker": "Lloyd", "text": "Vale, anillo... ¡Fuego!"},
 	])
 	await c.flash(Color(1, 0.6, 0.2), 0.6)
 	await c.shake_camera(0.3, 0.6)
-	await c.say([
+	await c.script("martel_temple.on_seal.03", [
 		{"speaker": "Genis", "text": "¡La barrera se ha deshecho! ¡Lloyd, lo has conseguido!"},
 		{"speaker": "Kratos", "text": "Bien. El altar está más adelante. No bajéis la guardia."},
 	])
@@ -99,7 +99,7 @@ func _on_seal(c: Cutscene) -> void:
 	add_interactable("altar_trigger", Vector3(0, 0, -33), Vector3(6, 0.2, 1.0), Color(0.9, 0.9, 0.8), _oracle)
 
 func _raine_ruins(c: Cutscene) -> void:
-	await c.say([
+	await c.script("martel_temple.raine_ruins.01", [
 		{"speaker": "Raine", "text": "¡¿Lloyd?! ¡¿Genis?! ¡Os dije que os quedarais en clase! ...Bueno, luego hablaremos de eso."},
 		{"speaker": "Raine", "text": "¡Mirad estas paredes! ¡Escritura de la era de Kharlan! ¡Una ruina intacta de hace cuatro mil años! ¡Es maravilloso!", "mood": "happy"},
 		{"speaker": "Genis", "text": "Ya está otra vez en modo ruinas... Ignoradla."},
@@ -114,13 +114,13 @@ func _oracle(c: Cutscene) -> void:
 	c.spawn("genis", "genis", Vector3(2, 0, -31), 180.0, "Genis")
 	c.spawn("kratos", "kratos", Vector3(4, 0, -29), 180.0, "Kratos")
 	c.face("colette", Vector3(0, 0, -40))
-	await c.say([
+	await c.script("martel_temple.oracle.01", [
 		{"speaker": "Colette", "text": "Diosa Martel... Soy Colette Brunel, la Elegida de Sylvarant. Acudo a recibir el oráculo."},
 	])
 	await c.flash(Color(1, 1, 0.85), 1.4)
 	c.spawn("remiel", "remiel", Vector3(0, 2.0, -40), 0.0, "Remiel")
 	await c.look_at_pos(Vector3(0, 0, -38), 0.8)
-	await c.say([
+	await c.script("martel_temple.oracle.02", [
 		{"speaker": "Remiel", "text": "Colette, Elegida de la regeneración. Soy Remiel, ángel de Cruxis, enviado de la diosa Martel."},
 		{"speaker": "Lloyd", "text": "¡Un ángel! ¡Un ángel de verdad!"},
 		{"speaker": "Remiel", "text": "Colette, recibe el Cristal de Cruxis. Con él, viajarás por el mundo, liberarás los sellos de los Espíritus Invocadores y, al final, en la Torre de la Salvación, te convertirás en ángel."},
@@ -132,7 +132,7 @@ func _oracle(c: Cutscene) -> void:
 	await c.flash(Color(1, 1, 0.85), 1.0)
 	c.despawn("remiel")
 	await c.camera_reset(0.5)
-	await c.say([
+	await c.script("martel_temple.oracle.03", [
 		{"speaker": "Lloyd", "text": "¡Colette, ha sido increíble! ¡Vamos a regenerar el mundo! ¡Cuenta conmigo!"},
 		{"speaker": "Kratos", "text": "Tú no vienes. Raine y yo escoltaremos a la Elegida. Un crío que apenas sabe sostener dos espadas no me sirve."},
 		{"speaker": "Lloyd", "text": "¡¿Qué?!"},

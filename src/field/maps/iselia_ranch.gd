@@ -53,7 +53,7 @@ func _marble(c: Cutscene) -> void:
 	c.anim("marble", "Idle_Talking")
 	await c.walk("player", Vector3(0, 0, 0), 5.0, true)
 	await c.look_at_actor("genis", 0.6)
-	await c.say([
+	await c.script("iselia_ranch.marble.01", [
 		{"speaker": "Marble", "text": "...y así, con los gritos del capataz, cargamos piedras hasta que anochece. Pero contigo me olvido de todo, Genis. Gracias por venir."},
 		{"speaker": "Genis", "text": "Te he traído galletas, Marble. Las hice yo. Come, que estás muy pálida..."},
 		{"speaker": "Lloyd", "text": "¡Genis!"},
@@ -63,13 +63,14 @@ func _marble(c: Cutscene) -> void:
 		{"speaker": "Marble", "text": "Nos la ponen a todos al llegar. Dicen que nos hace más fuertes para trabajar. Pero duele... cada día más."},
 		{"speaker": "Lloyd", "text": "Sin una Cresta Clave, la Exsfera devora a quien la lleva. Mi padre, Dirk, es enano. Él sabe fabricarlas. ¡Le pediré una!"},
 		{"speaker": "Marble", "text": "Eres muy amable... Pero no corráis riesgos por una vieja como yo."},
+		{"speaker": "Lloyd", "text": "Juramento Enano número dos: «Nunca abandones a quien necesite ayuda». Dirk me lo grabó a fuego."},
 	])
 	c.spawn("desian1", "desian", Vector3(3, 0, -22), 0.0, "Desiano")
 	c.spawn("desian2", "desian", Vector3(1, 0, 22), 180.0, "Desiano")
 	await c.camera_reset(0.3)
 	await c.run_to("desian1", Vector3(2, 0, -6), false)
 	await c.run_to("desian2", Vector3(0, 0, 6))
-	await c.say([
+	await c.script("iselia_ranch.marble.02", [
 		{"speaker": "Desiano", "text": "¡Eh! ¡Vosotros! ¡Esta zona está prohibida! ¡Y tú, vieja, deja de hablar con los de fuera!"},
 		{"speaker": "Marble", "text": "¡No! ¡Ellos no han hecho nada!"},
 		{"speaker": "Desiano", "text": "¡Cállate! ¡Para el castigo de la vieja, llevadla al patio! ¡Y a estos dos, capturadlos!"},
@@ -89,7 +90,7 @@ func _escape(c: Cutscene) -> void:
 	c.spawn("forcystus", "forcystus", Vector3(12, 2.0, -10), 270.0, "Forcystus")
 	await c.wait(0.3)
 	await c.look_at_actor("forcystus", 0.8)
-	await c.say([
+	await c.script("iselia_ranch.escape.01", [
 		{"speaker": "Forcystus", "text": "Vaya, vaya. Un chico con una Exsfera... y un semielfo. Interesante. Muy interesante."},
 		{"speaker": "Lloyd", "text": "¿Quién es ese?"},
 		{"speaker": "Genis", "text": "¡Es Forcystus, el líder del rancho! ¡Lloyd, tenemos que irnos ya!"},
@@ -105,7 +106,7 @@ func _escape(c: Cutscene) -> void:
 	await c.run_to("genis", Vector3(-30, 0, 0), false)
 	await c.run_to("player", Vector3(-28, 0, 0))
 	c.despawn("genis")
-	await c.say([
+	await c.script("iselia_ranch.escape.02", [
 		{"speaker": "Genis", "text": "Lloyd... si los desianos se lo cuentan al alcalde, estamos perdidos."},
 		{"speaker": "Lloyd", "text": "Lo que me preocupa es Marble. Vamos a casa de Dirk. Él sabrá cómo hacer una Cresta Clave. Está al sur de la aldea."},
 	])

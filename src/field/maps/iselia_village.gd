@@ -91,11 +91,11 @@ func _day_two(c: Cutscene) -> void:
 	await c.wait(0.3)
 	await c.walk("player", Vector3(0, 0, 13), 4.0, true, false)
 	await c.walk("genis", Vector3(-1.5, 0, 14), 4.0, true)
-	await c.say([
+	await c.script("iselia_village.day_two.01", [
 		{"speaker": "Lloyd", "text": "¡Phaidra! ¿Dónde está Colette? Le prometí que la vería antes de irse."},
 		{"speaker": "Phaidra", "text": "Lloyd... Colette partió al amanecer, con Raine y el mercenario Kratos. Me pidió que te diera esto."},
 	])
-	await c.say([
+	await c.script("iselia_village.day_two.02", [
 		{"speaker": "Phaidra", "text": "«Querido Lloyd: perdona que me marche sin despedirme. Si te veía, no habría sido capaz de irme. Gracias por el collar. Lo llevaré siempre. Por favor, sé feliz. Colette.»"},
 		{"speaker": "Lloyd", "text": "...Se ha ido. Sin mí."},
 		{"speaker": "Genis", "text": "Lloyd... Colette sabía que la seguirías. No quería ponerte en peligro."},
@@ -103,7 +103,7 @@ func _day_two(c: Cutscene) -> void:
 	])
 	await c.shake_camera(0.4, 0.8)
 	await c.flash(Color(1, 0.5, 0.3), 0.6)
-	await c.say([
+	await c.script("iselia_village.day_two.03", [
 		{"speaker": "Phaidra", "text": "¡¿Qué...?! ¡Humo! ¡La entrada norte está ardiendo!"},
 		{"speaker": "Genis", "text": "¡Desianos! ¡Han entrado en la aldea!"},
 		{"speaker": "Lloyd", "text": "¡Phaidra, escóndete! ¡Genis, conmigo!"},
@@ -115,7 +115,7 @@ func _day_two(c: Cutscene) -> void:
 	c.spawn("desian2", "desian", Vector3(2.5, 0, -7), 0.0, "Desiano")
 	await c.run_to("player", Vector3(0, 0, 0), false)
 	await c.run_to("genis", Vector3(-1.5, 0, 1))
-	await c.say([
+	await c.script("iselia_village.day_two.04", [
 		{"speaker": "Desiano", "text": "¡Ahí están! ¡Los que entraron en el rancho! ¡Capturadlos, por orden de Lord Forcystus!"},
 		{"speaker": "Lloyd", "text": "¡Fuera de mi aldea!"},
 	])
@@ -134,7 +134,7 @@ func _forcystus(c: Cutscene) -> void:
 	if ex:
 		ex.scale = Vector3.ONE * 2.0
 	await c.look_at_actor("forcystus", 0.8)
-	await c.say([
+	await c.script("iselia_village.forcystus.01", [
 		{"speaker": "Forcystus", "text": "Así que tú eres Lloyd Irving. El chico de la Exsfera... Lord Yggdrasill estará muy interesado."},
 		{"speaker": "Lloyd", "text": "¡¿Quién eres tú?!"},
 		{"speaker": "Forcystus", "text": "Forcystus, uno de los Cinco Grandes Cardenales. Rompisteis el tratado al entrar en mi rancho. Esta aldea pagará por ello."},
@@ -142,7 +142,7 @@ func _forcystus(c: Cutscene) -> void:
 		{"speaker": "Forcystus", "text": "Cierto. Y por eso os he traído un regalo. ¿Reconoces a tu amiga, pequeño semielfo?"},
 	])
 	await c.look_at_actor("exbelua", 0.8)
-	await c.say([
+	await c.script("iselia_village.forcystus.02", [
 		{"speaker": "Genis", "text": "¿Mar... Marble? ¡No! ¡¿Qué le habéis hecho?!"},
 		{"speaker": "Forcystus", "text": "Una Exsfera sin Cresta Clave, forzada hasta el límite. Esto es lo que ocurre cuando el parásito devora a su huésped. ¡Exbelua, devóralos!"},
 		{"speaker": "Lloyd", "text": "¡Genis, atrás! ¡Tenemos que detenerla!"},
@@ -165,7 +165,7 @@ func _marble_death(c: Cutscene) -> void:
 		ex.scale = Vector3.ONE * 2.0
 		c.anim("exbelua", "Death01")
 	await c.wait(0.8)
-	await c.say([
+	await c.script("iselia_village.marble_death.01", [
 		{"speaker": "Marble", "text": "...Ge... nis... ¿Eres tú...?"},
 		{"speaker": "Genis", "text": "¡Marble! ¡Marble, lo siento! ¡Todo esto es culpa mía!"},
 		{"speaker": "Marble", "text": "No... Gracias a ti... he podido recordar... lo que era ser feliz. Vive, Genis. Vive por mí..."},
@@ -174,7 +174,7 @@ func _marble_death(c: Cutscene) -> void:
 	await c.flash(Color(1, 1, 1), 1.0)
 	c.despawn("exbelua")
 	await c.give_item("marble_exsphere")
-	await c.say([
+	await c.script("iselia_village.marble_death.02", [
 		{"speaker": "Forcystus", "text": "¡Maldita sea! ¡Esa Exsfera es propiedad de los desianos! ¡Entregádmela!"},
 		{"speaker": "Lloyd", "text": "¡Nunca! ¡Es de Marble!"},
 		{"speaker": "Forcystus", "text": "...Tsk. Estoy herido. Nos retiramos, pero esto no ha terminado, Lloyd Irving. Te estaré esperando."},
@@ -186,7 +186,7 @@ func _marble_death(c: Cutscene) -> void:
 	c.spawn("villager_a", "frank", Vector3(8, 0, 3), 270.0, "Aldeano")
 	c.spawn("villager_b", "marble", Vector3(-8, 0, 3), 90.0, "Aldeana")
 	await c.wait(0.6)
-	await c.say([
+	await c.script("iselia_village.marble_death.03", [
 		{"speaker": "Alcalde", "text": "¡Mirad lo que habéis hecho! La mitad de la aldea en llamas. Casas destruidas. ¡Todo porque rompisteis el tratado!"},
 		{"speaker": "Lloyd", "text": "¡Los desianos secuestran a gente de la aldea para su rancho! ¡¿Eso no os importa?!"},
 		{"speaker": "Alcalde", "text": "¡Lo que me importa es Iselia! Lloyd Irving, Genis Sage: quedáis desterrados. Marchaos y no volváis."},

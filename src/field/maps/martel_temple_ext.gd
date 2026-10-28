@@ -71,7 +71,7 @@ func _ambush(c: Cutscene) -> void:
 	await c.walk("player", Vector3(0, 0, 10), 4.5, true, false)
 	await c.walk("genis", Vector3(-1.5, 0, 12), 4.5, true, false)
 	await c.walk("colette", Vector3(1.5, 0, 12), 4.5, true)
-	await c.say([
+	await c.script("martel_temple_ext.ambush.01", [
 		{"speaker": "Lloyd", "text": "¡Hay cuerpos en la escalera! Son los sacerdotes del templo..."},
 		{"speaker": "Colette", "text": "¡Abuela! ¡Abuela Phaidra!"},
 		{"speaker": "Phaidra", "text": "¡Colette, huye! ¡Son desianos! ¡Vienen a por la Elegida!"},
@@ -92,14 +92,14 @@ func _vidarr(c: Cutscene) -> void:
 	c.spawn("phaidra", "phaidra", Vector3(2, 0, -8), 0.0, "Phaidra")
 	c.spawn("vidarr", "vidarr", Vector3(0, 0, -6), 0.0, "Vidarr")
 	await c.shake_camera(0.3, 0.5)
-	await c.say([
+	await c.script("martel_temple_ext.vidarr.01", [
 		{"speaker": "Vidarr", "text": "Inútiles. Si quieres algo bien hecho, hazlo tú mismo. Elegida... entrégate, y tus amigos morirán rápido."},
 		{"speaker": "Genis", "text": "¡Es enorme! ¡Lloyd, ese martillo nos partirá en dos!"},
 		{"speaker": "Lloyd", "text": "¡Me da igual lo grande que sea!"},
 	])
 	c.spawn("kratos", "kratos", Vector3(-3, 0, 30), 180.0, "Kratos")
 	await c.run_to("kratos", Vector3(-2.5, 0, 9))
-	await c.say([
+	await c.script("martel_temple_ext.vidarr.02", [
 		{"speaker": "Kratos", "text": "Apartaos. Dejad que me encargue."},
 		{"speaker": "Lloyd", "text": "¡¿Y tú quién eres?!"},
 		{"speaker": "Kratos", "text": "Alguien que sabe luchar. Si quieres ayudar, cúbreme el flanco y no te pongas delante de ese martillo."},
@@ -119,8 +119,19 @@ func _kratos_intro(c: Cutscene) -> void:
 	c.spawn("colette", "colette", Vector3(2, 0, 9), 180.0, "Colette")
 	c.spawn("kratos", "kratos", Vector3(-3, 0, 4), 90.0, "Kratos")
 	c.spawn("phaidra", "phaidra", Vector3(2, 0, -8), 0.0, "Phaidra")
+	c.spawn("botta", "botta", Vector3(-6, 0, -14), 0.0, "Botta")
 	await c.wait(0.4)
-	await c.say([
+	await c.look_at_actor("botta", 0.6)
+	await c.script("martel_temple_ext.botta.01", [
+		{"speaker": "Botta", "text": "Vidarr... Qué inútil. ¿Derrotado por unos críos y un mercenario?"},
+		{"speaker": "Lloyd", "text": "¡¿Otro desiano?! ¡Ven aquí si quieres!"},
+		{"speaker": "Botta", "text": "No pienso malgastar más hombres hoy. Elegida, tu viaje acaba de empezar... y no llegarás a su final. Nos retiramos."},
+		{"speaker": "Genis", "text": "Ese no parecía un desiano cualquiera..."},
+	])
+	await c.walk("botta", Vector3(-20, 0, -10), 5.0, true)
+	c.despawn("botta")
+	await c.camera_reset(0.4)
+	await c.script("martel_temple_ext.kratos_intro.01", [
 		{"speaker": "Lloyd", "text": "¡Lo hemos conseguido! ...Oye, tú. Eres bueno. ¿Quién eres?"},
 		{"speaker": "Kratos", "text": "Kratos Aurion. Mercenario. Estaba de paso cuando vi el humo."},
 		{"speaker": "Phaidra", "text": "Kratos... Te lo ruego: protege a la Elegida mientras recibe el oráculo. Los sacerdotes han muerto. No queda nadie más."},

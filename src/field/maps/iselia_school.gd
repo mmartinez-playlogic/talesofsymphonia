@@ -38,7 +38,7 @@ func on_enter(c: Cutscene) -> void:
 		return
 	await c.wait(0.3)
 	c.anim("player", "Idle")
-	await c.say([
+	await c.script("iselia_school.on_enter.01", [
 		{"speaker": "Raine", "text": "...y así, el héroe Mithos puso fin a la Guerra de Kharlan, que había durado mil años. Para detener la guerra, Mithos firmó un pacto con la diosa Martel."},
 		{"speaker": "Raine", "text": "Pero el Gran Árbol de Kharlan, fuente de todo el maná, se marchitó por culpa de la guerra. Con su último aliento, la diosa Martel se transformó en la semilla del árbol."},
 		{"speaker": "Raine", "text": "Y entonces... Lloyd Irving. ¿Estás despierto?"},
@@ -51,7 +51,7 @@ func on_enter(c: Cutscene) -> void:
 	])
 	await c.flash(Color(1, 1, 0.9), 0.9)
 	await c.shake_camera(0.25, 0.6)
-	await c.say([
+	await c.script("iselia_school.on_enter.02", [
 		{"speaker": "Genis", "text": "¡¿Qué ha sido eso?!"},
 		{"speaker": "Lloyd", "text": "¡Una luz enorme! ¡Venía del Templo de Martel!"},
 		{"speaker": "Raine", "text": "Es el oráculo. Ha llegado el momento de la Elegida."},
@@ -60,11 +60,11 @@ func on_enter(c: Cutscene) -> void:
 	await c.walk("raine", Vector3(0, 0, 7.5), 4.5, true)
 	c.despawn("raine")
 	await c.wait(0.4)
-	await c.say([
+	await c.script("iselia_school.on_enter.03", [
 		{"speaker": "Lloyd", "text": "Colette, es tu día. ¿No deberías estar tú en el templo?"},
 		{"speaker": "Colette", "text": "Sí... Supongo que debería ir. Mi abuela Phaidra me estará esperando."},
 		{"speaker": "Genis", "text": "¡Raine ha dicho que no salgamos!"},
-		{"speaker": "Lloyd", "text": "Y también que es el día del oráculo. Alguien tiene que acompañar a la Elegida, ¿no? Vamos, Genis."},
+		{"speaker": "Lloyd", "text": "Y también que es el día del oráculo. Alguien tiene que acompañar a la Elegida, ¿no? Juramento Enano número uno: «Trabajemos todos juntos por un mundo en paz». Vamos, Genis."},
 		{"speaker": "Genis", "text": "Ay... Cuando mi hermana se entere nos va a castigar a los dos."},
 		{"speaker": "Colette", "text": "Gracias, Lloyd. Gracias, Genis. ¡Vamos al Templo de Martel!", "mood": "happy"},
 	])

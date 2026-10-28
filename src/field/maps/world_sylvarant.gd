@@ -85,7 +85,7 @@ func _near_road(p: Vector3) -> bool:
 func on_enter(c: Cutscene) -> void:
 	if c.has("ranch_visited") and not c.has("world_first_time"):
 		c.flag("world_first_time")
-		await c.say([
+		await c.script("world_sylvarant.on_enter.01", [
 			{"speaker": "Genis", "text": "Desde aquí se ve todo el sur de Sylvarant. La casa de Dirk está siguiendo el camino, al suroeste de la aldea."},
 			{"speaker": "Lloyd", "text": "Y más allá, el desierto. Nunca he ido tan lejos..."},
 		])

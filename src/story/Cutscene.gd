@@ -64,6 +64,12 @@ func teleport(id: String, pos: Vector3, yaw_deg := -1000.0) -> void:
 func say(lines: Array) -> void:
 	await field.dialogue.show_lines(lines)
 
+## Dialogue by scene id. Lines come from src/data/script/*.json when present (1:1 game text),
+## otherwise the inline fallback is used. Format: {"<id>": [{"speaker": "...", "text": "..."}, ...]}
+func script(id: String, fallback: Array) -> void:
+	var lines: Array = DB.script_lines(id)
+	await field.dialogue.show_lines(lines if not lines.is_empty() else fallback)
+
 func line(speaker: String, text: String) -> void:
 	await field.dialogue.show_lines([{"speaker": speaker, "text": text}])
 

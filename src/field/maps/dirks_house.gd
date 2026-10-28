@@ -60,7 +60,7 @@ func on_enter(c: Cutscene) -> void:
 		await _departure(c)
 
 func _grave(c: Cutscene) -> void:
-	await c.say([
+	await c.script("dirks_house.grave.01", [
 		{"speaker": "", "text": "«Anna Irving. Esposa y madre amada.»"},
 		{"speaker": "Lloyd", "text": "Mamá... Hoy ha sido un día muy largo. Pero creo que he hecho lo correcto."},
 	])
@@ -72,12 +72,14 @@ func _evening(c: Cutscene) -> void:
 	c.teleport("player", Vector3(0, 0.1, 20), 180.0)
 	await c.walk("genis", Vector3(-2, 0, 7), 3.5, false, false)
 	await c.walk("player", Vector3(0, 0, 5), 3.5)
-	await c.say([
+	await c.script("dirks_house.evening.01", [
 		{"speaker": "Dirk", "text": "Llegas tarde, Lloyd. ¿Y esa cara? ¿Qué habéis hecho esta vez?"},
 		{"speaker": "Lloyd", "text": "Papá... Necesito que hagas una Cresta Clave. Hay una mujer en el rancho con una Exsfera sin cresta. Se está muriendo."},
 		{"speaker": "Dirk", "text": "¿En el rancho? ¡¿HAS ESTADO EN EL RANCHO?!", "mood": "angry"},
 		{"speaker": "Genis", "text": "Fue culpa mía, señor Dirk. Lloyd solo vino a buscarme."},
-		{"speaker": "Dirk", "text": "¡Me da igual de quién fue la culpa! ¡Si los desianos ven tu Exsfera, Lloyd, irán a por ti! ¡Como fueron a por tu madre!"},
+		{"speaker": "Dirk", "text": "¡Me da igual de quién fue la culpa!"},
+		{"speaker": "", "text": "(Dirk golpea a Lloyd. Lloyd cae al suelo.)"},
+		{"speaker": "Dirk", "text": "¡Si los desianos ven tu Exsfera, Lloyd, irán a por ti! ¡Como fueron a por tu madre!"},
 		{"speaker": "Lloyd", "text": "¡Por eso mismo! ¡No puedo quedarme mirando mientras le pasa lo mismo a otra persona!"},
 		{"speaker": "Dirk", "text": "...No tengo mineral inhibidor. Sin él no hay Cresta Clave. Es la verdad, muchacho. Lo siento."},
 		{"speaker": "Lloyd", "text": "¡Pues buscaré mineral! ¡Lo que haga falta!"},
@@ -90,12 +92,12 @@ func _evening(c: Cutscene) -> void:
 
 func _kratos_at_grave(c: Cutscene) -> void:
 	c.face("player", Vector3(-14, 0, -10))
-	await c.say([
+	await c.script("dirks_house.kratos_at_grave.01", [
 		{"speaker": "Lloyd", "text": "Mamá... Hoy he visto a una mujer que lleva una Exsfera como la tuya. Y no he podido hacer nada."},
 	])
 	c.spawn("kratos", "kratos", Vector3(-6, 0, 2), 270.0, "Kratos")
 	await c.walk("kratos", Vector3(-11, 0, -6), 3.0)
-	await c.say([
+	await c.script("dirks_house.kratos_at_grave.02", [
 		{"speaker": "Kratos", "text": "...Esa tumba."},
 		{"speaker": "Lloyd", "text": "¡Kratos! ¿Qué haces aquí?"},
 		{"speaker": "Kratos", "text": "Colette quería verte. Está en la casa con tu padre. ¿Es tu madre?"},
@@ -103,17 +105,18 @@ func _kratos_at_grave(c: Cutscene) -> void:
 		{"speaker": "Kratos", "text": "...Ya veo. Esa Exsfera que llevas en la mano, ¿era de ella?"},
 		{"speaker": "Lloyd", "text": "Sí. Dirk le hizo una Cresta Clave. Dice que es lo único que me dejó mi madre."},
 		{"speaker": "Kratos", "text": "Cuídala. Y cuídate tú. Mañana la Elegida parte al alba. Si de verdad quieres protegerla... hazte más fuerte."},
+		{"speaker": "Lloyd", "text": "Juramento Enano número siete: «La justicia y el amor siempre vencen». Me haré más fuerte. Ya lo verás."},
 	])
 	await c.walk("kratos", Vector3(-6, 0, 2), 3.0)
 	c.despawn("kratos")
 	c.spawn("colette", "colette", Vector3(-8, 0, 0), 270.0, "Colette")
 	await c.walk("colette", Vector3(-12, 0, -5), 3.2)
-	await c.say([
+	await c.script("dirks_house.kratos_at_grave.03", [
 		{"speaker": "Colette", "text": "¡Lloyd! Siento venir tan tarde. Mañana salimos muy temprano y... quería verte."},
 		{"speaker": "Lloyd", "text": "Colette... Yo también tengo algo para ti. Espera."},
 	])
 	await c.give_item("colette_necklace")
-	await c.say([
+	await c.script("dirks_house.kratos_at_grave.04", [
 		{"speaker": "Lloyd", "text": "Lo hice yo. Es un collar. Me ha salido un poco torcido, pero..."},
 		{"speaker": "Colette", "text": "¡Es precioso! ¡Gracias, Lloyd! Lo llevaré siempre.", "mood": "happy"},
 		{"speaker": "Colette", "text": "Lloyd... ¿Sabes? Un Elegido no puede permitirse ser feliz. Pero hoy, contigo, lo soy un poquito."},
@@ -138,13 +141,13 @@ func _departure(c: Cutscene) -> void:
 	c.teleport("player", Vector3(0, 0.1, 20), 180.0)
 	await c.walk("genis", Vector3(-2, 0, 7), 3.5, false, false)
 	await c.walk("player", Vector3(0, 0, 5), 3.5)
-	await c.say([
+	await c.script("dirks_house.departure.01", [
 		{"speaker": "Dirk", "text": "Ya me lo han contado. Desterrados... Ese alcalde es un cobarde. Pero vosotros dos sois unos insensatos."},
 		{"speaker": "Lloyd", "text": "Papá, Marble murió. Me dio su Exsfera. Quiero que Genis la lleve, con una Cresta Clave. ¿Puedes...?"},
 		{"speaker": "Dirk", "text": "...Anoche, después de lo que me dijiste, rebusqué entre mis cosas. Encontré un último trozo de mineral inhibidor. Toma."},
 	])
 	await c.give_item("key_crest")
-	await c.say([
+	await c.script("dirks_house.departure.02", [
 		{"speaker": "Genis", "text": "Señor Dirk... Gracias. Marble... la llevaré conmigo."},
 		{"speaker": "Dirk", "text": "Y tú, Lloyd. Coge esto. Son tus espadas de verdad. Ya es hora."},
 	])
@@ -155,7 +158,7 @@ func _departure(c: Cutscene) -> void:
 	Game.add_item("marble_exsphere", -1)
 	await c.give_item("apple_gel", 3)
 	await c.give_gald(600)
-	await c.say([
+	await c.script("dirks_house.departure.03", [
 		{"speaker": "Dirk", "text": "Vais a seguir a la Elegida, ¿no? El desierto de Triet está al suroeste. Llevaos a Noishe. Y Lloyd... no mueras."},
 		{"speaker": "Noishe", "text": "¡Guau! ¡Guau!"},
 		{"speaker": "Lloyd", "text": "Papá... Gracias. Por todo. Volveré. Te lo prometo."},
