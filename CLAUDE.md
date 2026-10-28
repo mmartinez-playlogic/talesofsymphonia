@@ -10,8 +10,11 @@ Se construye sesión a sesión, "día a día, poco a poco". Cada sesión debe de
 ## Reglas fijadas con el usuario (Mateo)
 - No preguntar: tomar decisiones y avanzar. El usuario lo dijo explícitamente ("tío no me preguntes, hazlo tú").
 - Los tokens no importan; la calidad y la completitud sí.
-- Nada de assets ni guion copiados de Bandai Namco. Diálogos reescritos siguiendo la trama real.
+- Nada de assets ni guion de Bandai Namco en el repo ni en el build. Diálogos reescritos siguiendo la trama real.
   Modelos y animaciones de bibliotecas CC0 (Quaternius) o generados por script en Blender.
+- Excepción acordada (2026-10-28): modelos/texturas de Tales of Vesperia DE extraídos con VesperiaTools
+  SOLO como investigación de estilo, en `assets/ref/` (gitignored). Ver `docs/VESPERIA_REF.md`.
+  El objetivo visual es "gráficos de Vesperia, juego de Symphonia": nuestros personajes imitan ese look.
 - Guardar contexto en archivos (este CLAUDE.md, docs/DEVLOG.md, docs/ROADMAP.md) para no perder el hilo.
 - Idioma con el usuario: español. Código y nombres de archivos en inglés.
 - Estilo de respuesta: seguir la skill `i-have-adhd` (~/.claude/plugins/cache/i-have-adhd/.../SKILL.md): acción primero, pasos numerados, estado restatado, una sola acción siguiente al final.

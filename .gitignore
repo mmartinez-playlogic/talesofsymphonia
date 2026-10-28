@@ -3,3 +3,5 @@
 .DS_Store
 build/
 *.blend1
+# Material de investigación extraído de Tales of Vesperia DE (nunca al repo ni al build)
+assets/ref/

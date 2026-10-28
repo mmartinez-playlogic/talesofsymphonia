@@ -40,3 +40,12 @@ Mateo en reunión: NADA se ha ejecutado (ni Godot headless). Todo escrito a cieg
 2. `godot --path . res://tools/RunField.gd`… usar `tools/RunField.tscn -- --map iselia_school` y recorrer la historia entera hasta Triet.
    Atajos: `--flags temple_done,ranch_visited --party lloyd,genis --map dirks_house`.
 3. Probar el combate (RunBattle) y los jefes Vidarr/Exbelua; ajustar números.
+
+## 2026-10-28 — Sesión 3b (harness: Claude Code 2.1.287, Claude Fable 5.1)
+- Mateo: los modelos de Vesperia son "por investigación". Acordado: extraer con VesperiaTools a `assets/ref/` (gitignored),
+  nunca al repo/build; nuestros personajes imitan el estilo. Regla actualizada en CLAUDE.md.
+- Investigado hueyyeng/VesperiaTools: app PySide2 sin CLI; API Python parse_svo/parse_dat/parse_dec/parse_dec_ext,
+  export_wavefront_obj (OBJ sin huesos), export_dds_textures. `rowanG077/Resonance` no localizado (pedir enlace).
+- Escritos (sin ejecutar): `tools/vesperia_extract.py` (wrapper CLI de la API), `tools/vesperia_ref.py` (Blender:
+  OBJ+DDS → GLB de referencia + `vesperia_style.json` con proporciones), `docs/VESPERIA_REF.md`.
+- Hace falta: copia de Vesperia DE (PC) para los .SVO. Sin ella no hay nada que extraer.
